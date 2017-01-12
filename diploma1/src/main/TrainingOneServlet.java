@@ -63,7 +63,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingFourForm")) {
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFour&topic_id=" + topicID + "&questionId=" + (++j));
-					} else if (page.equals("trainingFiveForm")) {
+					} else if (page.equals("trainingFiveForm")) {// here
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFive&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingSixForm")) {

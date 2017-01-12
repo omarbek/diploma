@@ -13,9 +13,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/diploma1/WebContent/WEB-INF/lib/mysql-connector-java-5.1.36.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/diploma1/WebContent/WEB-INF/lib/pdfbox-app-2.0.0-RC1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/diploma1/WebContent/WEB-INF/lib/poi-3.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/diploma1/WebContent/WEB-INF/lib/poi-ooxml-3.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/kazakh/diploma1/WebContent/WEB-INF/lib/mysql-connector-java-5.1.36.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/kazakh/diploma1/WebContent/WEB-INF/lib/pdfbox-app-2.0.0-RC1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/kazakh/diploma1/WebContent/WEB-INF/lib/poi-3.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Omarbek/git/kazakh/kazakh/diploma1/WebContent/WEB-INF/lib/poi-ooxml-3.11.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
