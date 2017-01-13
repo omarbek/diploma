@@ -39,8 +39,7 @@ int j = Integer.parseInt(questionId);
 		 <input type="hidden" name="questionId" value="<%=j%>">
 		 <input type="hidden" name="task_type" value="one">
 		 <input type="hidden" name="wordID" value="<%=wordsRusKaz.get(j).id%>">
-		 <input type="hidden" name="variant" value="">
-		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
+		  <input type="hidden" name="variant" value="">
 		 
 		 <%
 		 Random rand = new Random();
@@ -57,31 +56,32 @@ int j = Integer.parseInt(questionId);
 		 String width = "style='width:180px;'";
 		 if(type == 0){
 			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
 		<%}
 		 else if(type == 1){
 			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
 		<%}
 		else if(type == 2){
 			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
 		<%}
 		else if(type == 3){
 			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
+		
 		<%}%>
 	 </form>
 	 <br>

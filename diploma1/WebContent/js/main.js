@@ -9,6 +9,7 @@ $(document).ready(function(){
         }
         else{
         	$(this).attr("class", "btn btn-danger btn-block train1");
+        	$("#trainingOneForm").submit();	
         }
         
     });
