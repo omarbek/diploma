@@ -18,6 +18,8 @@ questionId = request.getParameter("questionId");
 ArrayList<Word> wordsRusKaz = null;
 wordsRusKaz = (ArrayList<Word>)session.getAttribute("wordsRusKaz");
 
+List<String> wrongWordsList=new ArrayList<String>();
+
 if(questionId.equals("0")){
 	String sql = "SELECT * FROM topic_word WHERE topic_id="+topicId;
 	String sql2 = null;
@@ -40,6 +42,18 @@ if(questionId.equals("0")){
 else{
 	request.setAttribute("questionId", questionId);
 }
+
+String sqlForResult = "select x2.word_kaz from results x"//
++ " left join words x2 on x2.word_id=x.word_id"//
++ " where student_id=" + session.getAttribute("studentID") + " and topic_id=" + topicId;
+PreparedStatement ps = con.prepareStatement(sqlForResult);
+ResultSet rs = ps.executeQuery();
+while (rs.next()) {
+	wrongWordsList.add(rs.getString(1));
+}
+request.setAttribute("wrongWordsList", wrongWordsList);
+wrongWordsList.clear();
+
 session.setAttribute("wordsRusKaz", wordsRusKaz);
 request.setAttribute("topic_id", topicId);
 

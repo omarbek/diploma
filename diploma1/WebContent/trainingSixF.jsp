@@ -25,6 +25,21 @@ int j = Integer.parseInt(questionId);
  if(j>=wordsRusKaz.size()){
 		%>
 			<div class="well" style="background-color:pink;" align="center">
+			<h2>Список неверных слов: </h2>
+			<%
+				List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
+				if(wrongWordsList.isEmpty()){
+					%>
+					<h3>нет</h3>x
+					<%
+				}
+				for(String wrongWord: wrongWordsList){
+					%>
+						<h3><%=wrongWord %></h3>
+					<%
+				}
+			%>
+			<br>
 			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Finished</a>
 		   	</div>
 		<%

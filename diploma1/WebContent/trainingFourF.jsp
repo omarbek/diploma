@@ -25,35 +25,53 @@ int j = Integer.parseInt(questionId);
  if(j>=wordsRusKaz.size()){
 		%>
 			<div class="well" style="background-color:pink;" align="center">
+			<h2>Список неверных слов: </h2>
+			<%
+				List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
+				if(wrongWordsList.isEmpty()){
+					%>
+						<h3>нет</h3>
+					<%
+				}
+				for(String wrongWord: wrongWordsList){
+					%>
+						<h3><%=wrongWord %></h3>
+					<%
+				}
+			%>
+			<br>
 			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Finished</a>
 		   	</div>
 		<%
 	}
 	else{		
  %>
+ 		 <h2>Угадай слово по картинкам</h2>
+ 		 <br>
 		 <%
 		 String width = "style='width:180px;'";
 			 %>
 			 <table>
 			 	<tr>
-			 		<td><img height ="200px" width = "200px" src="img/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
-					<td><img height ="200px" width = "200px" src="img/<%=wordsRusKaz.get(j).id%>.1.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+			 		<td><img height ="150px" width = "150px" src="img/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+					<td><img height ="150px" width = "150px" src="img/<%=wordsRusKaz.get(j).id%>.1.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
 	 		    </tr>
 	 		    <tr>
-	 		    	<td><img height ="200px" width = "200px" src="img/<%=wordsRusKaz.get(j).id%>.2.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
-	 		    	<td><img height ="200px" width = "200px" src="img/<%=wordsRusKaz.get(j).id%>.3.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+	 		    	<td><img height ="150px" width = "150px" src="img/<%=wordsRusKaz.get(j).id%>.2.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+	 		    	<td><img height ="150px" width = "150px" src="img/<%=wordsRusKaz.get(j).id%>.3.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
 			 	</tr>
 			 </table>
-			
+		 <br>
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
-		 <input type="hidden" name="task_type" value="one">
+		 <input type="hidden" name="task_type" value="four">
 		 <input type="hidden" name="wordID" value="<%=wordsRusKaz.get(j).id%>">
-		 <input type="hidden" name="variant" value="">
-		 <input type="text" name="correctAns">
 		 <input type="hidden" name="page" value="trainingFourForm">
-	     <button class="btn btn-success btn-block" <%=width %>>Отправить</button>
+		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
+		 <input type="text" name="variant"><br>
+ 		 <br>
+ 		 <input class="btn btn-success btn-block" <%=width %>  type="submit" value="Отправить">
 	 </form>
 	 <br>
 	 <%	

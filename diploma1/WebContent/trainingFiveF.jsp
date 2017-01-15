@@ -25,6 +25,21 @@ int j = Integer.parseInt(questionId);
  if(j>=wordsRusKaz.size()){
 		%>
 			<div class="well" style="background-color:pink;" align="center">
+			<h2>Список неверных слов: </h2>
+			<%
+				List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
+				if(wrongWordsList.isEmpty()){
+					%>
+						<h3>нет</h3>
+					<%
+				}
+				for(String wrongWord: wrongWordsList){
+					%>
+						<h3><%=wrongWord %></h3>
+					<%
+				}
+			%>
+			<br>
 			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Finished</a>
 		   	</div>
 		<%
@@ -50,41 +65,17 @@ int j = Integer.parseInt(questionId);
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
-		 <input type="hidden" name="task_type" value="one">
+		 <input type="hidden" name="task_type" value="five">
 		 <input type="hidden" name="wordID" value="<%=wordsRusKaz.get(j).id%>">
-		 <input type="hidden" name="variant" value="">
+		 <input type="hidden" name="wordID2" value="<%=wordsRusKaz.get(numbers.get(0)).id%>">
 		 <input type="hidden" name="page" value="trainingFiveForm">
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
-		<%
-		 if(type == 0){
-		%>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%> және <%=wordsRusKaz.get(numbers.get(0)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%> және <%=wordsRusKaz.get(j).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%> және <%=wordsRusKaz.get(numbers.get(2)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%> және <%=wordsRusKaz.get(numbers.get(1)).kaz %></button>
-		<%}
-		 else if(type == 1){
-			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%> және <%=wordsRusKaz.get(j).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%> және <%=wordsRusKaz.get(numbers.get(0)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%> және <%=wordsRusKaz.get(numbers.get(2)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%> және <%=wordsRusKaz.get(numbers.get(1)).kaz %></button>
-		<%}
-		else if(type == 2){
-			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%> және <%=wordsRusKaz.get(j).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%> және <%=wordsRusKaz.get(numbers.get(2)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%> және <%=wordsRusKaz.get(numbers.get(0)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%> және <%=wordsRusKaz.get(numbers.get(1)).kaz %></button>
-		<%}
-		else if(type == 3){
-			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%> және <%=wordsRusKaz.get(j).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%> және <%=wordsRusKaz.get(numbers.get(2)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%> және <%=wordsRusKaz.get(numbers.get(1)).kaz %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%> және <%=wordsRusKaz.get(numbers.get(0)).kaz %></button>
-		<%}%>
-	 </form>
+		 <input type="hidden" name="correctAns2" value="<%=wordsRusKaz.get(numbers.get(0)).kaz%>">
+		 <input type="text" name="variant"><% out.print(" және"); %>
+		 <input type="text" name="variant2"><br>
+		 <br>
+		 <input class="btn btn-success btn-block" <%=width %> type="submit" value="Отправить">
+      </form>
 	 <br>
 	 <%	
 }
