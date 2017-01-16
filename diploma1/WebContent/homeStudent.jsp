@@ -10,7 +10,7 @@
 <div class="container">
 <h2>Уроки</h2>
 <%
-String sql = "SELECT * FROM topics";
+String sql = "SELECT * FROM topics where topic_id<10";
 PreparedStatement prepStmt = con.prepareStatement(sql);
 ResultSet rs = prepStmt.executeQuery();
 int i=0;

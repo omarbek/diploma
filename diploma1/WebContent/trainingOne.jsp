@@ -52,7 +52,6 @@ while (rs.next()) {
 	wrongWordsList.add(rs.getString(1));
 }
 request.setAttribute("wrongWordsList", wrongWordsList);
-wrongWordsList.clear();
 
 session.setAttribute("wordsRusKaz", wordsRusKaz);
 request.setAttribute("topic_id", topicId);
