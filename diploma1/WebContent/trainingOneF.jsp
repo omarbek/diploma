@@ -20,8 +20,10 @@ int j = Integer.parseInt(questionId);
 
 %>
 <br>
-<div class="panel panel-default" style="max-width: 400px;" align="center">
- <%
+
+      <section id="main">
+        <div class="question">
+		<%
  if(j>=wordsRusKaz.size()){
 		%>
 			<div class="well" style="background-color:pink;" align="center">
@@ -46,9 +48,15 @@ int j = Integer.parseInt(questionId);
 	}
 	else{		
  %>
- 		<h2><%=wordsRusKaz.get(j).rus%></h2>
- 		<img src="img/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
- 		<br><br>
+			<h1 class="text-center yellow">
+            Найди правильный перевод слова
+          </h1>
+ 		<div class="row">
+            <div class="col-sm-7">
+              <h2 class="text-center text-uppercase helv"><%=wordsRusKaz.get(j).rus%></h2>
+              <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre" width="250px">
+            </div>
+            <div class="col-sm-4 col-sm-offset-1">          
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
@@ -68,41 +76,46 @@ int j = Integer.parseInt(questionId);
 		         numbers.add(random);
 		     }
 		 }
-		 int type = rand.nextInt(4);
+		 int type = rand.nextInt(3);
 		 String width = "style='width:180px;'";
 		 if(type == 0){
 			 %>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn btn-answer"  correct="1"><%=wordsRusKaz.get(j).kaz%></button><br>
+			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
+			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
 		<%}
 		 else if(type == 1){
 			 %>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
+			<button class="btn-answer btn"  correct="1"><%=wordsRusKaz.get(j).kaz%></button><br>
+			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
 		<%}
 		else if(type == 2){
 			 %>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
+			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
+			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button><br>
+			<button class="btn-answer btn" correct="1"><%=wordsRusKaz.get(j).kaz%></button>
 		<%}
-		else if(type == 3){
-			 %>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).kaz%></button>
-			<button class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).kaz%></button>
-		
-		<%}%>
+		%>
 	 </form>
 	 <br>
 	 <%	
 }
 %>
-</div>
-	  
+			</div>
+          </div>
+        </div>
+        <div class="progress-holder">
+          <div class="percent">
+            20%
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60%</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </section>
+      
+   

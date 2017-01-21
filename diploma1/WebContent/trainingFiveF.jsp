@@ -59,8 +59,8 @@ int j = Integer.parseInt(questionId);
 		 String width = "style='width:180px;'";
  %>
  		<h2><%=wordsRusKaz.get(j).rus%> и <%= wordsRusKaz.get(numbers.get(0)).rus %></h2>
- 		<img src="img/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
- 		<img src="img/<%=wordsRusKaz.get(numbers.get(0)).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
+ 		<img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
+ 		<img src="img/questions/<%=wordsRusKaz.get(numbers.get(0)).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
  		<br><br>
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">

@@ -1,58 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
- <meta charset="utf-8">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Казақ Тілі</title>
+    <title>Казақ Тілі</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
   	<script src="js/jquery-3.1.1.min.js"></script>
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
-</head>
-<%
-String userId = (String)session.getAttribute("userId");
-String userStatus = (String)session.getAttribute("userStatus");
+  </head>
+  <body>
+	<%
+	String userId = (String)session.getAttribute("userId");
+	String userStatus = (String)session.getAttribute("userStatus");
 
-String navPage = request.getParameter("navPage");
+	String navPage = request.getParameter("navPage");
 
-%>
-<body>
-	<div class="container" id="content" style="max-width: 1000px;" align="center">
+	%>
+    <div class="container" id="content">
       <div id="nav" class="row" href="sad">
         <nav class="list-inline">
-         <%
+		<%
           if(userId==null){
           	  %><a href="?login.jsp"></a> <%
         		}
         		else{
         		%>
-	        		 <li>
-	           		 	<a href="index.jsp">Главная</a>
-	          		</li>
-	          		<li>
-	          			<a href="">Уроки</a>
-	          		</li>
-	          		<li>
-	            		<a href="">Тренировка</a>
-	          		</li>
-	          		<li>
-	            		<a href="">Мои достижения</a>
-	          		</li>
-	          		<li>
-	            		<a href="">Мой словарь</a>
-	          		</li>
-	          	
-				<%} %>
+          <li>
+            <a href="index.jsp">Главная</a>
+          </li>
+          <li>
+            <a href="?navPage=homeStudent">Уроки</a>
+          </li>
+          <li>
+            <a href="?navPage=test">Проверь себя</a>
+          </li>
+          <li>
+            <a href="?navPage=dictionary">Мой словарь</a>
+          </li>
+          <li>
+            <a href="?navPage=profile">Мой профиль</a>
+          </li>
+		  <% } %>
         </nav>
         <ul class="user-link list-inline">
-	        <li>
-	          <%
+          <li>
+            <%
 	          if(userId==null){
 	          	  %><a href="index.jsp"><span class="glyphicon glyphicon-log-in"></span> Войти</a> <%
 	          }
@@ -61,7 +71,7 @@ String navPage = request.getParameter("navPage");
         		<form action="LogoutServlet" method="post" id="logoutForm"></form>
 				<a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Выйти</a>
 			  <%} %>
-			</li>
+          </li>
         </ul>
       </div>
        <%
@@ -71,34 +81,47 @@ String navPage = request.getParameter("navPage");
 			<%
 		}
 		else{
-			//System.out.println(navPage);
-			if(userStatus!=null && userStatus.equals("1")){
+			if(navPage == null){
 				%>
-				<jsp:include page="homeTeacher.jsp" />
-				<%
-			}
-			else if(userStatus!=null && userStatus.equals("2")){
-				if(navPage == null){
-				%>
-			<jsp:include page="homeStudent.jsp" />
+			<jsp:include page="home.jsp" />
 				<%
 				}
-				else if(navPage.equals("trainings")){	
+			else if(navPage.equals("homeStudent")){	
 					
 					%>
-			<jsp:include page="trainings.jsp" />
+			<jsp:include page="homeStudent.jsp" />
 					<%
 				}
-				else if(navPage.equals("trainingOne")){	
+			else if(navPage.equals("dictionary")){	
+				
+				%>
+		<jsp:include page="dictionary.jsp" />
+				<%
+			}
+			else if(navPage.equals("profile")){	
+				
+				%>
+		<jsp:include page="profile.jsp" />
+				<%
+			}
+			
+			else if(navPage.equals("trainings")){	
+					%>
+			<jsp:include page="trainings.jsp" />
+					<%			
+				}
+			
+			else if(navPage.equals("trainingOne")){	
 					%>
 			<jsp:include page="trainingOne.jsp" />
 					<%			
 				}
-				else if(navPage.equals("trainingTwo")){	
+			else if(navPage.equals("trainingTwo")){	
 					%>
 			<jsp:include page="trainingTwo.jsp" />
 					<%			
-				} else if(navPage.equals("trainingThree")){
+				} 
+			else if(navPage.equals("trainingThree")){
 					%>
 			<jsp:include page="trainingThree.jsp" />
 					<%			
@@ -113,21 +136,20 @@ String navPage = request.getParameter("navPage");
 				}else if(navPage.equals("trainingSix")){
 					%>
 			<jsp:include page="trainingSix.jsp" />
-					<%			
-				}
-			}
-		}
-	  %>
+					<% } 
+					}%>
     </div>
-<footer class="container-fluid text-center">
-<p>
-   <div id="login-overlay" class="modal-dialog">
-	      <div class="modal-content">
-			@CopyRight ISTEP Solutions
-		  </div>
-	</div>
-</p>
-</footer>
 
-</body>
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.bxslider.js"></script>
+    <script src="js/script.js"></script>
+  </body>
 </html>
