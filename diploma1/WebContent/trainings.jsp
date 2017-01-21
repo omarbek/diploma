@@ -7,7 +7,7 @@
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <% String qwerty = null;
-	qwerty = request.getParameter("topic_id");
+	qwerty = request.getParameter("topic_id");//
  %>
 <h2>Тренировки</h2>
  
