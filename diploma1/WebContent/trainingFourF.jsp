@@ -53,12 +53,12 @@ int j = Integer.parseInt(questionId);
 			 %>
 			 <table>
 			 	<tr>
-			 		<td><img height ="150px" width = "150px" src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
-					<td><img height ="150px" width = "150px" src="img/questions/<%=wordsRusKaz.get(j).id%>.1.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+			 		<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+					<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.1.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
 	 		    </tr>
 	 		    <tr>
-	 		    	<td><img height ="150px" width = "150px" src="img/questions/<%=wordsRusKaz.get(j).id%>.2.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
-	 		    	<td><img height ="150px" width = "150px" src="img/questions/<%=wordsRusKaz.get(j).id%>.3.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+	 		    	<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.2.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+	 		    	<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.3.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
 			 	</tr>
 			 </table>
 		 <br>
