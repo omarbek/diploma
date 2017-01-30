@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@include file="mysql.jsp" %>
@@ -8,6 +9,56 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+var matchId=null;
+var wrongIds="";
+var isFirst=true;
+function firstMatch(id) {
+	if(isFirst){
+		matchId=id;
+		isFirst=false;
+	}else{
+		if(matchId==id){
+			var secondId=id+10;
+			//button disappear only in right answer
+		}else{ 
+			wrongIds+=matchId+",";
+			document.getElementById("postData").value = wrongIds;
+		}
+		document.getElementById(matchId).style.visibility = 'hidden';
+		document.getElementById(secondId).style.visibility = 'hidden';
+		isFirst=true;
+		matchId=null;
+	}
+}
+function secondMatch(id){
+	if(!isFirst){
+		var secondId=id-10;
+		if(secondId==matchId){
+			//button disappear only in right answer
+		}else{
+			wrongIds+=matchId+",";
+			document.getElementById("postData").value = wrongIds;
+		}
+		document.getElementById(matchId).style.visibility = 'hidden';
+		document.getElementById(id).style.visibility = 'hidden';
+		isFirst=true;
+		matchId=null;
+	}else{
+		matchId=id-10;
+		isFirst=false;
+	}
+}
+function myClear(){
+	wrongIds="";
+	matchId=null;
+	var isFirst=true;
+    for (var i = 1; i <= 20; i++) { 
+       document.getElementById(i).style.visibility = 'visible';
+     }
+}
+</script>
 <%
 String topicId = null;
 topicId = (String)request.getAttribute("topic_id");
@@ -20,8 +71,10 @@ int j = Integer.parseInt(questionId);
 
 %>
 <br>
-<div class="panel panel-default" style="max-width: 500px;" align="center">
- <%
+
+      <section id="main">
+        <div class="question">
+		<%
  if(j>=wordsRusKaz.size()){
 		%>
 			<div class="well" style="background-color:pink;" align="center">
@@ -30,7 +83,7 @@ int j = Integer.parseInt(questionId);
 				List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
 				if(wrongWordsList.isEmpty()){
 					%>
-					<h3>нет</h3>x
+						<h3>нет</h3>
 					<%
 				}
 				for(String wrongWord: wrongWordsList){
@@ -40,69 +93,76 @@ int j = Integer.parseInt(questionId);
 				}
 			%>
 			<br>
-			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Finished</a>
+			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Закончить</a>
 		   	</div>
 		<%
 	}
-	else{
-		 Random rand = new Random();
-		 ArrayList<Integer> numbers = new ArrayList<Integer>();   
-		 Random randomGenerator = new Random();
-		 while (numbers.size() < 3) {
-
-		     int random = randomGenerator .nextInt(wordsRusKaz.size());
-		     if (!numbers.contains(random)&& random!=j) {
-		         numbers.add(random);
-		     }
-		 }
-		 int type = rand.nextInt(4);
-		 String width = "style='width:180px;'";
+	else{		
+		String width = "style='width:180px;'";
+		List<Word> shuffleList=new ArrayList();
+		List<Integer> pushedButtons=new ArrayList();
+		shuffleList.addAll(wordsRusKaz);
+		Collections.shuffle(shuffleList);
  %>
- 		<h2><%=wordsRusKaz.get(j).kaz%> және <%= wordsRusKaz.get(numbers.get(0)).kaz %></h2>
- 		<img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
- 		<img src="img/questions/<%=wordsRusKaz.get(numbers.get(0)).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/>
- 		<br><br>
- 	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
+			<h1 class="text-center yellow">
+            Подберите пару для каждого слова
+          </h1>
+ 		<div class="row">
+            <div class="col-sm-7">
+			<table>
+			 <%
+		 for(int i=0;i<shuffleList.size();i++){
+    %>
+         	<tr>
+		 		<td><button id=<%=shuffleList.get(i).id %> onclick="firstMatch(<%=shuffleList.get(i).id %>)" class="btn btn-answer" <%=width %>><%=shuffleList.get(i).kaz %></button></td>
+      		</tr>
+    <%
+		 }
+    %>
+    		</table>
+    		<button onclick="myClear()" class="btn btn-success" <%=width %>>Заново</button>
+    		</div>
+    		<div class="col-sm-4 col-sm-offset-1">   
+    		<table>
+			 <%
+		 for(int i=0;i<shuffleList.size();i++){
+			 wordsRusKaz.get(i).id=wordsRusKaz.get(i).id+10;
+    %>
+         	<tr>
+		 		<td><button id=<%=wordsRusKaz.get(i).id %> onclick="secondMatch(<%=wordsRusKaz.get(i).id %>)" class="btn btn-answer" <%=width %>><%=wordsRusKaz.get(i).rus %></button></td>
+      		</tr>
+    <%
+		 }
+			 
+    %>
+    		</table>
+		<form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
-		 <input type="hidden" name="questionId" value="<%=j%>">
-		 <input type="hidden" name="task_type" value="one">
-		 <input type="hidden" name="wordID" value="<%=wordsRusKaz.get(j).id%>">
-		 <input type="hidden" name="variant" value="">
+		 <input type="hidden" name="task_type" value="six">
 		 <input type="hidden" name="page" value="trainingSixForm">
-		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).rus%>">
-		<%
-		 if(type == 0){
-		%>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).rus%> и <%=wordsRusKaz.get(numbers.get(0)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%> и <%=wordsRusKaz.get(j).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%> и <%=wordsRusKaz.get(numbers.get(2)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).rus%> и <%=wordsRusKaz.get(numbers.get(1)).rus %></button>
-		<%}
-		 else if(type == 1){
-			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%> и <%=wordsRusKaz.get(j).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).rus%> и <%=wordsRusKaz.get(numbers.get(0)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%> и <%=wordsRusKaz.get(numbers.get(2)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).rus%> и <%=wordsRusKaz.get(numbers.get(1)).rus %></button>
-		<%}
-		else if(type == 2){
-			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%> и <%=wordsRusKaz.get(j).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%> и <%=wordsRusKaz.get(numbers.get(2)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).rus%> и <%=wordsRusKaz.get(numbers.get(0)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).rus%> и <%=wordsRusKaz.get(numbers.get(1)).rus %></button>
-		<%}
-		else if(type == 3){
-			 %>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%> и <%=wordsRusKaz.get(j).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%> и <%=wordsRusKaz.get(numbers.get(2)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="0"><%=wordsRusKaz.get(numbers.get(2)).rus%> и <%=wordsRusKaz.get(numbers.get(1)).rus %></button>
-			<button type="button" class="btn btn-success btn-block train1" <%=width %> correct="1"><%=wordsRusKaz.get(j).rus%> и <%=wordsRusKaz.get(numbers.get(0)).rus %></button>
-		<%}%>
-	 </form>
+		 <input type="hidden" name="variant" id="postData" value="">
+	     <button class="btn btn-success" <%=width %>>Отправить</button>
+      </form>
+    		</div>
+		<div class="col-sm-4 col-sm-offset-1">          
 	 <br>
 	 <%	
 }
 %>
-</div>
-	  
+			</div>
+          </div>
+        </div>
+        <div class="progress-holder">
+          <div class="percent">
+            20%
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60%</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </section>
+      
+   
