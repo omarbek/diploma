@@ -54,7 +54,7 @@ int j = Integer.parseInt(questionId);
  		<div class="row">
             <div class="col-sm-7">
               <h2 class="text-center text-uppercase helv"><%=wordsRusKaz.get(j).kaz%></h2>
-              <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre" width="250px">
+              <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre">
             </div>
             <div class="col-sm-4 col-sm-offset-1">          
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">

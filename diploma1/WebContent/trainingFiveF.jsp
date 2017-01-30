@@ -78,7 +78,7 @@ int j = Integer.parseInt(questionId);
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).rus%>">
 		 
 		 <%
-		 Random rand = new Random();
+		 Random rand = new Random();//
 		 ArrayList<Integer> numbers = new ArrayList<Integer>();   
 		 Random randomGenerator = new Random();
 		 while (numbers.size() < 3) {
