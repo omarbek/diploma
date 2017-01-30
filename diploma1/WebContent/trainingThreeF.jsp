@@ -58,7 +58,8 @@ int j = Integer.parseInt(questionId);
 
 %>
 <br>
-<div class="panel panel-default" style="max-width: 500px;" align="center">
+<section id="main">
+        <div class="question">
  <%
  if(j>=wordsRusKaz.size()){
 		%>
@@ -84,9 +85,18 @@ int j = Integer.parseInt(questionId);
 	}
 	else{		
  %>
-		<h2><%=wordsRusKaz.get(j).rus %></h2>
- 		<h2><p name="input_letter" id="demo"></p></h2>
- 		<br><br>
+			<h1 class="text-center yellow">Собери слово из букв</h1>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> </h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+ 			<h2 class="text-center"><p name="input_letter" id="demo"></p></h2>
+ 		</div>
+ 	</div>
 		 <%
 		 String word="";
 		 String clearWidth = "style='width:40px;'";
@@ -97,24 +107,32 @@ int j = Integer.parseInt(questionId);
 				word+=ch;
 			}
 		%>
+		<div class="row" align="center">
+		<div class="col-sm-12">
 		<table>
 			<tr>
 			<%
 		 	for(int i=0;i<word.length();i++){
 		 	%>
 		 		<td>
-					<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn btn-success btn-block" <%=clearWidth %>>
+					<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn-success btn">
 					<% out.print(word.charAt(i)); %></button>
 				</td>
-				<td width="5px"></td>
+				<td width="10px"></td>
 		   <%
 			}
 		    %>
 	 		</tr>
 	 	</table>
-	 <br>
-	 <button onclick="myClear()" class="btn btn-success btn-block" <%=width %>>Заново</button>
-	 <br>
+	 	</div>
+	 </div>
+	 <div class="row">
+	 <div class="col-sm-4 col-sm-offset-4">
+	 <button onclick="myClear()" class="btn-answer btn">Заново</button>
+	 </div>
+	 </div>
+	 <div class="row">
+	 <div class="col-sm-4 col-sm-offset-4">
  	 <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
@@ -123,11 +141,14 @@ int j = Integer.parseInt(questionId);
 		 <input type="hidden" name="demo" id="postData" value="">
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
 		 <input type="hidden" name="page" value="trainingThreeForm">
-	     <button class="btn btn-success btn-block" <%=width %>>Отправить</button>
+	     <button class="btn-answer btn">Отправить</button>
 	 </form>
 	 <br>
+	 </div>
+	 </div>
 	 <%	
 	}
 %>
+
 </div>
-	  
+</section>

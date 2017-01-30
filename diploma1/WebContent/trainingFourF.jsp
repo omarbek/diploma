@@ -20,7 +20,8 @@ int j = Integer.parseInt(questionId);
 
 %>
 <br>
-<div class="panel panel-default" style="max-width: 600px;" align="center">
+<section id="main">
+        <div class="question">
  <%
  if(j>=wordsRusKaz.size()){
 		%>
@@ -46,36 +47,50 @@ int j = Integer.parseInt(questionId);
 	}
 	else{		
  %>
- 		 <h2>Угадай слово по картинкам</h2>
+ 		 <h1 class="text-center yellow">Угадай слово по картинкам (на казахском)</h1>
  		 <br>
-		 <%
-		 String width = "style='width:180px;'";
-			 %>
+		<div class="row">
+		<div class="col-sm-7">
 			 <table>
 			 	<tr>
-			 		<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
-					<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.1.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+			 		<td><img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" class="img-rounded" alt="Cinque Terre" width="250px"/></td>
+					<td><img src="img/questions/<%=wordsRusKaz.get(j).id%>.1.jpg" class="img-rounded" alt="Cinque Terre" width="250px"/></td>
 	 		    </tr>
 	 		    <tr>
-	 		    	<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.2.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
-	 		    	<td><img height ="150px"  src="img/questions/<%=wordsRusKaz.get(j).id%>.3.jpg" class="img-rounded" alt="Cinque Terre" width="200px"/></td>
+	 		    	<td><img src="img/questions/<%=wordsRusKaz.get(j).id%>.2.jpg" class="img-rounded" alt="Cinque Terre" width="250px"/></td>
+	 		    	<td><img src="img/questions/<%=wordsRusKaz.get(j).id%>.3.jpg" class="img-rounded" alt="Cinque Terre" width="250px"/></td>
 			 	</tr>
 			 </table>
-		 <br>
+		</div>
+		<div class="col-sm-4">
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
+ 	  <div class="form-group">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
 		 <input type="hidden" name="task_type" value="four">
 		 <input type="hidden" name="wordID" value="<%=wordsRusKaz.get(j).id%>">
 		 <input type="hidden" name="page" value="trainingFourForm">
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
-		 <input type="text" name="variant"><br>
- 		 <br>
- 		 <input class="btn btn-success btn-block" <%=width %>  type="submit" value="Отправить">
+		 <input type="text" name="variant" class="form-control" placeholder="Ваш ответ"><br>
+ 		</div>
+ 		 <button class="btn-answer btn">Отправить</button>
 	 </form>
-	 <br>
+	 </div>
+	 </div>
+	 
 	 <%	
 }
 %>
 </div>
-	  
+<div class="progress-holder">
+          <div class="percent">
+            20%
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60%</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+</section>	  
