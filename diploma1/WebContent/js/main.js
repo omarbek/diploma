@@ -4,11 +4,11 @@ $(document).ready(function(){
     	$("input[name='variant']").val($(this).html());
         var correct = $(this).attr("correct");
         if(correct == 1){
-        	$(this).attr("class", "btn btn-success");
+        	$(this).attr("class", "btn btn-correct");
         	$("#trainingOneForm").submit();	
         }
         else{
-        	$(this).attr("class", "btn btn-danger");
+        	$(this).attr("class", "btn btn-incorrect");
         	$("#trainingOneForm").submit();	
         }
         

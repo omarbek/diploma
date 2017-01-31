@@ -115,7 +115,7 @@ int j = Integer.parseInt(questionId);
 		 	for(int i=0;i<word.length();i++){
 		 	%>
 		 		<td>
-					<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn-success btn">
+					<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn btn-success btn-block">
 					<% out.print(word.charAt(i)); %></button>
 				</td>
 				<td width="10px"></td>

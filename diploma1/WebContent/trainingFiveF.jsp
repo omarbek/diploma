@@ -61,13 +61,14 @@ int j = Integer.parseInt(questionId);
             Найди правильный перевод слова
           </h1>
  		<div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-8">
+            <h1 class="text-center yellow"> </h1>
             	<audio id="myAudio">
 					<source src="audio/1.mp3">
 				</audio>
-                <img onclick="playAudio()" src="img/note.jpg" alt="" class="img-responsive img-centre" width="250px">
+                <img onclick="playAudio()" src="img/note.jpg" alt="" class="img-responsive img-centre">
             </div>
-            <div class="col-sm-4 col-sm-offset-1">          
+            <div class="col-sm-4">          
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
@@ -92,21 +93,21 @@ int j = Integer.parseInt(questionId);
 		 String width = "style='width:180px;'";
 		 if(type == 0){
 			 %>
-			<button class="btn-answer btn"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
+			<button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
 		<%}
 		 else if(type == 1){
 			 %>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
-			<button class="btn-answer btn"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
 		<%}
 		else if(type == 2){
 			 %>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button><br>
-			<button class="btn-answer btn" correct="1"><%=wordsRusKaz.get(j).rus%></button>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="1"><%=wordsRusKaz.get(j).rus%></button>
 		<%}
 		%>
 	 </form>
