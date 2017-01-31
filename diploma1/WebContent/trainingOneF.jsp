@@ -5,7 +5,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -80,21 +79,21 @@ int j = Integer.parseInt(questionId);
 		 String width = "style='width:180px;'";
 		 if(type == 0){
 			 %>
-			<button class="btn btn-answer"  correct="1"><%=wordsRusKaz.get(j).kaz%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
+			<button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
 		<%}
 		 else if(type == 1){
 			 %>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
-			<button class="btn-answer btn"  correct="1"><%=wordsRusKaz.get(j).kaz%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button>
 		<%}
 		else if(type == 2){
 			 %>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button><br>
-			<button class="btn-answer btn" correct="1"><%=wordsRusKaz.get(j).kaz%></button>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="1"><%=wordsRusKaz.get(j).kaz%></button>
 		<%}
 		%>
 	 </form>

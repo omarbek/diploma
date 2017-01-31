@@ -82,21 +82,21 @@ int j = Integer.parseInt(questionId);
 		 String width = "style='width:180px;'";
 		 if(type == 0){
 			 %>
-			<button class="btn-answer btn"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
+			<button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
 		<%}
 		 else if(type == 1){
 			 %>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
-			<button class="btn-answer btn"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
-			<button class="btn-answer btn"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).rus%></button><br>
+			<button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button>
 		<%}
 		else if(type == 2){
 			 %>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
-			<button class="btn-answer btn" correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button><br>
-			<button class="btn-answer btn" correct="1"><%=wordsRusKaz.get(j).rus%></button>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).rus%></button><br>
+			<button class="btn btn-answer btn-block train1" correct="1"><%=wordsRusKaz.get(j).rus%></button>
 		<%}
 		%>
 	 </form>
