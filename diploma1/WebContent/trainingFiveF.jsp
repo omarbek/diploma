@@ -65,7 +65,7 @@ int j = Integer.parseInt(questionId);
             	<audio id="myAudio">
 					<source src="audio/1.mp3">
 				</audio>
-                <img onclick="playAudio()" src="img/note.jpg" alt="" class="img-responsive img-centre" width="250px">
+                <img onclick="playAudio()" src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre" width="250px">
             </div>
             <div class="col-sm-4 col-sm-offset-1">          
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
@@ -78,7 +78,7 @@ int j = Integer.parseInt(questionId);
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).rus%>">
 		 
 		 <%
-		 Random rand = new Random();//
+		 Random rand = new Random();
 		 ArrayList<Integer> numbers = new ArrayList<Integer>();   
 		 Random randomGenerator = new Random();
 		 while (numbers.size() < 3) {
