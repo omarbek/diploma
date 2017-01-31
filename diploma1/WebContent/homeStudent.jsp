@@ -7,7 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <body>
     <div class="container" id="content">
-	<% String grade = request.getParameter("grade"); %>
+	<% 
+		String grade = request.getParameter("grade"); 
+	    int classId = Integer.parseInt(request.getParameter("classId")); 
+	%>
       <section id="main" class="subjects">
         <h1 class="text-center">
           Уроки
@@ -17,28 +20,86 @@
         </div>
         <div class="animatedParent">
         <ul class="list-inline classes animated bounceInLeft">
-          <li><a href="?navPage=homeStudent&grade=one" class="active">1 класс</a></li>
-          <li><a href="?navPage=homeStudent&grade=two">2 класс</a></li>
-          <li><a href="?navPage=homeStudent&grade=three">3 класс</a></li>
-          <li><a href="?navPage=homeStudent&grade=four">4 класс</a></li>
+          <% 
+          	if("one".equals(grade)){
+          		%>
+		          <li><a href="?navPage=homeStudent&grade=one&classId=<%=classId %>" class="active">1 класс</a></li>
+		          <% if(classId>=2){ %>
+		          <li><a href="?navPage=homeStudent&grade=two&classId=<%=classId %>">2 класс</a></li>
+		          <% } if(classId>=3){ %>
+		          <li><a href="?navPage=homeStudent&grade=three&classId=<%=classId %>">3 класс</a></li>
+		          <% } if(classId>=4){ %>
+		          <li><a href="?navPage=homeStudent&grade=four&classId=<%=classId %>">4 класс</a></li>
+          		<%
+		          }
+          	}else if("two".equals(grade)){
+          		%>
+		          <li><a href="?navPage=homeStudent&grade=one&classId=<%=classId %>">1 класс</a></li>
+		          <% if(classId>=2){ %>
+		          <li><a href="?navPage=homeStudent&grade=two&classId=<%=classId %>" class="active">2 класс</a></li>
+		          <% } if(classId>=3){ %>
+		          <li><a href="?navPage=homeStudent&grade=three&classId=<%=classId %>">3 класс</a></li>
+		          <% } if(classId>=4){ %>
+		          <li><a href="?navPage=homeStudent&grade=four&classId=<%=classId %>">4 класс</a></li>
+          		<%
+		          }
+          	}else if("three".equals(grade)){
+          		%>
+		          <li><a href="?navPage=homeStudent&grade=one&classId=<%=classId %>">1 класс</a></li>
+		          <% if(classId>=2){ %>
+		          <li><a href="?navPage=homeStudent&grade=two&classId=<%=classId %>">2 класс</a></li>
+		          <% } if(classId>=3){ %>
+		          <li><a href="?navPage=homeStudent&grade=three&classId=<%=classId %>" class="active">3 класс</a></li>
+		          <% } if(classId>=4){ %>
+		          <li><a href="?navPage=homeStudent&grade=four&classId=<%=classId %>">4 класс</a></li>
+          		<%
+		          }
+          	}else{
+          		%>
+		          <li><a href="?navPage=homeStudent&grade=one&classId=<%=classId %>">1 класс</a></li>
+		          <% if(classId>=2){ %>
+		          <li><a href="?navPage=homeStudent&grade=two&classId=<%=classId %>">2 класс</a></li>
+		          <% } if(classId>=3){ %>
+		          <li><a href="?navPage=homeStudent&grade=three&classId=<%=classId %>">3 класс</a></li>
+		          <% } if(classId>=4){ %>
+		          <li><a href="?navPage=homeStudent&grade=four&classId=<%=classId %>" class="active">4 класс</a></li>
+          		<%
+		          }
+          	}
+          %>
         </ul>
         </div>
        <%
-       String sql = "SELECT * FROM topics where grade=1";
+       String sql = null;
        
        if (grade != null && grade.equals("one")){       
-   		sql = "SELECT * FROM topics where grade=1";
+   		sql = "SELECT t.* FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+				     +" where t.grade=1 and ut.user_id="+session.getAttribute("studentID")
+				     +" and (ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
+				     +" and two>=75 and three>=75 and four>=75 and"
+				     +" five>=75 and six>=75)+1 and ut.topic_id<9)";
           }
-       
        else if (grade != null && grade.equals("two")){       
-		sql = "SELECT * FROM topics where grade=2";
-       }
+      		sql = "SELECT t.* FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+				     +" where t.grade=1 and ut.user_id="+session.getAttribute("studentID")
+				     +" and (ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
+				     +" and two>=75 and three>=75 and four>=75 and"
+				     +" five>=75 and six>=75)+1 and ut.topic_id>8 and ut.topic_id<17)";
+         }
        else if (grade != null && grade.equals("three")){       
-   		sql = "SELECT * FROM topics where grade=3";
-          }
+     		sql = "SELECT t.* FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+				     +" where t.grade=1 and ut.user_id="+session.getAttribute("studentID")
+				     +" and (ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
+				     +" and two>=75 and three>=75 and four>=75 and"
+				     +" five>=75 and six>=75)+1 and ut.topic_id>16 and ut.topic_id<25)";
+        }
        else if (grade != null && grade.equals("four")){       
-   		sql = "SELECT * FROM topics where grade=4";
-          }
+     		sql = "SELECT t.* FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+				     +" where t.grade=1 and ut.user_id="+session.getAttribute("studentID")
+				     +" and (ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
+				     +" and two>=75 and three>=75 and four>=75 and"
+				     +" five>=75 and six>=75)+1 and ut.topic_id>24)";
+        }
 		PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
 		int i=0;

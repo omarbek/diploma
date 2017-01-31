@@ -151,4 +151,15 @@ int j = Integer.parseInt(questionId);
 %>
 
 </div>
+<div class="progress-holder">
+          <div class="percent">
+            <%=j*10 %>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*10 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*10 %>%;">
+              <span class="sr-only">60%</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
 </section>

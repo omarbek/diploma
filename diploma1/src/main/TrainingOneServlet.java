@@ -26,6 +26,7 @@ public class TrainingOneServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	int score = 0;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,15 +62,21 @@ public class TrainingOneServlet extends HttpServlet {
 		Connection con = (new DBConnection()).getConnection();
 		HttpSession session = request.getSession();
 		try {
-			int score = 0;
+			if (j == 0) {
+				score = 0;
+			}
 			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
 						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
-					score++;// how many points to add if user answered to
-					// 6-training?
+					if ("trainingThreeForm".equals(page) && "trainingFourForm".equals(page)) {
+						score += 20;
+					} else if ("trainingSixForm".equals(page)) {
+						score = (10 - wrongIds.size()) * 30;
+					} else {
+						score += 10;
+					}
 					session.setAttribute("score", score);
-					System.out.println(score);
 				} else if ("trainingSixForm".equals(page)) {
 					for (Long wordId : wrongIds) {
 						String sql3 = "SELECT * FROM results WHERE word_id=" + wordID + " and topic_id=" + topicID;
@@ -97,25 +104,60 @@ public class TrainingOneServlet extends HttpServlet {
 						prepStmt2.executeUpdate();
 					}
 				}
-
 				if (page != null) {
 					if (page.equals("trainingTwoForm")) {
+						if (j == 9) {
+							PreparedStatement ps = con.prepareStatement("update user_topic set two=" + score
+									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " and two<" + score);
+							ps.executeUpdate();
+						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingTwo&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingThreeForm")) {
+						if (j == 9) {
+							PreparedStatement ps = con.prepareStatement("update user_topic set three=" + score
+									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " and three<" + score);
+							ps.executeUpdate();
+						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingThree&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingFourForm")) {
+						if (j == 9) {
+							PreparedStatement ps = con.prepareStatement("update user_topic set four=" + score
+									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " and four<" + score);
+							ps.executeUpdate();
+						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFour&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingFiveForm")) {
+						if (j == 9) {
+							PreparedStatement ps = con.prepareStatement("update user_topic set five=" + score
+									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " and five<" + score);
+							ps.executeUpdate();
+						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFive&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingSixForm")) {
+						if (j == 9) {
+							PreparedStatement ps = con.prepareStatement("update user_topic set six=" + score
+									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " and six<" + score);
+							ps.executeUpdate();
+						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingSix&topic_id=" + topicID + "&questionId=" + (++j));
 					}
 				} else {
+					if (j == 9) {
+						PreparedStatement ps = con.prepareStatement("update user_topic set one=" + score
+								+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+								+ " and one<" + score);
+						ps.executeUpdate();
+					}
 					response.sendRedirect("index.jsp?navPage=trainingOne&topic_id=" + topicID + "&questionId=" + (++j));
 				}
 			}

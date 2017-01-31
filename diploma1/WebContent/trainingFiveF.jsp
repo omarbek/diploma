@@ -66,7 +66,7 @@ int j = Integer.parseInt(questionId);
             	<audio id="myAudio">
 					<source src="audio/1.mp3">
 				</audio>
-                <img onclick="playAudio()" src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre" width="250px">
+                <img onclick="playAudio()" src="img/note.jpg" alt="" class="img-responsive img-centre" width="350px">
             </div>
             <div class="col-sm-4">          
  	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
@@ -120,10 +120,10 @@ int j = Integer.parseInt(questionId);
         </div>
         <div class="progress-holder">
           <div class="percent">
-            20%
+            <%=j*10 %>
           </div>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*10 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*10 %>%;">
               <span class="sr-only">60%</span>
             </div>
           </div>

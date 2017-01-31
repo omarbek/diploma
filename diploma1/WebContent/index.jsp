@@ -1,5 +1,8 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="mysql.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,9 +33,17 @@
 	<%
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
-
 	String navPage = request.getParameter("navPage");
 
+	PreparedStatement ps=con.prepareStatement("select c.class_name from classes c"
+			+ " left join students s on s.class_id=c.class_id where user_id="+userId);
+	ResultSet rs = ps.executeQuery();
+	String classId=null;
+	if(rs.next()){
+		String className=rs.getString(1);
+		char c = className.charAt(0);
+		classId=c+"";
+	}
 	%>
     <div class="container" id="content">
       <div id="nav" class="row" href="sad">
@@ -47,7 +58,7 @@
             <a href="index.jsp">Главная</a>
           </li>
           <li>
-            <a href="?navPage=homeStudent">Уроки</a>
+            <a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Уроки</a>
           </li>
           <li>
             <a href="?navPage=test">Проверь себя</a>
