@@ -76,12 +76,14 @@ p.sp {
     -webkit-box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.15); }
-  .subject div {
+  .subject .row {
     padding: 10px;
     border-top: 2px solid #f1c40f; }
+	.subject .img-star {
+	  width: 20px; }
     .subject div h3 {
       margin: 0px;
-      text-align: center; }
+      text-align: left; }
       .subject div h3 a {
         color: #000; }
         .subject div h3 a:hover {
