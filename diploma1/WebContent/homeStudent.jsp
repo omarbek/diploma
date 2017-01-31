@@ -48,7 +48,7 @@
 		  	<%}%>
 		  	<div class="col-md-3 ">
 		            <div class="subject">
-		              <a href="?navPage=trainings&topic_id=<%=rs.getString(1)%>"><img src="img/subjects/1.jpg" class="img-responsive" alt=""></a>
+		              <a href="?navPage=trainings&topic_id=<%=rs.getString(1)%>"><img src="img/subjects/<%=rs.getString(1)%>.jpg" class="img-responsive" alt=""></a>
 		              <div><h3><a href="?navPage=trainings&topic_id=<%=rs.getString(1)%>"><%=rs.getString(2) %></a></h3></div>
 		            </div>
 		     </div>

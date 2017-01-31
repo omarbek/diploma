@@ -108,49 +108,47 @@ int j = Integer.parseInt(questionId);
             Подберите пару для каждого слова
           </h1>
  		<div class="row">
-            <div class="col-sm-7">
-			<table>
+            <div class="col-sm-4 col-sm-offset-1">
+			
 			 <%
 		 for(int i=0;i<shuffleList.size();i++){
     %>
-         	<tr>
-		 		<td><button id=<%=shuffleList.get(i).id %> onclick="firstMatch(<%=shuffleList.get(i).id %>)" class="btn btn-answer" <%=width %>><%=shuffleList.get(i).kaz %></button></td>
-      		</tr>
+		 		<button id=<%=shuffleList.get(i).id %> onclick="firstMatch(<%=shuffleList.get(i).id %>)" class="btn btn-success btn-block" <%=width %>><%=shuffleList.get(i).kaz %></button>
+    			<h2></h2>
     <%
 		 }
     %>
-    		</table>
-    		<button onclick="myClear()" class="btn btn-success" <%=width %>>Заново</button>
     		</div>
-    		<div class="col-sm-4 col-sm-offset-1">   
-    		<table>
+    		<div class="col-sm-4 col-sm-offset-3">   
 			 <%
 		 for(int i=0;i<shuffleList.size();i++){
 			 wordsRusKaz.get(i).id=wordsRusKaz.get(i).id+10;
     %>
-         	<tr>
-		 		<td><button id=<%=wordsRusKaz.get(i).id %> onclick="secondMatch(<%=wordsRusKaz.get(i).id %>)" class="btn btn-answer" <%=width %>><%=wordsRusKaz.get(i).rus %></button></td>
-      		</tr>
+		 		<button id=<%=wordsRusKaz.get(i).id %> onclick="secondMatch(<%=wordsRusKaz.get(i).id %>)" class="btn btn-success btn-block" <%=width %>><%=wordsRusKaz.get(i).rus %></button>
+    			<h2></h2>
     <%
 		 }
 			 
     %>
-    		</table>
-		<form method="post" action="TrainingOneServlet" id="trainingOneForm">
-		 <input type="hidden" name="topic_id" value="<%=topicId%>">
-		 <input type="hidden" name="task_type" value="six">
-		 <input type="hidden" name="page" value="trainingSixForm">
-		 <input type="hidden" name="variant" id="postData" value="">
-	     <button class="btn btn-success" <%=width %>>Отправить</button>
-      </form>
-    		</div>
-		<div class="col-sm-4 col-sm-offset-1">          
-	 <br>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+        	<button onclick="myClear()" class="btn btn-answer" <%=width %>>Заново</button>       
+        </div>
+        <div class="col-sm-4 col-sm-offset-3">
+			<form method="post" action="TrainingOneServlet" id="trainingOneForm">
+			 <input type="hidden" name="topic_id" value="<%=topicId%>">
+			 <input type="hidden" name="task_type" value="six">
+			 <input type="hidden" name="page" value="trainingSixForm">
+			 <input type="hidden" name="variant" id="postData" value="">
+		     <button class="btn btn-answer" <%=width %>>Отправить</button>
+	      	</form>
+		</div>
+    </div>
 	 <%	
 }
-%>
-			</div>
-          </div>
+%>          
         </div>
         <div class="progress-holder">
           <div class="percent">
