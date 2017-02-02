@@ -26,7 +26,7 @@ public class TrainingOneServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	int score = 0;
+	double score = 0;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -39,8 +39,23 @@ public class TrainingOneServlet extends HttpServlet {
 		String wordID = null;
 		String questionId = null;
 		int j = 0;
+		int countOfTopic = 0;
 		String correctAns = null;
 		List<Long> wrongIds = new ArrayList<Long>();
+
+		ResultSet rs;
+		Connection con = (new DBConnection()).getConnection();
+
+		String sqlForCount = "select count(1) from topic_word where topic_id=" + topicID;
+		try (PreparedStatement ps = con.prepareStatement(sqlForCount)) {
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				countOfTopic = rs.getInt(1);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
 		if ("trainingThreeForm".equals(page)) {
 			variant = request.getParameter("demo");
 		}
@@ -55,11 +70,9 @@ public class TrainingOneServlet extends HttpServlet {
 				String nextElement = st.nextElement().toString();
 				wrongIds.add(Long.parseLong(nextElement));
 			}
-			j = 9;
+			j = countOfTopic - 1;
 		}
 
-		ResultSet rs;
-		Connection con = (new DBConnection()).getConnection();
 		HttpSession session = request.getSession();
 		try {
 			if (j == 0) {
@@ -69,12 +82,14 @@ public class TrainingOneServlet extends HttpServlet {
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
 						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
+					double division = countOfTopic;
+					double multiple = Word.round(100 / division, 1);
 					if ("trainingThreeForm".equals(page) && "trainingFourForm".equals(page)) {
-						score += 20;
+						score += 2 * multiple;
 					} else if ("trainingSixForm".equals(page)) {
-						score = (10 - wrongIds.size()) * 30;
+						score = (countOfTopic - wrongIds.size()) * 10;
 					} else {
-						score += 10;
+						score += multiple;
 					}
 					session.setAttribute("score", score);
 				} else if ("trainingSixForm".equals(page)) {
@@ -94,9 +109,9 @@ public class TrainingOneServlet extends HttpServlet {
 				} else {
 					String sql3 = "SELECT * FROM results WHERE word_id=" + wordID + " and topic_id=" + topicID;
 					PreparedStatement prepStmt3 = con.prepareStatement(sql3);
-					rs = prepStmt3.executeQuery();
+					ResultSet rSet = prepStmt3.executeQuery();
 
-					if (!rs.next()) {
+					if (!rSet.next()) {
 						String sql2 = "INSERT INTO `results`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`)"
 								+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '"
 								+ topicID + "', '" + task_type + "');";
@@ -106,7 +121,7 @@ public class TrainingOneServlet extends HttpServlet {
 				}
 				if (page != null) {
 					if (page.equals("trainingTwoForm")) {
-						if (j == 9) {
+						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set two=" + score
 									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
 									+ " and two<" + score);
@@ -115,7 +130,7 @@ public class TrainingOneServlet extends HttpServlet {
 						response.sendRedirect(
 								"index.jsp?navPage=trainingTwo&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingThreeForm")) {
-						if (j == 9) {
+						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set three=" + score
 									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
 									+ " and three<" + score);
@@ -124,7 +139,7 @@ public class TrainingOneServlet extends HttpServlet {
 						response.sendRedirect(
 								"index.jsp?navPage=trainingThree&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingFourForm")) {
-						if (j == 9) {
+						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set four=" + score
 									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
 									+ " and four<" + score);
@@ -133,7 +148,7 @@ public class TrainingOneServlet extends HttpServlet {
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFour&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingFiveForm")) {
-						if (j == 9) {
+						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set five=" + score
 									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
 									+ " and five<" + score);
@@ -142,7 +157,7 @@ public class TrainingOneServlet extends HttpServlet {
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFive&topic_id=" + topicID + "&questionId=" + (++j));
 					} else if (page.equals("trainingSixForm")) {
-						if (j == 9) {
+						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set six=" + score
 									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
 									+ " and six<" + score);
@@ -152,7 +167,7 @@ public class TrainingOneServlet extends HttpServlet {
 								"index.jsp?navPage=trainingSix&topic_id=" + topicID + "&questionId=" + (++j));
 					}
 				} else {
-					if (j == 9) {
+					if (j == (countOfTopic - 1)) {
 						PreparedStatement ps = con.prepareStatement("update user_topic set one=" + score
 								+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
 								+ " and one<" + score);
