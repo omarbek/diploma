@@ -110,7 +110,16 @@
 		  	<div class="col-md-3 ">
 		            <div class="subject">
 		              <a href="?navPage=trainings&topic_id=<%=rs.getString(1)%>"><img src="img/subjects/<%=rs.getString(1)%>.jpg" class="img-responsive" alt=""></a>
-		              <div><h3><a href="?navPage=trainings&topic_id=<%=rs.getString(1)%>"><%=rs.getString(2) %></a></h3></div>
+		              <div class="row">
+						<div class="col-md-7 ">
+							<h3><a href="?navPage=trainings&topic_id=<%=rs.getString(1)%>"><%=rs.getString(2) %></a></h3>
+						</div>
+						<div class="col-md-5 ">
+							<img src="img/icons/zvezda_full.png" class="img-star" alt="">
+							<img src="img/icons/zvezda.png" class="img-star" alt="">
+							<img src="img/icons/zvezda.png" class="img-star" alt="">
+						</div>			  
+					  </div>
 		            </div>
 		     </div>
 			<%if((i+1)%4 == 0){%>
