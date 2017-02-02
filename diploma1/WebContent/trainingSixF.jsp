@@ -14,40 +14,53 @@
 var matchId=null;
 var wrongIds="";
 var isFirst=true;
+var match=null;
 function firstMatch(id) {
-	if(isFirst){
-		matchId=id;
-		isFirst=false;
-	}else{
-		if(matchId==id){
-			var secondId=id+10;
-			//button disappear only in right answer
-		}else{ 
-			wrongIds+=matchId+",";
-			document.getElementById("postData").value = wrongIds;
+	if(match!=1){
+		if(isFirst){
+			matchId=id;
+			isFirst=false;
+			match=1;
+		}else{
+			if(matchId==id){
+				var secondId=id+10;
+				//button disappear only in right answer
+			}else{ 
+				wrongIds+=matchId+",";
+				document.getElementById("postData").value = wrongIds;
+			}
+			document.getElementById(matchId).style.visibility = 'hidden';//
+			document.getElementById(secondId).style.visibility = 'hidden';//
+			isFirst=true;
+			matchId=null;
+			match=null;
 		}
-		document.getElementById(matchId).style.visibility = 'hidden';
-		document.getElementById(secondId).style.visibility = 'hidden';
-		isFirst=true;
-		matchId=null;
+	}else{
+		alert("Выберите слово с другой колонки");
 	}
 }
 function secondMatch(id){
-	if(!isFirst){
-		var secondId=id-10;
-		if(secondId==matchId){
-			//button disappear only in right answer
+	if(match!=2){
+		if(!isFirst){
+			var secondId=id-10;
+			if(secondId==matchId){
+				//button disappear only in right answer
+			}else{
+				wrongIds+=matchId+",";
+				document.getElementById("postData").value = wrongIds;
+			}
+			document.getElementById(matchId).style.visibility = 'hidden';//
+			document.getElementById(id).style.visibility = 'hidden';//
+			isFirst=true;
+			matchId=null;
+			match=null;
 		}else{
-			wrongIds+=matchId+",";
-			document.getElementById("postData").value = wrongIds;
+			matchId=id-10;
+			isFirst=false;
+			match=2;
 		}
-		document.getElementById(matchId).style.visibility = 'hidden';
-		document.getElementById(id).style.visibility = 'hidden';
-		isFirst=true;
-		matchId=null;
 	}else{
-		matchId=id-10;
-		isFirst=false;
+		alert("Выберите слово с другой колонки");
 	}
 }
 function myClear(){
