@@ -3,7 +3,7 @@
 <%@include file="mysql.jsp" %>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
-
+<%@page import="java.util.ArrayList"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <body>
     <div class="container" id="content">
@@ -71,6 +71,7 @@
         </div>
        <%
        String sql = null;
+       String sql2 = null;
        
        if (grade != null && grade.equals("one")){       
    		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
@@ -78,6 +79,7 @@
 			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
 			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
 			    +" and ut.topic_id<>1) or ut.topic_id=1) and ut.topic_id<9)";
+   		sql2 = "SELECT * FROM topics where grade=1";
           }
        else if (grade != null && grade.equals("two")){
       		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
@@ -85,6 +87,7 @@
    			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
    			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
    			    +" and ut.topic_id<>9) or ut.topic_id=9) and ut.topic_id<17 and ut.topic_id>8)";
+      		sql2 = "SELECT * FROM topics where grade=1 and grade=2";
          }
        else if (grade != null && grade.equals("three")){
      		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
@@ -92,13 +95,15 @@
   			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
   			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
   			    +" and ut.topic_id<>17) or ut.topic_id=17) and ut.topic_id<25 and ut.topic_id>16)";
-        }
+     		sql2 = "SELECT * FROM topics where grade<=3";
+       }
        else if (grade != null && grade.equals("four")){
     		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
  			    +" where t.grade=4 and ut.user_id="+session.getAttribute("studentID")
  			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
  			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
  			    +" and ut.topic_id<>25) or ut.topic_id=25) and ut.topic_id>24)";
+    		sql2 = "SELECT * FROM topics";
         }
 		PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
@@ -158,8 +163,7 @@
 			</div>
 			<%}
 			i++;
-		}
-		%>
+		} %>
       </section>
       
     </div>

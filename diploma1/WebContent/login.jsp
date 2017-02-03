@@ -35,7 +35,7 @@
                   </div>
                   <div class="col-xs-6">
                       <p class="lead">Еще не зарегистрирован?</p>                     
-                      <p><a href="/new-customer/" class="btn btn-info btn-block">Да, хочу зарегистрироваться сейчас!</a></p>
+                      <p><a href="?navPage=registration" class="btn btn-info btn-block">Да, хочу зарегистрироваться сейчас!</a></p>
                   </div>
               </div>
           </div>

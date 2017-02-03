@@ -86,9 +86,14 @@
         </ul>
       </div>
        <%
-		if(userId == null){
+		if((userId == null) && (navPage == null)){
 			%>
 			<jsp:include page="login.jsp" />
+			<%
+		}
+		else if ((userId == null) && (navPage.equals("registration"))){
+			%>
+			<jsp:include page="registration.jsp"/>
 			<%
 		}
 		else{
