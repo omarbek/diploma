@@ -71,15 +71,16 @@
         </div>
        <%
        String sql = null;
-       String sql2 = null;
+       String sqlAll = null;
        
        if (grade != null && grade.equals("one")){       
-   		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+   			sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
 			    +" where t.grade=1 and ut.user_id="+session.getAttribute("studentID")
 			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
 			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
 			    +" and ut.topic_id<>1) or ut.topic_id=1) and ut.topic_id<9)";
-   		sql2 = "SELECT * FROM topics where grade=1";
+   			sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+   				+" where t.grade=1";
           }
        else if (grade != null && grade.equals("two")){
       		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
@@ -87,15 +88,17 @@
    			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
    			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
    			    +" and ut.topic_id<>9) or ut.topic_id=9) and ut.topic_id<17 and ut.topic_id>8)";
-      		sql2 = "SELECT * FROM topics where grade=1 and grade=2";
-         }
+      		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+       				+" where t.grade=2";
+       }
        else if (grade != null && grade.equals("three")){
      		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
   			    +" where t.grade=3 and ut.user_id="+session.getAttribute("studentID")
   			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
   			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
   			    +" and ut.topic_id<>17) or ut.topic_id=17) and ut.topic_id<25 and ut.topic_id>16)";
-     		sql2 = "SELECT * FROM topics where grade<=3";
+     		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+       				+" where t.grade=3";
        }
        else if (grade != null && grade.equals("four")){
     		sql = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
@@ -103,25 +106,38 @@
  			    +" and ((((ut.topic_id<=(select max(topic_id) from user_topic where one>=75"
  			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
  			    +" and ut.topic_id<>25) or ut.topic_id=25) and ut.topic_id>24)";
-    		sql2 = "SELECT * FROM topics";
-        }
+    		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+       				+" where t.grade=4";
+       }
 		PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
+		
+		PreparedStatement ps=con.prepareStatement(sqlAll);
+		ResultSet rsAll=ps.executeQuery();
+		
 		int i=0;
-		while(rs.next()){
+		while(rsAll.next()){
 			if(i%4 == 0){%>
 			<div class="row">
 		  	<%}%>
 		  	<div class="col-md-3 ">
-		            <div class="subject">
-		              <a href="?navPage=trainings&topic_id=<%=rs.getLong("topic_id")%>"><img src="img/subjects/<%=rs.getLong("topic_id")%>.jpg" class="img-responsive" alt=""></a>
+		  		<%
+		  			String subject=null;
+		  			if(rs.next()){
+		  				subject="subject";
+		  			}else{
+		  				subject="subject disabled";
+		  			}
+		  		%>
+		            <div class="<%=subject%>">
+		              <a href="?navPage=trainings&topic_id=<%=rsAll.getLong("topic_id")%>"><img src="img/subjects/<%=rsAll.getLong("topic_id")%>.jpg" class="img-responsive" alt=""></a>
 		              <div class="row">
 						<div class="col-md-7 ">
-							<h3><a href="?navPage=trainings&topic_id=<%=rs.getLong("topic_id")%>"><%=rs.getString("topic_name") %></a></h3>
+							<h3><a href="?navPage=trainings&topic_id=<%=rsAll.getLong("topic_id")%>"><%=rsAll.getString("topic_name") %></a></h3>
 						</div>
 						<%
-							double average=(rs.getDouble("one")+rs.getDouble("two")+rs.getDouble("three")
-									+rs.getDouble("four")+rs.getDouble("five")+rs.getDouble("six"))/6;
+							double average=(rsAll.getDouble("one")+rsAll.getDouble("two")+rsAll.getDouble("three")
+									+rsAll.getDouble("four")+rsAll.getDouble("five")+rsAll.getDouble("six"))/6;
 							if(average==100){
 						%>
 								<div class="col-md-5 ">
