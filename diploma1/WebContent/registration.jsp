@@ -4,11 +4,12 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@include file="mysql.jsp" %>
+<meta charset="utf-8">
 <script type="text/javascript">
 window.onload = function () {
     document.getElementById("inputPassword").onchange = validatePassword;
     document.getElementById("confirmPassword").onchange = validatePassword;
-}
+};
 function validatePassword(){
 var pass2=document.getElementById("confirmPassword").value;
 var pass1=document.getElementById("inputPassword").value;
@@ -67,39 +68,40 @@ else
       </label>
     </div>
   </div>
-  <% Connection con = (new DBConnection()).getConnection();
-	 String sql = "SELECT distinct city FROM schools";
-	 PreparedStatement prepStmt = con.prepareStatement(sql);
-	 ResultSet rs = prepStmt.executeQuery();%>
   <div class="form-group">
     <label class="control-label col-xs-3"></label>
     <div class="col-xs-3">
       <select class="form-control" name="city">
         <option disabled selected>Город</option>
-        <% while(rs.next()){ %>
-        <option value="<%=rs.getString(1)%>"><%=rs.getString(1)%></option>
-        <% } %>
+        <option value="Астана">г. Астана</option>
+        <option value="Алматы">г. Алматы</option>
+        <option value="Акмолинская">Акмолинская обл.</option>
+        <option value="Актюбинская">Актюбинская обл.</option>
+        <option value="Алматинская">Алматинская обл.</option>
+        <option value="Атырауская">Атырауская обл.</option>
+        <option value="Восточно-Казахстанская">Восточно-Казахстанская обл.</option>
+        <option value="Жамбылская">Жамбылская обл.</option>
+        <option value="Западно-Казахстанская">Западно-Казахстанская обл.</option>
+        <option value="Карагандинская">Карагандинская обл.</option>
+        <option value="Костанайская">Костанайская обл.</option>
+        <option value="Кызылординская">Кызылординская обл.</option>
+        <option value="Мангистауская">Мангистауская обл.</option>
+        <option value="Павлодарская">Павлодарская обл.</option>
+        <option value="Северо-Казахстанская">Северо-Казахстанская обл.</option>
+        <option value="Южно-Казахстанская">Южно-Казахстанская обл.</option>
       </select>
     </div>
-  <% String sql2 = "SELECT school_name FROM schools where city = 'Almaty'";
-	 PreparedStatement prepStmt2 = con.prepareStatement(sql2);
-	 ResultSet rs2 = prepStmt2.executeQuery();  %>
     <div class="col-xs-3">
-      <select class="form-control" name="school">
-        <option disabled selected>Школа</option>
-        <% while (rs2.next()){ %>
-        <option value="<%=rs2.getString(1)%>"><%=rs2.getString(1)%></option>
-        <% } %>
-      </select>
+      <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы"/>
     </div>
-    <% String sql3 = "SELECT class_name FROM classes";
+    <% String sql3 = "SELECT * FROM classes";
 	 PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 	 ResultSet rs3 = prepStmt3.executeQuery();  %>
     <div class="col-xs-3">
       <select class="form-control" name="studentClass">
         <option disabled selected>Класс</option>
         <% while (rs3.next()){ %>
-        <option value="<%=rs3.getString(1)%>"><%=rs3.getString(1)%></option>
+        <option value="<%=rs3.getString(1)%>"><%=rs3.getString(3)%></option>
         <% } %>
       </select>
     </div>
