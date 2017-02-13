@@ -74,6 +74,7 @@ public class LoginServlet extends HttpServlet {
 
 					if (rs2.next()) {
 						session.setAttribute("studentID", rs2.getString(1));
+						session.setAttribute("userId", rs2.getString(2));
 						session.setAttribute("studentClass", rs2.getString(3));
 						session.setAttribute("userFirstName", rs2.getString(4));
 						session.setAttribute("userLastName", rs2.getString(5));

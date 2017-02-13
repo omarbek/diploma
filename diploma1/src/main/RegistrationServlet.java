@@ -91,6 +91,21 @@ public class RegistrationServlet extends HttpServlet {
 				}
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 				prepStmt3.executeUpdate();
+
+				String sql7 = "select class_name from classes where class_id=" + studentClass;
+				PreparedStatement prepStmt7 = con.prepareStatement(sql7);
+				ResultSet rs4 = prepStmt7.executeQuery();
+				int studClass = 0;
+				if (rs4.next()) {
+					studClass = Integer.parseInt(rs4.getString(1).charAt(0) + "");
+				}
+
+				for (int i = 1; i <= studClass * 8; i++) {
+					String sql6 = "INSERT INTO user_topic (user_id, topic_id) values (" + userID + ", " + i + ")";
+					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
+					prepStmt6.executeUpdate();
+				}
+
 				response.sendRedirect("index.jsp");
 			}
 		} catch (Exception e) {
