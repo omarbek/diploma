@@ -84,7 +84,11 @@ public class LoginServlet extends HttpServlet {
 				for (Cookie c : cookies) {
 					response.addCookie(c);
 				}
-				response.sendRedirect("index.jsp");
+				if (rs.getString(4).equals("3")) {
+					response.sendRedirect("admin.jsp");
+				} else {
+					response.sendRedirect("index.jsp");
+				}
 			} else {
 				response.sendRedirect("index.jsp");
 			}
