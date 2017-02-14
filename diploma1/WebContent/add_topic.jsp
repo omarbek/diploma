@@ -5,13 +5,23 @@
 <%@page import="java.sql.Connection"%>
 <%@include file="mysql.jsp" %>
 <meta charset="utf-8">
+<% boolean isEdit=Boolean.valueOf(request.getParameter("isEdit")); %>
+<% 
+	if(isEdit){
+%>
+<div class="col-xs-offset-3 col-xs-9"><h1>Изменить урок</h1></div>
+<%
+	}else{
+%>
 <div class="col-xs-offset-3 col-xs-9"><h1>Добавить урок</h1></div>
-
+<%
+	}
+%>
 <form class="form-horizontal" action="AdminServlet" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <label class="control-label col-xs-3">Имя урока:</label>
     <div class="col-xs-9">
-      <input type="text" class="form-control" name="name" placeholder="Введите имя" required>
+      <input type="text" class="form-control" name="name" required>
     </div>
   </div>
   <div class="form-group">
@@ -34,7 +44,8 @@
   <br />
   <div class="form-group">
     <div class="col-xs-offset-3 col-xs-9">
-      <input type="submit" class="btn btn-primary" value="Регистрация">
+      <input type="submit" class="btn btn-primary" value="Добавить">
     </div>
   </div>
+  <input type="hidden" name="page" value="add_topic">
 </form>

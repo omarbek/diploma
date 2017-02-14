@@ -30,10 +30,10 @@ public class AdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
+		Connection con = (new DBConnection()).getConnection();
 
 		String name = null;
 		String classNumber = null;
-		Connection con = (new DBConnection()).getConnection();
 		Long topicId = null;
 
 		boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
@@ -74,23 +74,14 @@ public class AdminServlet extends HttpServlet {
 							e.printStackTrace();
 						}
 
-						String path = "C:/Users/ŒÏ‡·ÂÍ/git/kazakh/diploma1/WebContent";
+						String path = "C:/Users/–û–º–∞—Ä–±–µ–∫/git/kazakh/diploma1/WebContent";
 						// String output =
 						// item.getName().substring(item.getName().indexOf('.'),
 						// item.getName().length());
 						String nameOfImage = topicId + ".jpg";
 						Word.processFile(path, item, nameOfImage);
 
-						String grade = null;
-						if ("1".equals(classNumber)) {
-							grade = "one";
-						} else if ("2".equals(classNumber)) {
-							grade = "two";
-						} else if ("3".equals(classNumber)) {
-							grade = "three";
-						} else {
-							grade = "four";
-						}
+						String grade = Word.getGrade(classNumber);
 						response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
 					}
 				}
@@ -98,6 +89,5 @@ public class AdminServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
 	}
 }

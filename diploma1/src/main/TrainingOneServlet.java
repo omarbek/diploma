@@ -123,7 +123,7 @@ public class TrainingOneServlet extends HttpServlet {
 					if (page.equals("trainingTwoForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set two=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and two<" + score);
 							ps.executeUpdate();
 						}
@@ -132,7 +132,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingThreeForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set three=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and three<" + score);
 							ps.executeUpdate();
 						}
@@ -141,7 +141,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingFourForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set four=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and four<" + score);
 							ps.executeUpdate();
 						}
@@ -150,7 +150,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingFiveForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set five=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and five<" + score);
 							ps.executeUpdate();
 						}
@@ -159,7 +159,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingSixForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set six=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and six<" + score);
 							ps.executeUpdate();
 						}
@@ -169,7 +169,7 @@ public class TrainingOneServlet extends HttpServlet {
 				} else {
 					if (j == (countOfTopic - 1)) {
 						PreparedStatement ps = con.prepareStatement("update user_topic set one=" + score
-								+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+								+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 								+ " and one<" + score);
 						ps.executeUpdate();
 					}

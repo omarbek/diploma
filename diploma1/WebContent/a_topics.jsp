@@ -101,8 +101,12 @@
 						</div>
 						<div class="col-md-5 ">
 							<!-- <button><i class="fa fa-plus" aria-hidden="true"></i></button> -->
-							<button>...</button>
-							<button>-</button>
+							<a href="?navPage=add_topic&isEdit=true">...</a>
+							<form action="TopicServlet" method="post">
+								<input type="hidden" name="page" value="remove">
+								<input type="hidden" name="topic_id" value="<%=rs.getLong("topic_id")%>">
+								<button>-</button>
+							</form>
 						</div>	
 					  </div>
 		            </div>

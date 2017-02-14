@@ -17,6 +17,20 @@ public class Word {
 		this.kaz = kaz;
 	}
 
+	public static String getGrade(String classNumber) {
+		String grade = null;
+		if ("1".equals(classNumber)) {
+			grade = "one";
+		} else if ("2".equals(classNumber)) {
+			grade = "two";
+		} else if ("3".equals(classNumber)) {
+			grade = "three";
+		} else {
+			grade = "four";
+		}
+		return grade;
+	}
+
 	public static double round(double value, int places) {
 		if (places < 0) {
 			throw new IllegalArgumentException();

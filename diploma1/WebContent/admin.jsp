@@ -54,7 +54,7 @@
             <a href="?navPage=a_topics&grade=one&classId=4">Уроки</a>
           </li>
           <li>
-            <a href="?navPage=add_topic">Добавить урок</a>
+            <a href="?navPage=add_topic&isEdit=false">Добавить урок</a>
           </li>
           <li>
             <a href="?navPage=dictionary">Мой словарь</a>
