@@ -94,18 +94,18 @@
 		  	<%}%>
 		  	<div class="col-md-3 ">
 		            <div class="subject">
-		              <a href="?navPage=trainings&topic_id=<%=rs.getLong("topic_id")%>"><img src="img/subjects/<%=rs.getLong("topic_id")%>.jpg" class="img-responsive" alt=""></a>
+		              <a href="?navPage=words&topic_id=<%=rs.getLong("topic_id")%>"><img src="img/subjects/<%=rs.getLong("topic_id")%>.jpg" class="img-responsive" alt=""></a>
 		              <div class="row">
 						<div class="col-md-7 ">
-							<h3><a href="?navPage=trainings&topic_id=<%=rs.getLong("topic_id")%>"><%=rs.getString("topic_name") %></a></h3>
+							<h3><a href="?navPage=words&topic_id=<%=rs.getLong("topic_id")%>"><%=rs.getString("topic_name") %></a></h3>
 						</div>
 						<div class="col-md-5 ">
 							<!-- <button><i class="fa fa-plus" aria-hidden="true"></i></button> -->
-							<a href="?navPage=add_topic&isEdit=true">...</a>
+							<a href="?navPage=add_topic&topic_id=<%=rs.getLong("topic_id")%>">Изменить</a>
 							<form action="TopicServlet" method="post">
 								<input type="hidden" name="page" value="remove">
 								<input type="hidden" name="topic_id" value="<%=rs.getLong("topic_id")%>">
-								<button>-</button>
+								<button>Удалить</button>
 							</form>
 						</div>	
 					  </div>

@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,6 +42,17 @@ public class TopicServlet extends HttpServlet {
 
 				removePs = con.prepareStatement("delete from topics where topic_id=" + topicId);
 				removePs.executeUpdate();
+
+				try {
+					File file = new File(
+							"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/" + topicId + ".jpg");
+					file.delete();
+					// file.renameTo(new
+					// File("C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/"
+					// + topicId + "_old.jpg"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 				response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
 			} catch (SQLException e) {

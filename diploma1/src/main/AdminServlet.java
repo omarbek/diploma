@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -35,6 +36,7 @@ public class AdminServlet extends HttpServlet {
 		String name = null;
 		String classNumber = null;
 		Long topicId = null;
+		String page = null;
 
 		boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
 		if (isMultiPart) {
@@ -53,36 +55,70 @@ public class AdminServlet extends HttpServlet {
 						response.getWriter().println(fieldName + ":" + value + "<br/>");
 						if (fieldName.equalsIgnoreCase("name")) {
 							name = value;
+						} else if (fieldName.equalsIgnoreCase("page")) {
+							page = value;
+						} else if (fieldName.equalsIgnoreCase("topicId")) {
+							topicId = Long.parseLong(value);
 						} else {
 							classNumber = value;
 						}
 					} else {
-						try {
-							PreparedStatement insertPs = con
-									.prepareStatement("INSERT INTO `topics` (topic_name,grade) values ('" + name + "', "
-											+ classNumber + ")");
-							insertPs.executeUpdate();
+						if ("add_topic".equals(page)) {
+							try {
+								PreparedStatement insertPs = con
+										.prepareStatement("INSERT INTO `topics` (topic_name,grade) values ('" + name
+												+ "', " + classNumber + ")");
+								insertPs.executeUpdate();
 
-							PreparedStatement selectPs = con
-									.prepareStatement("select topic_id from topics where topic_name='" + name
-											+ "' and grade=" + classNumber);
-							ResultSet rs = selectPs.executeQuery();
-							if (rs.next()) {
-								topicId = rs.getLong(1);
+								PreparedStatement selectPs = con
+										.prepareStatement("select topic_id from topics where topic_name='" + name
+												+ "' and grade=" + classNumber);
+								ResultSet rs = selectPs.executeQuery();
+								if (rs.next()) {
+									topicId = rs.getLong(1);
+								}
+							} catch (SQLException e) {
+								e.printStackTrace();
 							}
-						} catch (SQLException e) {
-							e.printStackTrace();
+
+							String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+							// String output =
+							// item.getName().substring(item.getName().indexOf('.'),
+							// item.getName().length());
+							String nameOfImage = topicId + ".jpg";
+							Word.processFile(path, item, nameOfImage);
+
+							String grade = Word.getGrade(classNumber);
+							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
 						}
+						if ("edit_topic".equals(page)) {
+							try {
+								PreparedStatement updatePs = con.prepareStatement("update topics set topic_name='"
+										+ name + "', grade=" + classNumber + " where topic_id=" + topicId);
+								updatePs.executeUpdate();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
 
-						String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
-						// String output =
-						// item.getName().substring(item.getName().indexOf('.'),
-						// item.getName().length());
-						String nameOfImage = topicId + ".jpg";
-						Word.processFile(path, item, nameOfImage);
+							String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+							String nameOfImage = topicId + ".jpg";
 
-						String grade = Word.getGrade(classNumber);
-						response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+							try {
+								File file = new File(
+										"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/" + nameOfImage);
+								file.delete();
+								// file.renameTo(new
+								// File("C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/"
+								// + topicId + "_old.jpg"));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							Word.processFile(path, item, nameOfImage);
+
+							String grade = Word.getGrade(classNumber);
+							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+						}
 					}
 				}
 			} catch (FileUploadException e) {

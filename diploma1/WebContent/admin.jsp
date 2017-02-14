@@ -54,7 +54,7 @@
             <a href="?navPage=a_topics&grade=one&classId=4">Уроки</a>
           </li>
           <li>
-            <a href="?navPage=add_topic&isEdit=false">Добавить урок</a>
+            <a href="?navPage=add_topic">Добавить урок</a>
           </li>
           <li>
             <a href="?navPage=dictionary">Мой словарь</a>
@@ -120,9 +120,9 @@
 					<%			
 				}
 			
-			else if(navPage.equals("trainingOne")){	
+			else if(navPage.equals("words")){	
 					%>
-			<jsp:include page="trainingOne.jsp" />
+			<jsp:include page="words.jsp" />
 					<%			
 				}
 			else if(navPage.equals("trainingTwo")){	
