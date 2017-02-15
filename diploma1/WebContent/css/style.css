@@ -27,6 +27,10 @@ p.sp {
 .helv {
   font-family: 'Helvetica'; }
 
+div .container {
+	margin-left: -15px;
+}
+
 #content {
   background-color: #ecf0f1;
   padding-top: 30px;
@@ -90,7 +94,7 @@ p.sp {
           text-decoration: none; }
 
 .dostizh, .dictionary, .profile {
-  margin-top: 100px; }
+  margin-top: 50px; }
   .dostizh span, .dictionary span, .profile span {
     color: #8e44ad; }
 

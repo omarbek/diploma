@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Фев 06 2017 г., 12:55
+-- Время создания: Фев 14 2017 г., 16:13
 -- Версия сервера: 10.1.19-MariaDB
--- Версия PHP: 5.6.28
+-- Версия PHP: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -76,24 +76,6 @@ CREATE TABLE `results` (
   `task_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `results`
---
-
-INSERT INTO `results` (`id`, `student_id`, `word_id`, `topic_id`, `task_type`) VALUES
-(1, 1, 1, 1, 'one'),
-(32, 1, 14, 2, 'one'),
-(33, 1, 15, 2, 'one'),
-(34, 1, 16, 2, 'one'),
-(35, 1, 17, 2, 'one'),
-(36, 1, 18, 2, 'one'),
-(37, 1, 11, 2, 'one'),
-(38, 1, 30, 4, 'one'),
-(39, 1, 31, 4, 'one'),
-(40, 1, 32, 4, 'one'),
-(41, 1, 33, 4, 'one'),
-(42, 1, 34, 4, 'one');
-
 -- --------------------------------------------------------
 
 --
@@ -114,7 +96,7 @@ INSERT INTO `schools` (`school_id`, `school_name`, `city`) VALUES
 (1, '24', 'Алматы'),
 (2, '79', 'Алматы'),
 (3, '13', 'Астана'),
-(5, '16', '??????');
+(10, '44', 'Кызылординская');
 
 -- --------------------------------------------------------
 
@@ -138,8 +120,7 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`student_id`, `user_id`, `class_id`, `first_name`, `last_name`, `school_id`) VALUES
 (1, 2, 3, 'Мысал', 'Мысалова', 1),
 (3, 4, 7, 'Юзердва', 'Юзердвадва', 2),
-(4, 6, 13, '???????', '??????????', 2),
-(5, 10, 21, '??????', '??????', 5);
+(10, 15, 17, 'Омарбек', 'Динасил', 10);
 
 -- --------------------------------------------------------
 
@@ -573,7 +554,9 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `status`) VALUES
 (2, 'user02@gmail.com', '12345', 2),
 (4, 'user03@gmail.com', 'Aa12345', 2),
 (6, 'user04@gmail.com', 'Qwerty1', 2),
-(10, 'user05@gmail.com', 'Ss12345', 2);
+(10, 'user05@gmail.com', 'Ss12345', 2),
+(15, 'omarbek96@mail.ru', 'Aa12345', 2),
+(16, 'admin@mail.ru', '111', 3);
 
 -- --------------------------------------------------------
 
@@ -585,12 +568,12 @@ CREATE TABLE `user_topic` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
-  `one` float NOT NULL,
-  `two` float NOT NULL,
-  `three` float NOT NULL,
-  `four` float NOT NULL,
-  `five` float NOT NULL,
-  `six` float NOT NULL
+  `one` float NOT NULL DEFAULT '0',
+  `two` float NOT NULL DEFAULT '0',
+  `three` float NOT NULL DEFAULT '0',
+  `four` float NOT NULL DEFAULT '0',
+  `five` float NOT NULL DEFAULT '0',
+  `six` float NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -606,30 +589,30 @@ INSERT INTO `user_topic` (`id`, `user_id`, `topic_id`, `one`, `two`, `three`, `f
 (6, 1, 6, 0, 0, 0, 0, 0, 0),
 (7, 1, 7, 0, 0, 0, 0, 0, 0),
 (8, 1, 8, 0, 0, 0, 0, 0, 0),
-(9, 1, 9, 0, 0, 0, 0, 0, 0),
-(10, 1, 10, 0, 0, 0, 0, 0, 0),
-(11, 1, 11, 0, 0, 0, 0, 0, 0),
-(12, 1, 12, 0, 0, 0, 0, 0, 0),
-(13, 1, 13, 0, 0, 0, 0, 0, 0),
-(14, 1, 14, 0, 0, 0, 0, 0, 0),
-(15, 1, 15, 0, 0, 0, 0, 0, 0),
-(16, 1, 16, 0, 0, 0, 0, 0, 0),
-(17, 1, 17, 0, 0, 0, 0, 0, 0),
-(18, 1, 18, 0, 0, 0, 0, 0, 0),
-(19, 1, 19, 0, 0, 0, 0, 0, 0),
-(20, 1, 20, 0, 0, 0, 0, 0, 0),
-(21, 1, 21, 0, 0, 0, 0, 0, 0),
-(22, 1, 22, 0, 0, 0, 0, 0, 0),
-(23, 1, 23, 0, 0, 0, 0, 0, 0),
-(24, 1, 24, 0, 0, 0, 0, 0, 0),
-(25, 1, 25, 0, 0, 0, 0, 0, 0),
-(26, 1, 26, 0, 0, 0, 0, 0, 0),
-(27, 1, 27, 0, 0, 0, 0, 0, 0),
-(28, 1, 28, 0, 0, 0, 0, 0, 0),
-(29, 1, 29, 0, 0, 0, 0, 0, 0),
-(30, 1, 30, 0, 0, 0, 0, 0, 0),
-(31, 1, 31, 0, 0, 0, 0, 0, 0),
-(32, 1, 32, 0, 0, 0, 0, 0, 0);
+(35, 15, 1, 0, 0, 0, 0, 0, 0),
+(36, 15, 2, 0, 0, 0, 0, 0, 0),
+(37, 15, 3, 0, 0, 0, 0, 0, 0),
+(38, 15, 4, 0, 0, 0, 0, 0, 0),
+(39, 15, 5, 0, 0, 0, 0, 0, 0),
+(40, 15, 6, 0, 0, 0, 0, 0, 0),
+(41, 15, 7, 0, 0, 0, 0, 0, 0),
+(42, 15, 8, 0, 0, 0, 0, 0, 0),
+(43, 15, 9, 0, 0, 0, 0, 0, 0),
+(44, 15, 10, 0, 0, 0, 0, 0, 0),
+(45, 15, 11, 0, 0, 0, 0, 0, 0),
+(46, 15, 12, 0, 0, 0, 0, 0, 0),
+(47, 15, 13, 0, 0, 0, 0, 0, 0),
+(48, 15, 14, 0, 0, 0, 0, 0, 0),
+(49, 15, 15, 0, 0, 0, 0, 0, 0),
+(50, 15, 16, 0, 0, 0, 0, 0, 0),
+(51, 15, 17, 0, 0, 0, 0, 0, 0),
+(52, 15, 18, 0, 0, 0, 0, 0, 0),
+(53, 15, 19, 0, 0, 0, 0, 0, 0),
+(54, 15, 20, 0, 0, 0, 0, 0, 0),
+(55, 15, 21, 0, 0, 0, 0, 0, 0),
+(56, 15, 22, 0, 0, 0, 0, 0, 0),
+(57, 15, 23, 0, 0, 0, 0, 0, 0),
+(58, 15, 24, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1048,17 +1031,17 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT для таблицы `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `school_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `school_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT для таблицы `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `student_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT для таблицы `teachers`
 --
@@ -1068,7 +1051,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT для таблицы `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `topic_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT для таблицы `topic_word`
 --
@@ -1078,7 +1061,12 @@ ALTER TABLE `topic_word`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT для таблицы `user_topic`
+--
+ALTER TABLE `user_topic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT для таблицы `words`
 --
