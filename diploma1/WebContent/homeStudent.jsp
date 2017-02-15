@@ -80,7 +80,7 @@
    			    +" user_id="+session.getAttribute("userId")+" and one>=75"
    			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
    			    +" and ut.topic_id<>1) or (ut.topic_id=1 and ut.user_id="
-   			    + session.getAttribute("userId")+")) and ut.topic_id<9)";
+   			    + session.getAttribute("userId")+")) and ut.topic_id<9) and user_id="+session.getAttribute("userId");
    			sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
    				+" where t.grade=1 and ut.user_id="+session.getAttribute("userId");
           }
@@ -91,7 +91,7 @@
       			    +" user_id="+session.getAttribute("userId")+" and one>=75"
       			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
       			    +" and ut.topic_id<>9) or (ut.topic_id=9 and ut.user_id="
-      			    + session.getAttribute("userId")+")) and ut.topic_id<17 and ut.topic_id>8)";
+      			    + session.getAttribute("userId")+")) and ut.topic_id<17 and ut.topic_id>8) and user_id="+session.getAttribute("userId");
       		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
        				+" where t.grade=2 and ut.user_id="+session.getAttribute("userId");
        }
@@ -102,7 +102,7 @@
      			    +" user_id="+session.getAttribute("userId")+" and one>=75"
      			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
      			    +" and ut.topic_id<>17) or (ut.topic_id=17 and ut.user_id="
-     			    + session.getAttribute("userId")+")) and ut.topic_id<25 and ut.topic_id>16)";
+     			    + session.getAttribute("userId")+")) and ut.topic_id<25 and ut.topic_id>16) and user_id="+session.getAttribute("userId");
      		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
        				+" where t.grade=3 and ut.user_id="+session.getAttribute("userId");
        }
@@ -113,7 +113,7 @@
     			    +" user_id="+session.getAttribute("userId")+" and one>=75"
     			    +" and two>=75 and three>=75 and four>=75 and five>=75 and six>=75)+1)"
     			    +" and ut.topic_id<>25) or (ut.topic_id=25 and ut.user_id="
-    			    + session.getAttribute("userId")+")) and ut.topic_id>24)";
+    			    + session.getAttribute("userId")+")) and ut.topic_id>24) and user_id="+session.getAttribute("userId");
     		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
        				+" where t.grade=4 and ut.user_id="+session.getAttribute("userId");
        }
