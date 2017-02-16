@@ -30,6 +30,10 @@ function myClear(){
        document.getElementById(buttons[i]).style.visibility = 'visible';
      }
 }
+function playAudio() {
+	var x = document.getElementById("myAudio");
+	x.play(); 
+}  
 </script>
 <%!
 	public Long randomQuestion(Long lid){
@@ -89,7 +93,11 @@ int j = Integer.parseInt(questionId);
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> <img src="img/icons/zvuk.png" class="zvuk-text"></h2>
+			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> 
+			<audio id="myAudio">
+				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
+			</audio>
+			<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"></h2>
 		</div>
 	</div>
 	<div class="row">

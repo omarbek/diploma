@@ -7,6 +7,14 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+function playAudio() {
+	var x = document.getElementById("myAudio");
+	x.play(); 
+}  
+</script>  
 <%
 String topicId = null;
 topicId = (String)request.getAttribute("topic_id");
@@ -82,46 +90,73 @@ int j = Integer.parseInt(questionId);
 					 if(type == 0){
 						 %>
 					 	<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(0).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(1).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 					<%}
 					 else if(type == 1){
 						 %>		 
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(0).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(1).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 					<%}
 					else if(type == 2){
 						 %>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(0).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(1).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
-						<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
-						<div class="col-sm-3"><img src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
+							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
+							<audio id="myAudio">
+								<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
+							</audio>
+							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 					<%}
 					%>

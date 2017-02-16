@@ -64,7 +64,7 @@ int j = Integer.parseInt(questionId);
             <div class="col-sm-7">
             <h1 class="text-center yellow"> </h1>
             	<audio id="myAudio">
-					<source src="audio/1.mp3">
+					<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 				</audio>
                 <img onclick="playAudio()" src="img/note.jpg" alt="" class="img-responsive img-centre" width="350px">
             </div>

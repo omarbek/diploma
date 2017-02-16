@@ -8,6 +8,13 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+function playAudio() {
+	var x = document.getElementById("myAudio");
+	x.play(); 
+}  
+</script>   
 <%
 String topicId = null;
 topicId = (String)request.getAttribute("topic_id");
@@ -55,7 +62,10 @@ int j = Integer.parseInt(questionId);
             <div class="col-sm-6">
             
             <h2 class="text-center text-uppercase helv"><%=wordsRusKaz.get(j).kaz%>
-            <img src="img/icons/zvuk.png" class="zvuk-text"></h2>    
+            <audio id="myAudio">
+				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
+			</audio>
+            <img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"></h2>    
             <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre">
             </div>
             <div class="col-sm-5 col-sm-offset-1">          
