@@ -89,7 +89,7 @@ int j = Integer.parseInt(questionId);
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> </h2>
+			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> <img src="img/icons/zvuk.png" class="zvuk-text"></h2>
 		</div>
 	</div>
 	<div class="row">

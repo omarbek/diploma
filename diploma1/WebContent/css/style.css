@@ -254,4 +254,12 @@ div .container {
     opacity: 0.6;
     pointer-events: none;
 }
+.zvuk {
+	width: 40px;
+	margin-top: 32px;
+}
+.zvuk-text {
+	width: 40px;
+	
+}
 /*# sourceMappingURL=style.css.map */
