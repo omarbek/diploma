@@ -14,7 +14,7 @@
       
 
       <section id="main" class="trener">
-      <h1 class="text-center">Тренеровки</h1>
+      <h1 class="text-center">Тренировки</h1>
         
         <div class="hr-img">
           <img src="img/hr.png" style="width: 50px;" class="img-centre" alt="">

@@ -15,21 +15,24 @@ var matchId=null;
 var wrongIds="";
 var isFirst=true;
 var match=null;
-function firstMatch(id) {
+function firstMatch(id,count) {
 	if(match!=1){
 		if(isFirst){
+			document.getElementById(id).style.background='#FFA500';
 			matchId=id;
 			isFirst=false;
 			match=1;
 		}else{
+			var secondId;
 			if(matchId==id){
-				var secondId=id+10;
+				secondId=id+count;
 				//button disappear only in right answer
 			}else{ 
+				secondId=matchId+count;
 				wrongIds+=matchId+",";
 				document.getElementById("postData").value = wrongIds;
 			}
-			document.getElementById(matchId).style.visibility = 'hidden';//
+			document.getElementById(id).style.visibility = 'hidden';//
 			document.getElementById(secondId).style.visibility = 'hidden';//
 			isFirst=true;
 			matchId=null;
@@ -39,10 +42,10 @@ function firstMatch(id) {
 		alert("Выберите слово с другой колонки");
 	}
 }
-function secondMatch(id){
+function secondMatch(id,count){
 	if(match!=2){
 		if(!isFirst){
-			var secondId=id-10;
+			var secondId=id-count;
 			if(secondId==matchId){
 				//button disappear only in right answer
 			}else{
@@ -55,7 +58,8 @@ function secondMatch(id){
 			matchId=null;
 			match=null;
 		}else{
-			matchId=id-10;
+			document.getElementById(id).style.background='#FFA500';
+			matchId=id-count;
 			isFirst=false;
 			match=2;
 		}
@@ -63,12 +67,14 @@ function secondMatch(id){
 		alert("Выберите слово с другой колонки");
 	}
 }
-function myClear(){
-	wrongIds="";
+function myClear(id,count){
 	matchId=null;
-	var isFirst=true;
-    for (var i = 1; i <= 20; i++) { 
+	wrongIds="";
+	match=null;
+	isFirst=true;
+    for (var i = id; i <= (id+count)*2; i++) { 
        document.getElementById(i).style.visibility = 'visible';
+	   document.getElementById(i).style.background='#5cb85c';
      }
 }
 </script>
@@ -82,6 +88,7 @@ ArrayList<Word> wordsRusKaz = (ArrayList<Word>)session.getAttribute("wordsRusKaz
 
 int j = Integer.parseInt(questionId);
 
+Integer count=(Integer)request.getAttribute("count");
 %>
 <br>
 
@@ -126,7 +133,7 @@ int j = Integer.parseInt(questionId);
 			 <%
 		 for(int i=0;i<shuffleList.size();i++){
     %>
-		 		<button id=<%=shuffleList.get(i).id %> onclick="firstMatch(<%=shuffleList.get(i).id %>)" class="btn btn-success btn-block" <%=width %>><%=shuffleList.get(i).kaz %></button>
+		 		<button id=<%=shuffleList.get(i).id %> onclick="firstMatch(<%=shuffleList.get(i).id %>, <%=count %>)" class="btn btn-success btn-block" <%=width %>><%=shuffleList.get(i).kaz %></button>
     			<h2></h2>
     <%
 		 }
@@ -135,9 +142,9 @@ int j = Integer.parseInt(questionId);
     		<div class="col-sm-4 col-sm-offset-3">   
 			 <%
 		 for(int i=0;i<shuffleList.size();i++){
-			 wordsRusKaz.get(i).id=wordsRusKaz.get(i).id+10;
+			 wordsRusKaz.get(i).id=wordsRusKaz.get(i).id+count;
     %>
-		 		<button id=<%=wordsRusKaz.get(i).id %> onclick="secondMatch(<%=wordsRusKaz.get(i).id %>)" class="btn btn-success btn-block" <%=width %>><%=wordsRusKaz.get(i).rus %></button>
+		 		<button id=<%=wordsRusKaz.get(i).id %> onclick="secondMatch(<%=wordsRusKaz.get(i).id %>, <%=count %>)" class="btn btn-success btn-block" <%=width %>><%=wordsRusKaz.get(i).rus %></button>
     			<h2></h2>
     <%
 		 }
@@ -147,7 +154,7 @@ int j = Integer.parseInt(questionId);
     </div>
     <div class="row">
         <div class="col-sm-4 col-sm-offset-1">
-        	<button onclick="myClear()" class="btn btn-answer" <%=width %>>Заново</button>       
+        	<button onclick="myClear(<%=wordsRusKaz.get(0).id-count %>, <%=count %>)" class="btn btn-answer" <%=width %>>Заново</button>       
         </div>
         <div class="col-sm-4 col-sm-offset-3">
 			<form method="post" action="TrainingOneServlet" id="trainingOneForm">

@@ -77,6 +77,11 @@ public class TrainingOneServlet extends HttpServlet {
 		try {
 			if (j == 0) {
 				score = 0;
+
+				String sql = "delete from results where student_id = " + session.getAttribute("studentID")
+						+ " and topic_id = " + topicID + " and task_type='" + task_type + "'";
+				PreparedStatement prepStmt = con.prepareStatement(sql);
+				prepStmt.executeUpdate();
 			}
 			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
 					|| "trainingSixForm".equals(page)) {
@@ -107,23 +112,17 @@ public class TrainingOneServlet extends HttpServlet {
 						}
 					}
 				} else {
-					String sql3 = "SELECT * FROM results WHERE word_id=" + wordID + " and topic_id=" + topicID;
-					PreparedStatement prepStmt3 = con.prepareStatement(sql3);
-					ResultSet rSet = prepStmt3.executeQuery();
-
-					if (!rSet.next()) {
-						String sql2 = "INSERT INTO `results`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`)"
-								+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '"
-								+ topicID + "', '" + task_type + "');";
-						PreparedStatement prepStmt2 = con.prepareStatement(sql2);
-						prepStmt2.executeUpdate();
-					}
+					String sql2 = "INSERT INTO `results`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`)"
+							+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '" + topicID
+							+ "', '" + task_type + "');";
+					PreparedStatement prepStmt2 = con.prepareStatement(sql2);
+					prepStmt2.executeUpdate();
 				}
 				if (page != null) {
 					if (page.equals("trainingTwoForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set two=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and two<" + score);
 							ps.executeUpdate();
 						}
@@ -132,7 +131,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingThreeForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set three=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and three<" + score);
 							ps.executeUpdate();
 						}
@@ -141,7 +140,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingFourForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set four=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and four<" + score);
 							ps.executeUpdate();
 						}
@@ -150,7 +149,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingFiveForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set five=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and five<" + score);
 							ps.executeUpdate();
 						}
@@ -159,7 +158,7 @@ public class TrainingOneServlet extends HttpServlet {
 					} else if (page.equals("trainingSixForm")) {
 						if (j == (countOfTopic - 1)) {
 							PreparedStatement ps = con.prepareStatement("update user_topic set six=" + score
-									+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and six<" + score);
 							ps.executeUpdate();
 						}
@@ -169,7 +168,7 @@ public class TrainingOneServlet extends HttpServlet {
 				} else {
 					if (j == (countOfTopic - 1)) {
 						PreparedStatement ps = con.prepareStatement("update user_topic set one=" + score
-								+ " WHERE user_id=" + session.getAttribute("studentID") + " and topic_id=" + topicID
+								+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 								+ " and one<" + score);
 						ps.executeUpdate();
 					}
