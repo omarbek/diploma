@@ -28,7 +28,6 @@ public class RegistrationServlet extends HttpServlet {
 		String userFirstName = request.getParameter("firstName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("pwd");
-		// String password2 = request.getParameter("pwd2");
 		String city = request.getParameter("city");
 		String school = request.getParameter("school");
 		String studentClass = request.getParameter("studentClass");
