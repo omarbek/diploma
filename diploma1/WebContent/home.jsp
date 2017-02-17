@@ -10,7 +10,7 @@
         <h1 class="text-center">
           Добро пожаловать, Мой Друг!
         </h1>
-        <p class="sp text-center">Lorem ipsum ываеdolor sit amet, consectetur adipiscing elit,<br/> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco<br/> laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="sp text-center">Lorem ipsum ываевапроdolor sit amet, consectetur adipiscing elit,<br/> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco<br/> laboris nisi ut aliquip ex ea commodo consequat.</p>
         
       </section>
       <div class="row" id="prem">
