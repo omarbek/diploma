@@ -9,6 +9,9 @@
         <h1 class="text-center">
           Мой словарь
         </h1>
+        <div class="hr-img">
+          <img src="img/hr.png" style="width: 50px;" class="img-centre" alt="">
+        </div>
         <h3 class="text-center">
           На этой странице находятся все слова, которые Вы изучили. <br>
           Вы можете в любой момент зайти сюда и повторить их, чтобы не забыть!

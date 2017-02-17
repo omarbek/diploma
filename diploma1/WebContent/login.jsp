@@ -1,5 +1,6 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <meta charset="utf-8">
   <div id="login-overlay" class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
@@ -22,14 +23,8 @@
                                   <span class="help-block"></span>
                               </div>
                               <div id="loginErrorMsg" class="alert alert-error hide">Неверная почта или пароль</div>
-                              <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" name="remember" id="remember"> Запомнить меня
-                                  </label>
-                                  <p class="help-block">(если это личный компьютер)</p>
-                              </div>
                               <button type="submit" class="btn btn-success btn-block">Готово</button>
-                              <a href="/forgot/" class="btn btn-default btn-block">Помощь в регистрации</a>
+                              <a href="/forgot/" class="btn btn-default btn-block">Забыли пароль?</a>
                           </form>
                       </div>
                   </div>

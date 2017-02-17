@@ -28,7 +28,7 @@
                   <a href="?navPage=trainingOne&topic_id=<%=qwerty %>&questionId=0">
                     <img src="img/icons/5.png" class="img-responsive img-centre" alt="">
                     <br>
-                     <h3>Перевод с русского</h3>
+                     <h3>Переведи с русского</h3>
                      <p class="text-center">
                        Дано слово на русском языке, нужно найти перевод на казахском
                     </p>
@@ -40,7 +40,7 @@
                   <a href="?navPage=trainingTwo&topic_id=<%=qwerty %>&questionId=0">
                     <img src="img/icons/6.png" class="img-responsive img-centre" alt="">
                     <br>
-                     <h3>Перевод с казахского</h3>
+                     <h3>Переведи с казахского</h3>
                      <p class="text-center">
                        Дано слово на казахском языке, нужно найти перевод на русском
                     </p>
@@ -50,9 +50,9 @@
                <div class="col-md-4">
                 <div class="subject">
                   <a href="?navPage=trainingThree&topic_id=<%=qwerty%>&questionId=0">
-                    <img src="img/icons/7.png" class="img-responsive img-centre" alt="">
+                    <img src="img/icons/8.png" class="img-responsive img-centre" alt="">
                     <br>
-                     <h3>Собрать слово из букв</h3>
+                     <h3>Собери слово</h3>
                      <p class="text-center">
                        Нужно составить слово из данных букв
                     </p>
@@ -64,9 +64,9 @@
               <div class="col-md-4">
                 <div class="subject">
                   <a href="?navPage=trainingFour&topic_id=<%=qwerty %>&questionId=0">
-                    <img src="img/icons/8.png" class="img-responsive img-centre" alt="">
+                    <img src="img/icons/7.png" class="img-responsive img-centre" alt="">
                     <br>
-                     <h3>4 картинки 1 слово</h3>
+                     <h3>Угадай слово</h3>
                      <p class="text-center">
                        Даны 4 картинки, нужно написать общее слово для этих картинок на казахском
                     </p>
@@ -78,7 +78,7 @@
                   <a href="?navPage=trainingFive&topic_id=<%=qwerty %>&questionId=0">
                     <img src="img/icons/9.png" class="img-responsive img-centre" alt="">
                     <br>
-                     <h3>Аудиозапись</h3>
+                     <h3>Аудирование</h3>
                      <p class="text-center">
                        Нужно прослушать аудиозапись и найти перевод этого слова
                     </p>
@@ -90,7 +90,7 @@
                   <a href="?navPage=trainingSix&topic_id=<%=qwerty %>&questionId=0">
                     <img src="img/icons/10.png" class="img-responsive img-centre" alt="">
                     <br>
-                     <h3>Соответствие слов</h3>
+                     <h3>Подбери пару</h3>
                      <p class="text-center">
                        Нужно найти соответствующий перевод слова
                     </p>

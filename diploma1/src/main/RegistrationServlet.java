@@ -32,7 +32,6 @@ public class RegistrationServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String school = request.getParameter("school");
 		String studentClass = request.getParameter("studentClass");
-		String userStatus = request.getParameter("statusRadios");
 		String userID = "";
 		String schoolID = " ";
 		Connection con = (new DBConnection()).getConnection();
@@ -52,7 +51,7 @@ public class RegistrationServlet extends HttpServlet {
 
 			else {
 				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)" + " VALUES (0, '" + email
-						+ "', '" + password + "', '" + userStatus + "');";
+						+ "', '" + password + "', '2');";
 				String sql3 = "";
 				PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 				prepStmt2.executeUpdate();
@@ -80,25 +79,13 @@ public class RegistrationServlet extends HttpServlet {
 				if (rs2.next()) {
 					userID = rs2.getString(1);
 				}
-				if (userStatus.equals("1")) {
-					sql3 = "INSERT INTO `teachers`(`teacher_id`, `user_id`, `school_id`, `first_name`, `last_name`)"
-							+ " VALUES (0, '" + userID + "', '" + school + "', '" + userFirstName + "', '"
-							+ userLastName + "');";
-				} else if (userStatus.equals("2")) {
-					sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `class_id`, `first_name`, `last_name`, `school_id`)"
+				sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_id`)"
 							+ " VALUES (0, '" + userID + "', '" + studentClass + "', '" + userFirstName + "', '"
 							+ userLastName + "', '" + schoolID + "');";
-				}
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 				prepStmt3.executeUpdate();
 
-				String sql7 = "select class_name from classes where class_id=" + studentClass;
-				PreparedStatement prepStmt7 = con.prepareStatement(sql7);
-				ResultSet rs4 = prepStmt7.executeQuery();
-				int studClass = 0;
-				if (rs4.next()) {
-					studClass = Integer.parseInt(rs4.getString(1).charAt(0) + "");
-				}
+				int studClass = Integer.parseInt(studentClass);
 
 				for (int i = 1; i <= studClass * 8; i++) {
 					String sql6 = "INSERT INTO user_topic (user_id, topic_id) values (" + userID + ", " + i + ")";

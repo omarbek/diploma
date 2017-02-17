@@ -35,14 +35,11 @@
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
 
-	PreparedStatement ps=con.prepareStatement("select c.class_name from classes c"
-			+ " left join students s on s.class_id=c.class_id where user_id="+userId);
+	PreparedStatement ps=con.prepareStatement("select studentClass from students where user_id="+userId);
 	ResultSet rs = ps.executeQuery();
 	String classId=null;
 	if(rs.next()){
-		String className=rs.getString(1);
-		char c = className.charAt(0);
-		classId=c+"";
+		classId=rs.getString(1);
 	}
 	%>
     <div class="container" id="content">

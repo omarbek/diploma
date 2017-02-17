@@ -56,23 +56,10 @@ else
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-xs-3">Статус:</label>
-    <div class="col-xs-2">
-      <label class="radio-inline">
-        <input type="radio" name="statusRadios" value="1"> Учитель
-      </label>
-    </div>
-    <div class="col-xs-2">
-      <label class="radio-inline">
-        <input type="radio" name="statusRadios" value="2"> Ученик
-      </label>
-    </div>
-  </div>
-  <div class="form-group">
     <label class="control-label col-xs-3"></label>
     <div class="col-xs-3">
       <select class="form-control" name="city">
-        <option disabled selected>Город</option>
+        <option disabled selected>Регион</option>
         <option value="Астана">г. Астана</option>
         <option value="Алматы">г. Алматы</option>
         <option value="Акмолинская">Акмолинская обл.</option>
@@ -94,15 +81,13 @@ else
     <div class="col-xs-3">
       <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы"/>
     </div>
-    <% String sql3 = "SELECT * FROM classes";
-	 PreparedStatement prepStmt3 = con.prepareStatement(sql3);
-	 ResultSet rs3 = prepStmt3.executeQuery();  %>
     <div class="col-xs-3">
       <select class="form-control" name="studentClass">
         <option disabled selected>Класс</option>
-        <% while (rs3.next()){ %>
-        <option value="<%=rs3.getString(1)%>"><%=rs3.getString(3)%></option>
-        <% } %>
+        <option value="1">1 класс</option>
+        <option value="2">2 класс</option>
+        <option value="3">3 класс</option>
+        <option value="4">4 класс</option>
       </select>
     </div>
   </div>
