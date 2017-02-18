@@ -18,14 +18,24 @@ var checkAnswer="";
 function myFunction(id,a) {
 	/* alert("s"); */
     checkAnswer += a;
-    document.getElementById("demo").innerHTML = checkAnswer;
+    document.getElementsByClassName("next")[0].innerHTML = a;
     document.getElementById(id).style.visibility="hidden";
     buttons.push(id);
     document.getElementById("postData").value = checkAnswer;
+    $('.next').removeClass('next').addClass('done');
+    $('.others').first().removeClass('others').addClass('next');
 }
 function myClear(){
 	checkAnswer="";
-    document.getElementById("demo").innerHTML = "";
+	var y = document.getElementsByClassName("done");
+	var i;
+	for (i = 0; i < y.length; i++) {
+	  y[i].innerHTML = "";
+	}
+	$('.next').removeClass('next').addClass('others');
+	$('.done').first().removeClass('done').addClass('next');
+	$('.done').removeClass('done').addClass('others');
+    
     for (var i = 0; i < buttons.length; i++) { 
        document.getElementById(buttons[i]).style.visibility = 'visible';
      }
@@ -93,19 +103,14 @@ int j = Integer.parseInt(questionId);
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> 
+			<h3 class="text-center"><%=wordsRusKaz.get(j).rus %> 
 			<audio id="myAudio">
 				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 			</audio>
-			<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"></h2>
+			<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"></h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-12">
- 			<h2 class="text-center"><p name="input_letter" id="demo"></p></h2>
- 		</div>
- 	</div>
-		 <%
+ 	<%
 		 String word="";
 		 String clearWidth = "style='width:40px;'";
 		 String width = "style='width:180px;'";
@@ -115,32 +120,36 @@ int j = Integer.parseInt(questionId);
 				word+=ch;
 			}
 		%>
-		<div class="row" align="center">
-		<div class="col-sm-12">
-		<table>
-			<tr>
+	<div class="row">
+	<div class="col-sm-6 letters">	
+ 	<div class="row row-centered">
+		<% for(int i=0;i<word.length();i++){ %>
+			  <div class="col-sm-1 letter col-centered">
+			  <% if(i == 0){ %>
+			  		<button class="input-letter next"></button>
+			  <% } 
+			     else{%>
+			     	<button class="input-letter others"></button>
+			  <% }%>
+
+			  </div>
+	 	<% } %>
+ 	</div>
+	<div class="row row-centered">		
 			<%
 		 	for(int i=0;i<word.length();i++){
 		 	%>
-		 		<td>
-					<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn btn-success btn-block">
-					<% out.print(word.charAt(i)); %></button>
-				</td>
-				<td width="10px"></td>
+		 	<div class="col-sm-1 letter col-centered">
+				<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn btn-success btn-block">
+				<% out.print(word.charAt(i)); %></button>
+			</div>
 		   <%
 			}
-		    %>
-	 		</tr>
-	 	</table>
-	 	</div>
-	 </div>
-	 <div class="row">
-	 <div class="col-sm-4 col-sm-offset-4">
-	 <button onclick="myClear()" class="btn-answer btn">Заново</button>
+		    %>	 	
 	 </div>
 	 </div>
-	 <div class="row">
-	 <div class="col-sm-4 col-sm-offset-4">
+	 <div class="col-sm-4  col-sm-offset-1">
+	 <button onclick="myClear()" class="btn-answer btn zanovo">Заново</button>
  	 <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
@@ -149,9 +158,8 @@ int j = Integer.parseInt(questionId);
 		 <input type="hidden" name="demo" id="postData" value="">
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
 		 <input type="hidden" name="page" value="trainingThreeForm">
-	     <button class="btn-answer btn">Отправить</button>
+	     <button class="btn-answer btn zanovo">Отправить</button>
 	 </form>
-	 <br>
 	 </div>
 	 </div>
 	 <%	

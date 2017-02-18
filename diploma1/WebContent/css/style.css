@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6, .sp {
 p.sp {
   font-size: 20px;
   font-weight: 200;
-  color: #b1b1b1; }
+  color: #808080; }
 
 .helv {
   font-family: 'Helvetica'; }
@@ -70,6 +70,25 @@ div .container {
 
 #main {
   margin: 30px 0px 0px; }
+  #main .question div div h3 {
+			font-size: 34px; }
+	.letter {
+  	padding: 5px;
+	width: 55px;
+	height: 55px; }
+	.letter .input-letter{
+		border: 2px solid #8e44ad;
+		width: 45px;
+		height: 45px;
+		border-radius: 5px;
+		padding: 2px; 
+		color: #8e44ad;
+		font-family: 'SignPainter';
+		font-size: 30px;
+		margin-top: 0px;
+		float: left;}
+	.letter .btn-success{
+		font-size: 20px; }
 
 .subject {
   margin: 0px auto 40px;
@@ -116,7 +135,7 @@ div .container {
   height: 300px; }
 
 #prem {
-  margin-top: 80px; }
+  margin-top: 30px; }
   #prem img {
     width: 100px; }
 
@@ -263,7 +282,30 @@ div .container {
 	margin-top: 32px;
 }
 .zvuk-text {
-	width: 40px;
-	
+	width: 40px;	
+}
+.home-text{
+	color: #808080;
+	font-family: 'SignPainter';
+	font-size: 18px;
+}
+.row-centered {
+	text-align:center;
+	margin: auto;
+}
+.col-centered {
+	display:inline-block;
+	float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.zanovo {
+	margin-bottom:0px;
+	height: 70px;
+}
+.letters {
+	margin-top: 40px;
 }
 /*# sourceMappingURL=style.css.map */
