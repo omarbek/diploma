@@ -20,44 +20,50 @@ else
 //empty string means no validation error
 }
 </script>
-<div class="col-xs-offset-3 col-xs-9"><h1>Регистрация</h1></div>
 
+<div class="" ><h1 class="text-center">Регистрация</h1></div>
+<div class="hr-img">
+          <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
+        </div>
+<br>
+<div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="RegistrationServlet">
-  <div class="form-group">
-    <label class="control-label col-xs-3" for="lastName">Фамилия:</label>
-    <div class="col-xs-9">
+  <div class="form-group ">
+    <!--<label class="control-label col-xs-3" for="lastName"></label>-->
+    <div class="">
       <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Введите фамилию" required>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-xs-3" for="firstName">Имя:</label>
-    <div class="col-xs-9">
+    <!--<label class="control-label col-xs-3" for="firstName"></label>-->
+    <div class="">
       <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Введите имя" required>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-xs-3" for="inputEmail">E-mail:</label>
-    <div class="col-xs-9">
+    <!--<label class="control-label col-xs-3" for="inputEmail"></label>-->
+    <div class="">
       <input type="email" class="form-control" id="inputEmail" name="email" placeholder="E-mail" required>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-xs-3" for="inputPassword">Пароль:</label>
-    <div class="col-xs-9">
+    <!--<label class="control-label col-xs-3" for="inputPassword"></label>-->
+    <div class="">
       <input type="password" class="form-control" id="inputPassword" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
       			title="Пароль должен состоять минимум из 8 символов и должен иметь минимум одну цифру, одну строчную и одну прописную букву" placeholder="Введите пароль" required>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-xs-3" for="confirmPassword">Подтвердите пароль:</label>
-    <div class="col-xs-9">
+    <!--<label class="control-label col-xs-3" for="confirmPassword"></label>-->
+    <div class="">
       <input type="password" class="form-control" id="confirmPassword" name="pwd2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
       			title="Пароль должен состоять минимум из 8 символов и должен иметь минимум одну цифру, одну строчную и одну прописную букву" placeholder="Введите пароль ещё раз" required>
     </div>
   </div>
-  <div class="form-group">
-    <label class="control-label col-xs-3"></label>
-    <div class="col-xs-3">
+  <div class="row">
+  <div class="form-group ">
+    <!--<label class="control-label col-xs-3"></label>-->
+    <div class="col-xs-4">
       <select class="form-control" name="city">
         <option disabled selected>Регион</option>
         <option value="Астана">г. Астана</option>
@@ -78,10 +84,10 @@ else
         <option value="Южно-Казахстанская">Южно-Казахстанская обл.</option>
       </select>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-4">
       <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы"/>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-4">
       <select class="form-control" name="studentClass">
         <option disabled selected>Класс</option>
         <option value="1">1 класс</option>
@@ -91,11 +97,13 @@ else
       </select>
     </div>
   </div>
+  </div>
   <br />
   <div class="form-group">
-    <div class="col-xs-offset-3 col-xs-9">
-      <input type="submit" class="btn btn-primary" value="Регистрация">
-      <input type="reset" class="btn btn-default" value="Очистить форму">
+    <div class="text-center">
+      <input type="submit" class="btn btn-yellow " value="Готово">
+      <input type="reset" class="btn btn-default " value="Очистить форму">
     </div>
   </div>
 </form>
+</div>
