@@ -13,7 +13,7 @@
 	        <h1 class="text-center">
 	          Добро пожаловать, Мой Друг!
 	        </h1>
-	        <p class="sp text-center">Funny Kazakh - это интересный и увлекательный способ изучить Казахский язык. <br> Здесь ты будешь учить слова из лексического минимума, которые позволят тебе понимать основную казахскую речь.<br> Чем больше слов ты изучишь, тем больше становится твой дракон!</p>
+	        <p class="sp text-center">Айдаһар - это интересный и увлекательный способ изучить казахский язык. <br> Здесь ты будешь учить слова из лексического минимума, которые позволят тебе понимать основную казахскую речь.<br> Чем больше слов ты изучаешь, тем больше становится твой дракон!</p>
 	      </div>
 	      <div class="col-sm-4  ">
 	      <img class="img-responsive img-centre" src="img/dragon.png" style="width:300px">
@@ -23,22 +23,22 @@
         <div class="col-sm-3">
           <img class="img-responsive img-centre" src="img/icons/1.png">
           <h3 class="text-center">Основные слова</h3>
-          <p class="text-center home-text">Ты будешь изчать основные слова, которые помогут составить базу в освоении языка</p>
+          <p class="text-center home-text">Ты будешь изучать основные слова, которые помогут составить базу в освоении языка</p>
         </div>
         <div class="col-sm-3">
           <img class="img-responsive img-centre" src="img/icons/2.png">
           <h3 class="text-center">Баллы за успеваемость</h3>
-          <p class="text-center home-text">ты будешь получать баллы и звезды за правильные ответы, это поможет вырасти твоему дракону</p>
+          <p class="text-center home-text">За правильные ответы тебя ждут баллы и звезды, что поможет твоему дракону вырасти</p>
         </div>
          <div class="col-sm-3">
           <img class="img-responsive img-centre" src="img/icons/3.png">
-          <h3 class="text-center">Разные тренировки</h3>
+          <h3 class="text-center">Тренировки</h3>
           <p class="text-center home-text">Разнообразные тренировки не дадут тебе скучать</p>
         </div>
         <div class="col-sm-3">
           <img class="img-responsive img-centre" src="img/icons/4.png">
           <h3 class="text-center">Проверь себя</h3>
-          <p class="text-center home-text">После того, как пройдешь все темы, ты можешь проверить свои знания</p>
+          <p class="text-center home-text">После того, как пройдешь все темы, ты сможешь проверить свои знания</p>
         </div>
       </div>
       </section>

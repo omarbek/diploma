@@ -91,29 +91,92 @@ int j = Integer.parseInt(questionId);
 Integer count=(Integer)request.getAttribute("count");
 %>
 <br>
-
-      <section id="main">
-        <div class="question">
-		<%
+<section id="main">
+  <div class="question">
+ <%
  if(j>=wordsRusKaz.size()){
-		%>
-			<div class="well" style="background-color:pink;" align="center">
-			<h2>Список неверных слов: </h2>
+	List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
+	String userId = (String)session.getAttribute("userId");
+	String sql5 = "select studentClass from students where user_id='"+userId+"'";
+	PreparedStatement prepStmt5 = con.prepareStatement(sql5);
+	ResultSet rs5 = prepStmt5.executeQuery();
+	String classId = null;
+	if (rs5.next()){
+    	classId = rs5.getString(1);
+    }
+	 if(wrongWordsList.isEmpty()){ %>
+		<h1 class="text-center">Хорошая работа!</h1>
+		<h2 class="text-center">Ты ответил правильно на все вопросы!</h2>
+		<div class="row">	
+			<div class="col-sm-4 col-sm-offset-2" style="margin-top:15px;">
+				<div class="c100 p100 center">
+	                <span><%=wordsRusKaz.size()%> / <%=wordsRusKaz.size()%></span>
+	                <p class="prav">парвильных</p>
+	                <p class="otv">ответов</p>
+	                <div class="slice">
+	                   <div class="bar"></div>
+	                   <div class="fill"></div>
+	                </div>
+                </div>
+			</div>
+		   	<div class="col-sm-4">
+		   		<img class="img-responsive img-centre" src="img/dragon.png" style="width:280px;">
+			</div>
+		 </div>
+	<%}
+	 else{  %>
+		 <h1 class="text-center">Список неверных слов:</h1>	
+		<div class="row">	
+			<div class="col-sm-4" style="margin-top:15px;">
+			<%  int rightAnswers = wordsRusKaz.size() - wrongWordsList.size();
+				int percntge = (100*rightAnswers)/wordsRusKaz.size();%>
+				<div class="c100 p<%=percntge%> center">
+	                 <span><%=rightAnswers%> / <%=wordsRusKaz.size()%></span>
+	                 <p class="prav">парвильных</p>
+	                 <p class="otv">ответов</p>
+	                 <div class="slice">
+	                     <div class="bar"></div>
+	                     <div class="fill"></div>
+	                 </div>
+                </div>
+			</div>
+			<div class="col-sm-4">
 			<%
-				List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
-				if(wrongWordsList.isEmpty()){
-					%>
-						<h3>нет</h3>
-					<%
-				}
-				for(String wrongWord: wrongWordsList){
-					%>
-						<h3><%=wrongWord %></h3>
-					<%
-				}
+			for(String wrongWord: wrongWordsList){ 
+				  String sql6 = "select * from words where word_kaz='"+wrongWord+"'";
+				  PreparedStatement prepStmt6 = con.prepareStatement(sql6);
+				  ResultSet rs6 = prepStmt6.executeQuery();
+				  String wordID = null;
+				  if (rs6.next()){
+					  wordID = rs6.getString(1);
+				  }
 			%>
-			<br>
-			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Закончить</a>
+				<h3>
+				<audio id="myAudio">
+					<source src="audio/<%=wordID %>.mp3">
+				</audio>
+				<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
+				<span class="wrong-word-rus"> - <%=rs6.getString(2)%></span></h3>
+				<% } %>
+				</div>
+			   	<div class="col-sm-4">
+			   		<img class="img-responsive img-centre" src="img/dragon.png" style="width:280px;">
+				</div>
+			   	</div>
+			<% }%>
+		   	
+		   	
+		   	<div class="row" style="margin-top:50px;">
+			   	<div class="col-sm-3">
+			   	</div>
+			   	<div class="col-sm-3">
+					<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">К списку тренировок</a>
+			   	</div>
+			   	<div class="col-sm-3">
+			   		<a href="?navPage=homeStudent&grade=one&classId=<%=classId%>" class = "btn btn-default" style="font-size: 17px;">Выбрать другую тему</a>
+			   	</div>
+			   	<div class="col-sm-3">
+		   		</div>
 		   	</div>
 		<%
 	}
