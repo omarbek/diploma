@@ -30,7 +30,7 @@
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
   </head>
-  <body>
+  
 	<%
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
@@ -43,6 +43,12 @@
 		classId=rs.getString(1);
 	}
 	%>
+  <body  <%
+		if((userId == null)){
+			%>
+			class="login"
+			<%
+		}%>>
     <div class="container" id="content">
       <div id="nav" class="row" href="sad">
         <nav class="list-inline">
