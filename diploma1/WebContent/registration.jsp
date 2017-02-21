@@ -103,6 +103,7 @@ else
     <div class="text-center">
       <input type="submit" class="btn btn-yellow " value="Готово">
       <input type="reset" class="btn btn-default " value="Очистить форму">
+      <a href="index.jsp" class="btn btn-info ">На страницу входа</a>
     </div>
   </div>
 </form>
