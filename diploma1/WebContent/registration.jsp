@@ -21,7 +21,9 @@ else
 }
 </script>
 
-<div class="" ><h1 class="text-center">Регистрация</h1></div>
+<div class="" >
+	<h1 class="text-center">Регистрация</h1>
+</div>
 <div class="hr-img">
           <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
         </div>
@@ -101,9 +103,9 @@ else
   <br />
   <div class="form-group">
     <div class="text-center">
-      <input type="submit" class="btn btn-yellow " value="Готово">
+      <a href="index.jsp" class="btn btn-yellow" style="color:#000;"><i class="glyphicon glyphicon-menu-left"></i> Назад</a>
       <input type="reset" class="btn btn-default " value="Очистить форму">
-      <a href="index.jsp" class="btn btn-info ">На страницу входа</a>
+      <input type="submit" class="btn btn-yellow " value="Готово">
     </div>
   </div>
 </form>

@@ -4,6 +4,13 @@
   /* Имя шрифта */
   src: url(../fonts/SignPainter.otf);
   /* Путь к файлу со шрифтом */ }
+  
+  
+@font-face {
+  font-family: 'Cat';
+  /* Имя шрифта */
+  src: url(../fonts/cheshirskiy_cat.ttf);
+  /* Путь к файлу со шрифтом */ }
 html {
   height: 100%; }
 
@@ -75,12 +82,15 @@ div .container {
       float: left; }
       #content #nav nav li a, #content #nav .user-link li a {
         display: block;
-        padding: 0px 30px;
-        color: #fff;
-        height: 60px;
-        line-height: 60px;
-        font-size: 16px;
-        text-decoration: none; }
+    padding: 0px 30px;
+    color: #fff;
+    height: 60px;
+    font-weight: 200;
+    font-family: 'Cat';
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: 3px;
+    text-decoration: none; }
         #content #nav nav li a:hover, #content #nav .user-link li a:hover {
           background-color: #522764; }
     #content #nav .user-link {
@@ -140,7 +150,11 @@ div .container {
   color: #fff; }
 .dictionary tbody tr:nth-child(odd) {
   background: #fff; }
-
+@media (max-width: 1024px) {
+	#content #nav nav li a, #content #nav .user-link li a {
+		font-size: 14px;
+	    padding: 0px 12px;}
+}
 @media (min-width: 1920px) {
   body {
     background-size: auto auto; } }
@@ -180,11 +194,11 @@ div .container {
     padding: 25px 20px; }
 
 .progress-holder {
-  width: 90%;
+  width: 100%;
   margin: 0px auto;
   margin-top: 20px;
   background: #8e44ad;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px; }
   .progress-holder .progress {
     width: calc(100% - 70px);
@@ -297,9 +311,22 @@ div .container {
 .zvuk {
 	width: 40px;
 	margin-top: 32px;
+	cursor: pointer;
 }
+.back-btn {
+	float: left;
+	font-family: 'Helvetica';
+}
+.back-btn a {
+	font-size: 14px;
+	color: #fff;
+}
+
 .zvuk-text {
 	width: 40px;	
+}
+.zvuk-text:hover,.zvuk:hover, .zvuk-5:hover {
+	cursor: pointer;	
 }
 .home-text{
 	color: #808080;
@@ -342,4 +369,52 @@ div .container {
     word-spacing: 2px;
     text-align: center;
 }
+.profile-name span {
+	font-size: 12px;
+}
+.learnt {
+	padding: 0px;
+	list-style:none;
+}
+.learnt li {
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+}
+.learnt li:first-child {
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+.learnt li:last-child {
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+.profile i.glyphicon {
+	color: #f1c40f;
+}
+.profile a {
+	color: #000;
+}
+.profile {
+	margin-top: 25px;
+}
+.profile-block {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	padding: 20px;
+}
+.profile-block h1 {
+	margin-top: 0px;
+}
+.learnt li .stars {
+	width: 75px;
+	float:right;
+}
+.learnt li .stars img {
+	float: left;
+	width: 20px;
+	margin-right: 5px;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -43,7 +43,7 @@ int j = Integer.parseInt(questionId);
     	classId = rs5.getString(1);
     }
 	 if(wrongWordsList.isEmpty()){ %>
-		<h1 class="text-center">Хорошая работа!</h1>
+		<h1 class="text-center">Удивительный результат!</h1>
 		<h2 class="text-center">Ты ответил правильно на все вопросы!</h2>
 		<div class="row">	
 			<div class="col-sm-4 col-sm-offset-2" style="margin-top:15px;">
@@ -108,10 +108,10 @@ int j = Integer.parseInt(questionId);
 			   	<div class="col-sm-3">
 			   	</div>
 			   	<div class="col-sm-3">
-					<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">К списку тренировок</a>
+					<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-warning">К списку тренировок</a>
 			   	</div>
 			   	<div class="col-sm-3">
-			   		<a href="?navPage=homeStudent&grade=one&classId=<%=classId%>" class = "btn btn-default" style="font-size: 17px;">Выбрать другую тему</a>
+			   		<a href="?navPage=homeStudent&grade=one&classId=<%=classId%>" class = "btn btn-warning">Выбрать другую тему</a>
 			   	</div>
 			   	<div class="col-sm-3">
 		   		</div>
@@ -121,7 +121,8 @@ int j = Integer.parseInt(questionId);
 	else{
  %>
 			<h1 class="text-center yellow">
-            Найди правильный перевод слова
+            <span class="back-btn"><a href="index.jsp?navPage=trainings&topic_id=<%=topicId %>" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Назад</a></span>
+            	Найди правильный перевод слова
           </h1>
  		<div class="row">
             <div class="col-sm-7">
@@ -129,7 +130,7 @@ int j = Integer.parseInt(questionId);
             	<audio id="myAudio">
 					<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 				</audio>
-                <img onclick="playAudio()" src="img/note.jpg" alt="" class="img-responsive img-centre" width="350px">
+                <img onclick="playAudio()" src="img/icons/zvuk.png" alt="" class="img-responsive img-centre zvuk-5" width="350px">
             </div>
             <div class="col-sm-5">          
 		 	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">

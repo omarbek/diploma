@@ -105,7 +105,7 @@ Integer count=(Integer)request.getAttribute("count");
     	classId = rs5.getString(1);
     }
 	 if(wrongWordsList.isEmpty()){ %>
-		<h1 class="text-center">Хорошая работа!</h1>
+		<h1 class="text-center">Так держать!</h1>
 		<h2 class="text-center">Ты ответил правильно на все вопросы!</h2>
 		<div class="row">	
 			<div class="col-sm-4 col-sm-offset-2" style="margin-top:15px;">
@@ -170,10 +170,10 @@ Integer count=(Integer)request.getAttribute("count");
 			   	<div class="col-sm-3">
 			   	</div>
 			   	<div class="col-sm-3">
-					<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">К списку тренировок</a>
+					<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-warning">К списку тренировок</a>
 			   	</div>
 			   	<div class="col-sm-3">
-			   		<a href="?navPage=homeStudent&grade=one&classId=<%=classId%>" class = "btn btn-default" style="font-size: 17px;">Выбрать другую тему</a>
+			   		<a href="?navPage=homeStudent&grade=one&classId=<%=classId%>" class = "btn btn-warning"">Выбрать другую тему</a>
 			   	</div>
 			   	<div class="col-sm-3">
 		   		</div>
@@ -188,7 +188,8 @@ Integer count=(Integer)request.getAttribute("count");
 		Collections.shuffle(shuffleList);
  %>
 			<h1 class="text-center yellow">
-            Подберите пару для каждого слова
+            <span class="back-btn"><a href="index.jsp?navPage=trainings&topic_id=<%=topicId %>" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Назад</a></span>
+            	Подберите пару для каждого слова
           </h1>
  		<div class="row">
             <div class="col-sm-4 col-sm-offset-1">
