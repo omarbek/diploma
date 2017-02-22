@@ -72,10 +72,14 @@ function myClear(id,count){
 	wrongIds="";
 	match=null;
 	isFirst=true;
-    for (var i = id; i <= (id+count)*2; i++) { 
+    for(var i = id; i <= (id+(count/2)-1); i++){
+       document.getElementById(i).style.visibility = 'visible';
+ 	   document.getElementById(i).style.background='#5cb85c';
+    }
+    for (var i = id+count; i <= id+(3*count/2)-1; i++) { 
        document.getElementById(i).style.visibility = 'visible';
 	   document.getElementById(i).style.background='#5cb85c';
-     }
+    }
 }
 </script>
 <%
@@ -183,8 +187,18 @@ Integer count=(Integer)request.getAttribute("count");
 	else{		
 		String width = "style='width:180px;'";
 		List<Word> shuffleList=new ArrayList();
-		List<Integer> pushedButtons=new ArrayList();
-		shuffleList.addAll(wordsRusKaz);
+		List<Word> secondWordRusKaz=new ArrayList();
+		if(j==0){
+			for(int i=0;i<count/2;i++){
+				secondWordRusKaz.add(wordsRusKaz.get(i));
+				shuffleList.add(wordsRusKaz.get(i));
+			} 
+		}else{
+			for(int i=count/2;i<count;i++){
+				secondWordRusKaz.add(wordsRusKaz.get(i));
+				shuffleList.add(wordsRusKaz.get(i));
+			}
+		}
 		Collections.shuffle(shuffleList);
  %>
 			<h1 class="text-center yellow">
@@ -206,9 +220,9 @@ Integer count=(Integer)request.getAttribute("count");
     		<div class="col-sm-4 col-sm-offset-3">   
 			 <%
 		 for(int i=0;i<shuffleList.size();i++){
-			 wordsRusKaz.get(i).id=wordsRusKaz.get(i).id+count;
+			 secondWordRusKaz.get(i).id=secondWordRusKaz.get(i).id+count;
     %>
-		 		<button id=<%=wordsRusKaz.get(i).id %> onclick="secondMatch(<%=wordsRusKaz.get(i).id %>, <%=count %>)" class="btn btn-success btn-block" <%=width %>><%=wordsRusKaz.get(i).rus %></button>
+		 		<button id=<%=secondWordRusKaz.get(i).id %> onclick="secondMatch(<%=secondWordRusKaz.get(i).id %>, <%=count %>)" class="btn btn-success btn-block" <%=width %>><%=secondWordRusKaz.get(i).rus %></button>
     			<h2></h2>
     <%
 		 }
@@ -218,12 +232,13 @@ Integer count=(Integer)request.getAttribute("count");
     </div>
     <div class="row">
         <div class="col-sm-4 col-sm-offset-1">
-        	<button onclick="myClear(<%=wordsRusKaz.get(0).id-count %>, <%=count %>)" class="btn btn-answer" <%=width %>>Заново</button>       
+        	<button onclick="myClear(<%=secondWordRusKaz.get(0).id-count %>, <%=count %>)" class="btn btn-answer" <%=width %>>Заново</button>       
         </div>
         <div class="col-sm-4 col-sm-offset-3">
 			<form method="post" action="TrainingOneServlet" id="trainingOneForm">
 			 <input type="hidden" name="topic_id" value="<%=topicId%>">
 			 <input type="hidden" name="task_type" value="six">
+			 <input type="hidden" name="questionId" value="<%=j%>">
 			 <input type="hidden" name="page" value="trainingSixForm">
 			 <input type="hidden" name="variant" id="postData" value="">
 		     <button class="btn btn-answer" <%=width %>>Отправить</button>
@@ -236,10 +251,10 @@ Integer count=(Integer)request.getAttribute("count");
         </div>
         <div class="progress-holder">
           <div class="percent">
-            <%=j*10 %>
+            <%=j*100/count %>
           </div>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*10 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*10 %>%;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*100/count %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*100/count %>%;">
               <span class="sr-only">60%</span>
             </div>
           </div>

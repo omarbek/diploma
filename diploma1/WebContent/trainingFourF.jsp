@@ -17,6 +17,7 @@ questionId = (request.getAttribute("questionId")).toString();
 ArrayList<Word> wordsRusKaz = (ArrayList<Word>)session.getAttribute("wordsRusKaz");
 
 int j = Integer.parseInt(questionId);
+Integer count=(Integer)request.getAttribute("count");
 
 %>
 <br>
@@ -149,10 +150,10 @@ int j = Integer.parseInt(questionId);
 </div>
 <div class="progress-holder">
           <div class="percent">
-            <%=j*10 %>
+            <%=j*100/count %>
           </div>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*10 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*10 %>%;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*100/count %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*100/count %>%;">
               <span class="sr-only">60%</span>
             </div>
           </div>
