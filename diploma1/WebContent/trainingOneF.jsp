@@ -48,7 +48,7 @@ Integer count=(Integer)request.getAttribute("count");
 			<div class="col-sm-4 col-sm-offset-2" style="margin-top:15px;">
 				<div class="c100 p100 center">
 	                <span><%=wordsRusKaz.size()%> / <%=wordsRusKaz.size()%></span>
-	                <p class="prav">парвильных</p>
+	                <p class="prav">правильных</p>
 	                <p class="otv">ответов</p>
 	                <div class="slice">
 	                   <div class="bar"></div>
@@ -69,7 +69,7 @@ Integer count=(Integer)request.getAttribute("count");
 				int percntge = (100*rightAnswers)/wordsRusKaz.size();%>
 				<div class="c100 p<%=percntge%> center">
 	                 <span><%=rightAnswers%> / <%=wordsRusKaz.size()%></span>
-	                 <p class="prav">парвильных</p>
+	                 <p class="prav">правильных</p>
 	                 <p class="otv">ответов</p>
 	                 <div class="slice">
 	                     <div class="bar"></div>

@@ -369,6 +369,30 @@ div .container {
     word-spacing: 2px;
     text-align: center;
 }
+.prov_sebya {
+	font-size: 46px;
+	font-family: 'Helvetica';
+	text-align: right; }
+.castellar {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #f1c40f, 2px 2px 0 #f1c40f,
+             3px -1px 0 #f1c40f, 4px 0 0 #f1c40f;
+}
+.castellar-snd {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #de4bd2, 2px 2px 0 #de4bd2,
+             3px -1px 0 #de4bd2, 4px 0 0 #de4bd2;
+}
+.castellar-thrd {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #43cf3c, 2px 2px 0 #43cf3c,
+             3px -1px 0 #43cf3c, 4px 0 0 #43cf3c;
+}
+.castellar-frth {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #5f89e3, 2px 2px 0 #5f89e3,
+             3px -1px 0 #5f89e3, 4px 0 0 #5f89e3;
+}
 .profile-name span {
 	font-size: 12px;
 }

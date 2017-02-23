@@ -64,7 +64,7 @@
             <a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Уроки</a>
           </li>
           <li>
-            <a href="?navPage=test">Проверь себя</a>
+            <a href="?navPage=tests">Проверь себя</a>
           </li>
           <li>
             <a href="?navPage=dictionary">Мой словарь</a>
@@ -123,7 +123,18 @@
 		<jsp:include page="profile.jsp" />
 				<%
 			}
-			
+			else if(navPage.equals("tests")){	
+				
+				%>
+		<jsp:include page="tests.jsp" />
+				<%
+			}
+			else if(navPage.equals("prover_sebya")){	
+				
+				%>
+		<jsp:include page="prover_sebya.jsp" />
+				<%
+			}
 			else if(navPage.equals("trainings")){	
 					%>
 			<jsp:include page="trainings.jsp" />

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
-<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.PreparedStatement"%>  
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.util.ArrayList"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,7 +21,7 @@
         <div class="animatedParent">
         <ul class="list-inline classes animated bounceInLeft">
           <% 
-          	if("one".equals(grade)){
+          	if("one".equals(grade)){ ////
           		%>
 		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>" class="active">1 класс</a></li>
 		          <% if(classId>=2){ %>

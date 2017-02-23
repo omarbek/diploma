@@ -14,7 +14,7 @@
         </div>
         <h3 class="text-center" style="color:#808080;">
           На этой странице находятся все слова, которые Вы изучили. <br>
-          Вы можете в любой момент зайти сюда и повторить их, чтобы не забыть!
+          Вы можете в любой момент зайти сюда и повторить их, чтобы не забыть!    
         </h3>
         <%  String userId = (String)session.getAttribute("userId");
 	    	String studentId = (String)session.getAttribute("studentID");

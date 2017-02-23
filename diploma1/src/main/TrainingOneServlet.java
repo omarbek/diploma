@@ -36,16 +36,15 @@ public class TrainingOneServlet extends HttpServlet {
 		String topicID = request.getParameter("topic_id");
 		String task_type = request.getParameter("task_type");
 		String variant = request.getParameter("variant");
-		String questionId = request.getParameter("questionId");
 		String wordID = null;
-		int j = Integer.parseInt(questionId);
+		String questionId = null;
+		int j = 0;
 		int countOfTopic = 0;
 		String correctAns = null;
 		List<Long> wrongIds = new ArrayList<Long>();
 
 		ResultSet rs;
 		Connection con = (new DBConnection()).getConnection();
-		HttpSession session = request.getSession();
 
 		String sqlForCount = "select count(1) from topic_word where topic_id=" + topicID;
 		try (PreparedStatement ps = con.prepareStatement(sqlForCount)) {
@@ -62,15 +61,19 @@ public class TrainingOneServlet extends HttpServlet {
 		}
 		if (!"trainingSixForm".equals(page)) {
 			wordID = request.getParameter("wordID");
+			questionId = request.getParameter("questionId");
 			correctAns = request.getParameter("correctAns");
+			j = Integer.parseInt(questionId);
 		} else {
 			StringTokenizer st = new StringTokenizer(variant, ",");
 			while (st.hasMoreElements()) {
 				String nextElement = st.nextElement().toString();
 				wrongIds.add(Long.parseLong(nextElement));
 			}
+			j = countOfTopic - 1;
 		}
 
+		HttpSession session = request.getSession();
 		try {
 			if (j == 0) {
 				score = 0;
@@ -79,12 +82,7 @@ public class TrainingOneServlet extends HttpServlet {
 						+ " and topic_id = " + topicID + " and task_type='" + task_type + "'";
 				PreparedStatement prepStmt = con.prepareStatement(sql);
 				prepStmt.executeUpdate();
-			} else {
-				if ("trainingSixForm".equals(page)) {
-					j = countOfTopic - 1;
-				}
 			}
-
 			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
@@ -127,8 +125,6 @@ public class TrainingOneServlet extends HttpServlet {
 									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and two<" + score);
 							ps.executeUpdate();
-
-							nextClass(con, session);
 						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingTwo&topic_id=" + topicID + "&questionId=" + (++j));
@@ -138,8 +134,6 @@ public class TrainingOneServlet extends HttpServlet {
 									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and three<" + score);
 							ps.executeUpdate();
-
-							nextClass(con, session);
 						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingThree&topic_id=" + topicID + "&questionId=" + (++j));
@@ -149,8 +143,6 @@ public class TrainingOneServlet extends HttpServlet {
 									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and four<" + score);
 							ps.executeUpdate();
-
-							nextClass(con, session);
 						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFour&topic_id=" + topicID + "&questionId=" + (++j));
@@ -160,8 +152,6 @@ public class TrainingOneServlet extends HttpServlet {
 									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and five<" + score);
 							ps.executeUpdate();
-
-							nextClass(con, session);
 						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingFive&topic_id=" + topicID + "&questionId=" + (++j));
@@ -171,8 +161,6 @@ public class TrainingOneServlet extends HttpServlet {
 									+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 									+ " and six<" + score);
 							ps.executeUpdate();
-
-							nextClass(con, session);
 						}
 						response.sendRedirect(
 								"index.jsp?navPage=trainingSix&topic_id=" + topicID + "&questionId=" + (++j));
@@ -183,8 +171,6 @@ public class TrainingOneServlet extends HttpServlet {
 								+ " WHERE user_id=" + session.getAttribute("userId") + " and topic_id=" + topicID
 								+ " and one<" + score);
 						ps.executeUpdate();
-
-						nextClass(con, session);
 					}
 					response.sendRedirect("index.jsp?navPage=trainingOne&topic_id=" + topicID + "&questionId=" + (++j));
 				}
@@ -195,31 +181,5 @@ public class TrainingOneServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	}
-
-	private void nextClass(Connection con, HttpSession session) throws SQLException {
-		ResultSet rs;
-		String selectSql = "SELECT * FROM user_topic WHERE one>75 and two>75 and three>75 and four>75 and five>75"
-				+ " and six>75 and user_id=" + session.getAttribute("userId") + " and"
-				+ " topic_id=(select studentClass*8 as studentClass from students where user_id="
-				+ session.getAttribute("userId") + ")";
-		PreparedStatement psSelect = con.prepareStatement(selectSql);
-		rs = psSelect.executeQuery();
-		if (rs.next()) {
-			int topicId = rs.getInt("topic_id");
-			int studClass = topicId / 8;
-
-			String updateGradeSql = "update students set studentClass=studentClass+1 where" + " user_id="
-					+ session.getAttribute("userId") + " and studentClass<>4";
-			PreparedStatement psUpdate = con.prepareStatement(updateGradeSql);
-			psUpdate.executeUpdate();
-
-			for (int i = studClass * 8 + 1; i <= (studClass + 1) * 8; i++) {
-				String addTopicsSql = "INSERT INTO user_topic (user_id, topic_id) values ("
-						+ session.getAttribute("userId") + ", " + i + ")";
-				PreparedStatement prepStmt6 = con.prepareStatement(addTopicsSql);
-				prepStmt6.executeUpdate();
-			}
-		}
 	}
 }
