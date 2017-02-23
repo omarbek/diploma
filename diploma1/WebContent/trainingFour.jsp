@@ -53,6 +53,15 @@
 	}
 	request.setAttribute("wrongWordsList", wrongWordsList);
 	
+	Integer count=0;
+	String sqlCount="select count(1) from topic_word where topic_id=" + topicId;
+	PreparedStatement psCount=con.prepareStatement(sqlCount);
+	ResultSet rsCount=psCount.executeQuery();
+	while(rsCount.next()){
+		count=rsCount.getInt(1);
+	}
+	request.setAttribute("count",count);
+	
 	session.setAttribute("wordsRusKaz", wordsRusKaz);
 	request.setAttribute("topic_id", topicId);
 %>
