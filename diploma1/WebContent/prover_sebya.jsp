@@ -63,7 +63,6 @@
 	else{
 		request.setAttribute("questionId", questionId);
 	}
-	
 	session.setAttribute("wordsRusKaz", wordsRusKaz);
 	session.setAttribute("topicIds", topicIds);
 	request.setAttribute("test_grade", test_grade);

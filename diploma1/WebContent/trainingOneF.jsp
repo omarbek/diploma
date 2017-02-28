@@ -227,12 +227,11 @@ Integer count=(Integer)request.getAttribute("count");
 					%>
 				 </form>
 				 <br>
+			</div>
+          </div>
 				 <%	
 			}
 			%>
-				
-			</div>
-          </div>
         </div>
         <div class="progress-holder">
           <div class="percent">

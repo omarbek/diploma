@@ -43,6 +43,76 @@ function playAudio() {
 	var x = document.getElementById("myAudio");
 	x.play(); 
 }
+var matchId=null;
+var wrongIds="";
+var isFirst=true;
+var match=null;
+function firstMatch(id,count) {
+	if(match!=1){
+		if(isFirst){
+			document.getElementById(id).style.background='#FFA500';
+			matchId=id;
+			isFirst=false;
+			match=1;
+		}else{
+			var secondId;
+			if(matchId==id){
+				secondId=id+count;
+				//button disappear only in right answer
+			}else{ 
+				secondId=matchId+count;
+				wrongIds+=matchId+",";
+				document.getElementById("postData").value = wrongIds;
+			}
+			document.getElementById(id).style.visibility = 'hidden';//
+			document.getElementById(secondId).style.visibility = 'hidden';//
+			isFirst=true;
+			matchId=null;
+			match=null;
+		}
+	}else{
+		alert("Выберите слово с другой колонки");
+	}
+}
+function secondMatch(id,count){
+	if(match!=2){
+		if(!isFirst){
+			var secondId=id-count;
+			if(secondId==matchId){
+				//button disappear only in right answer
+			}else{
+				wrongIds+=matchId+",";
+				document.getElementById("postData").value = wrongIds;
+			}
+			document.getElementById(matchId).style.visibility = 'hidden';//
+			document.getElementById(id).style.visibility = 'hidden';//
+			isFirst=true;
+			matchId=null;
+			match=null;
+		}else{
+			document.getElementById(id).style.background='#FFA500';
+			matchId=id-count;
+			isFirst=false;
+			match=2;
+		}
+	}else{
+		alert("Выберите слово с другой колонки");
+	}
+}
+function myClear(id,count){
+	matchId=null;
+	wrongIds="";
+	match=null;
+	isFirst=true;
+    for(var i = id; i <= (id+(count/2)-1); i++){
+       document.getElementById(i).style.visibility = 'visible';
+ 	   document.getElementById(i).style.background='#5cb85c';
+    }
+    for (var i = id+count; i <= id+(3*count/2)-1; i++) { 
+       document.getElementById(i).style.visibility = 'visible';
+	   document.getElementById(i).style.background='#5cb85c';
+    }
+}
 </script>  
 <%!
 public Long randomQuestion(Long lid){
@@ -429,6 +499,59 @@ int j = Integer.parseInt(questionId); %>
 			 <br>
 			 </div>
           </div>
+<%	}
+	else if (j==40){ 
+		String width = "style='width:180px;'";
+		List<Word> shuffleList=new ArrayList();
+		List<Word> secondWordRusKaz=new ArrayList();
+		for(int i=0;i<wordsRusKaz.size();i++){
+			secondWordRusKaz.add(wordsRusKaz.get(i));
+			shuffleList.add(wordsRusKaz.get(i));
+		} 
+		Collections.shuffle(shuffleList);
+ %>
+			<h1 class="text-center yellow"> Подберите пару для каждого слова </h1>
+ 		<div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+			
+			 <%
+		 for(int i=0;i<shuffleList.size();i++){
+    %>
+		 		<button id=<%=shuffleList.get(i).id %> onclick="firstMatch(<%=shuffleList.get(i).id %>, 8)" class="btn btn-success btn-block" <%=width %>><%=shuffleList.get(i).kaz %></button>
+    			<h2></h2>
+    <%
+		 }
+    %>
+    		</div>
+    		<div class="col-sm-4 col-sm-offset-3">   
+			 <%
+		 for(int i=0;i<shuffleList.size();i++){
+			 secondWordRusKaz.get(i).id=secondWordRusKaz.get(i).id+8;
+    %>
+		 		<button id=<%=secondWordRusKaz.get(i).id %> onclick="secondMatch(<%=secondWordRusKaz.get(i).id %>, 8)" class="btn btn-success btn-block" <%=width %>><%=secondWordRusKaz.get(i).rus %></button>
+    			<h2></h2>
+    <%
+		 }
+			 
+    %>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+        	<button onclick="myClear(<%=secondWordRusKaz.get(0).id-8 %>, 8)" class="btn btn-answer" <%=width %>>Заново</button>       
+        </div>
+        <div class="col-sm-4 col-sm-offset-3">
+			<form method="post" action="ProverSebyaServlet" id="trainingOneForm">
+			 <input type="hidden" name="test_grade" value="<%=test_grade%>">
+		 	 <input type="hidden" name="topic_id" value="<%=topicIds.get(j-40)%>">
+			 <input type="hidden" name="task_type" value="six">
+			 <input type="hidden" name="questionId" value="<%=j%>">
+			 <input type="hidden" name="page" value="trainingSixForm">
+			 <input type="hidden" name="variant" id="postData" value="">
+		     <button class="btn btn-answer" <%=width %>>Отправить</button>
+	      	</form>
+		</div>
+    </div>
 <%	}
 	else { 
 

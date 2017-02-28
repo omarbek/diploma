@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ProverSebyaServlet")
 public class ProverSebyaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	double score = 0;
        
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,26 +33,47 @@ public class ProverSebyaServlet extends HttpServlet {
 		String task_type = request.getParameter("task_type");
 		String variant = request.getParameter("variant");
 		String wordID = request.getParameter("wordID");
-		String questionId = request.getParameter("questionId");
-		int j = Integer.parseInt(questionId);
-		String correctAns = request.getParameter("correctAns");
+		String questionId = request.getParameter("questionId");;
+		String correctAns = request.getParameter("correctAns");;
+		List<Long> wrongIds = new ArrayList<Long>();
 		HttpSession session = request.getSession();
-		ResultSet rs1;
+		ArrayList<Integer> topicIds = (ArrayList<Integer>)session.getAttribute("topicIds");
+		ResultSet rs;
 		Connection con = (new DBConnection()).getConnection();
+		int j = Integer.parseInt(questionId);
+
+		if ("trainingThreeForm".equals(page)) {
+			variant = request.getParameter("demo");
+		}
 		try {
-			if ("trainingThreeForm".equals(page)) {
-				variant = request.getParameter("demo");
-			}
-			if (variant != null && correctAns != null){
-				if (!variant.equals(correctAns)){
+			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
+					|| "trainingSixForm".equals(page)) {
+				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
+						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
+	
+				} else if ("trainingSixForm".equals(page)) {
+					for (Long wordId : wrongIds) {
+						String sql3 = "SELECT * FROM results_test WHERE word_id=" + wordID + " and topic_id=" + topicID;
+						PreparedStatement prepStmt3 = con.prepareStatement(sql3);
+						rs = prepStmt3.executeQuery();
+
+						if (!rs.next()) {
+							String sql2 = "INSERT INTO `results_test`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`, `test_grade`)"
+									+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordId + "', '"
+									+ topicID + "', '" + task_type + "', '" + test_grade + "');";
+							PreparedStatement prepStmt2 = con.prepareStatement(sql2);
+							prepStmt2.executeUpdate();
+						}
+					}
+				} else {
 					String sql2 = "INSERT INTO `results_test`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`, `test_grade`)"
-								+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '" + topicID
-								+ "', '" + task_type + "', '" + test_grade + "');";
+							+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '" + topicID
+							+ "', '" + task_type + "', '" + test_grade + "');";
 					PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 					prepStmt2.executeUpdate();
 				}
+				response.sendRedirect("index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j));		
 			}
-		response.sendRedirect("index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j));
 		} catch (
 
 		SQLException e) {
