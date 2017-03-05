@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ProverSebyaServlet")
 public class ProverSebyaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -33,11 +33,11 @@ public class ProverSebyaServlet extends HttpServlet {
 		String task_type = request.getParameter("task_type");
 		String variant = request.getParameter("variant");
 		String wordID = request.getParameter("wordID");
-		String questionId = request.getParameter("questionId");;
-		String correctAns = request.getParameter("correctAns");;
+		String questionId = request.getParameter("questionId");
+		String correctAns = request.getParameter("correctAns");
 		List<Long> wrongIds = new ArrayList<Long>();
 		HttpSession session = request.getSession();
-		ArrayList<Integer> topicIds = (ArrayList<Integer>)session.getAttribute("topicIds");
+		ArrayList<Integer> topicIds = (ArrayList<Integer>) session.getAttribute("topicIds");
 		ResultSet rs;
 		Connection con = (new DBConnection()).getConnection();
 		int j = Integer.parseInt(questionId);
@@ -45,12 +45,24 @@ public class ProverSebyaServlet extends HttpServlet {
 		if ("trainingThreeForm".equals(page)) {
 			variant = request.getParameter("demo");
 		}
+		if (!"trainingSixForm".equals(page)) {
+			wordID = request.getParameter("wordID");
+			questionId = request.getParameter("questionId");
+			correctAns = request.getParameter("correctAns");
+		} else {
+			StringTokenizer st = new StringTokenizer(variant, ",");
+			while (st.hasMoreElements()) {
+				String nextElement = st.nextElement().toString();
+				wrongIds.add(Long.parseLong(nextElement));
+			}
+		}
+
 		try {
 			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
 						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
-	
+
 				} else if ("trainingSixForm".equals(page)) {
 					for (Long wordId : wrongIds) {
 						String sql3 = "SELECT * FROM results_test WHERE word_id=" + wordID + " and topic_id=" + topicID;
@@ -72,7 +84,8 @@ public class ProverSebyaServlet extends HttpServlet {
 					PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 					prepStmt2.executeUpdate();
 				}
-				response.sendRedirect("index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j));		
+				response.sendRedirect(
+						"index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j));
 			}
 		} catch (
 
