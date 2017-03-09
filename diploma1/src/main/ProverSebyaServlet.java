@@ -59,6 +59,9 @@ public class ProverSebyaServlet extends HttpServlet {
 		}
 
 		try {
+			if (j == 0) {
+				score = 0;
+			}
 			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
@@ -66,9 +69,9 @@ public class ProverSebyaServlet extends HttpServlet {
 					int countOfTopic = 8;
 					double division = countOfTopic;
 					double multiple = 0;
-					if ("trainingThreeForm".equals(page) && "trainingFourForm".equals(page)) {
+					if ("trainingThreeForm".equals(page) || "trainingFourForm".equals(page)) {
 						multiple = Word.round(20 / division, 2);
-						score += 2 * multiple;
+						score += multiple;
 					} else if ("trainingSixForm".equals(page)) {
 						score += (countOfTopic - wrongIds.size()) * 5;
 					} else {

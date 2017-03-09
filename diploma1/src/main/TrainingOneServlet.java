@@ -89,7 +89,7 @@ public class TrainingOneServlet extends HttpServlet {
 						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
 					double division = countOfTopic;
 					double multiple = Word.round(100 / division, 1);
-					if ("trainingThreeForm".equals(page) && "trainingFourForm".equals(page)) {
+					if ("trainingThreeForm".equals(page) || "trainingFourForm".equals(page)) {
 						score += 2 * multiple;
 					} else if ("trainingSixForm".equals(page)) {
 						score = (countOfTopic - wrongIds.size()) * 10;
