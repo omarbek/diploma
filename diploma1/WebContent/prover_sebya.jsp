@@ -22,6 +22,7 @@
 	ArrayList<Integer> randomWords = new ArrayList<Integer>();
 	Random myRandomizer = new Random();
 	int randomWord = 0;
+	String score=request.getParameter("score");
 	
 	if(questionId.equals("0")){
 		String sql1 = "SELECT topic_id FROM topics WHERE grade="+test_grade;
@@ -66,6 +67,7 @@
 	session.setAttribute("wordsRusKaz", wordsRusKaz);
 	session.setAttribute("topicIds", topicIds);
 	request.setAttribute("test_grade", test_grade);
+	request.setAttribute("score", score);
 
 %>
 

@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ProverSebyaServlet")
 public class ProverSebyaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	double score = 0;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,7 +63,18 @@ public class ProverSebyaServlet extends HttpServlet {
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
 						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
-
+					int countOfTopic = 8;
+					double division = countOfTopic;
+					double multiple = 0;
+					if ("trainingThreeForm".equals(page) && "trainingFourForm".equals(page)) {
+						multiple = Word.round(20 / division, 2);
+						score += 2 * multiple;
+					} else if ("trainingSixForm".equals(page)) {
+						score += (countOfTopic - wrongIds.size()) * 5;
+					} else {
+						multiple = Word.round(10 / division, 2);
+						score += multiple;
+					}
 				} else if ("trainingSixForm".equals(page)) {
 					for (Long wordId : wrongIds) {
 						String sql3 = "SELECT * FROM results_test WHERE word_id=" + wordID + " and topic_id=" + topicID;
@@ -84,8 +96,8 @@ public class ProverSebyaServlet extends HttpServlet {
 					PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 					prepStmt2.executeUpdate();
 				}
-				response.sendRedirect(
-						"index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j));
+				response.sendRedirect("index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j)
+						+ "&score=" + score);
 			}
 		} catch (
 

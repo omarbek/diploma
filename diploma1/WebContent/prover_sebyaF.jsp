@@ -134,6 +134,7 @@ String test_grade = null;
 test_grade = (String)request.getAttribute("test_grade");
 String questionId = null;
 questionId = (request.getAttribute("questionId")).toString();
+String score=(String)request.getAttribute("score");
 
 ArrayList<Word> wordsRusKaz = (ArrayList<Word>)session.getAttribute("wordsRusKaz");
 ArrayList<Integer> topicIds = (ArrayList<Integer>)session.getAttribute("topicIds");
@@ -646,6 +647,10 @@ int j = Integer.parseInt(questionId); %>
 			   	</div>
 		   	</div>
 		   	<%
+		String sql="update test set score="+score+" where grade="+test_grade+" and score<"+score+" and user_id="+session.getAttribute("userId");
+		PreparedStatement prepStmt = con.prepareStatement(sql);
+		prepStmt.executeUpdate();
+		   	
 		String sqlForCleanResults = "select * from results_test where test_grade='" + test_grade + "'";
 		PreparedStatement prepStmtForCleanResults = con.prepareStatement(sqlForCleanResults);
 		ResultSet rsForCleanResults = prepStmtForCleanResults.executeQuery();

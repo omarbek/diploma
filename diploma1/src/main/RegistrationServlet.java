@@ -79,8 +79,8 @@ public class RegistrationServlet extends HttpServlet {
 					userID = rs2.getString(1);
 				}
 				sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_id`)"
-							+ " VALUES (0, '" + userID + "', '" + studentClass + "', '" + userFirstName + "', '"
-							+ userLastName + "', '" + schoolID + "');";
+						+ " VALUES (0, '" + userID + "', '" + studentClass + "', '" + userFirstName + "', '"
+						+ userLastName + "', '" + schoolID + "');";
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 				prepStmt3.executeUpdate();
 
@@ -88,6 +88,12 @@ public class RegistrationServlet extends HttpServlet {
 
 				for (int i = 1; i <= studClass * 8; i++) {
 					String sql6 = "INSERT INTO user_topic (user_id, topic_id) values (" + userID + ", " + i + ")";
+					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
+					prepStmt6.executeUpdate();
+				}
+
+				for (int i = 1; i <= studClass; i++) {
+					String sql6 = "insert into test (user_id, grade) values (" + userID + ", " + i + ")";
 					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
 					prepStmt6.executeUpdate();
 				}
