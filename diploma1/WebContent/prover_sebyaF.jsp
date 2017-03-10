@@ -578,15 +578,13 @@ int j = Integer.parseInt(questionId); %>
 	if (rs5.next()){
     	classId = rs5.getString(1);
     }
-	 if(wrongWordList.isEmpty()){ %>
+	 if(score.equals("100")){ %>
 		<h1 class="text-center">Хорошая работа!</h1>
 		<h2 class="text-center">Ты ответил правильно на все вопросы!</h2>
 		<div class="row">	
 			<div class="col-sm-4 col-sm-offset-2" style="margin-top:15px;">
 				<div class="c100 p100 center">
-	                <span><%=wordsRusKaz.size()%> / <%=wordsRusKaz.size()%></span>
-	                <p class="prav">правильных</p>
-	                <p class="otv">ответов</p>
+	                <span style="margin-top:0px;">100%</span>
 	                <div class="slice">
 	                   <div class="bar"></div>
 	                   <div class="fill"></div>
@@ -601,14 +599,12 @@ int j = Integer.parseInt(questionId); %>
 	 else{ 
 		 %>
 		 <h1 class="text-center">Список неверных слов:</h1>	
-		<div class="row">	
+		<div class="row">
+		<%  double scoreDouble = Double.parseDouble(score);
+			int scoreInt = (int) scoreDouble; %>	
 			<div class="col-sm-4" style="margin-top:15px;">
-			<%  int rightAnswers = wordsRusKaz.size() - wrongWordList.size();
-				int percntge = (100*rightAnswers)/wordsRusKaz.size();%>
-				<div class="c100 p<%=percntge%> center">
-	                 <span><%=rightAnswers%> / <%=wordsRusKaz.size()%></span>
-	                 <p class="prav">правильных</p>
-	                 <p class="otv">ответов</p>
+				<div class="c100 p<%=scoreInt%> center">
+	                 <span style="margin-top:0px;"><%=scoreInt%>%</span>
 	                 <div class="slice">
 	                     <div class="bar"></div>
 	                     <div class="fill"></div>
