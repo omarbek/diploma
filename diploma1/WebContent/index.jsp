@@ -4,20 +4,20 @@
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Казақ Тілі</title>
-
+    <title>SpeakKaзakh</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- bxSlider CSS file -->
     <link href="css/jquery.bxslider.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=1.24">
+    <link rel="stylesheet" type="text/css" href="css/circle.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,22 +29,25 @@
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
   </head>
-  <body>
+  
 	<%
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
 
-	PreparedStatement ps=con.prepareStatement("select c.class_name from classes c"
-			+ " left join students s on s.class_id=c.class_id where user_id="+userId);
+	PreparedStatement ps=con.prepareStatement("select studentClass from students where user_id="+userId);
 	ResultSet rs = ps.executeQuery();
 	String classId=null;
 	if(rs.next()){
-		String className=rs.getString(1);
-		char c = className.charAt(0);
-		classId=c+"";
+		classId=rs.getString(1);
 	}
 	%>
+  <body  <%
+		if((userId == null)){
+			%>
+			class="login"
+			<%
+		}%>>
     <div class="container" id="content">
       <div id="nav" class="row" href="sad">
         <nav class="list-inline">
@@ -61,7 +64,7 @@
             <a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Уроки</a>
           </li>
           <li>
-            <a href="?navPage=test">Проверь себя</a>
+            <a href="?navPage=tests">Проверь себя</a>
           </li>
           <li>
             <a href="?navPage=dictionary">Мой словарь</a>
@@ -86,9 +89,14 @@
         </ul>
       </div>
        <%
-		if(userId == null){
+		if((userId == null) && (navPage == null)){
 			%>
 			<jsp:include page="login.jsp" />
+			<%
+		}
+		else if ((userId == null) && (navPage.equals("registration"))){
+			%>
+			<jsp:include page="registration.jsp"/>
 			<%
 		}
 		else{
@@ -115,7 +123,24 @@
 		<jsp:include page="profile.jsp" />
 				<%
 			}
-			
+			else if(navPage.equals("delete_profile")){	
+				
+				%>
+		<jsp:include page="delete_profile.jsp" />
+				<%
+			}
+			else if(navPage.equals("tests")){	
+				
+				%>
+		<jsp:include page="tests.jsp" />
+				<%
+			}
+			else if(navPage.equals("prover_sebya")){	
+				
+				%>
+		<jsp:include page="prover_sebya.jsp" />
+				<%
+			}
 			else if(navPage.equals("trainings")){	
 					%>
 			<jsp:include page="trainings.jsp" />

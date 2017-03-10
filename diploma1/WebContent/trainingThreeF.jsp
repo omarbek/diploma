@@ -18,18 +18,32 @@ var checkAnswer="";
 function myFunction(id,a) {
 	/* alert("s"); */
     checkAnswer += a;
-    document.getElementById("demo").innerHTML = checkAnswer;
+    document.getElementsByClassName("next")[0].innerHTML = a;
     document.getElementById(id).style.visibility="hidden";
     buttons.push(id);
     document.getElementById("postData").value = checkAnswer;
+    $('.next').removeClass('next').addClass('done');
+    $('.others').first().removeClass('others').addClass('next');
 }
 function myClear(){
 	checkAnswer="";
-    document.getElementById("demo").innerHTML = "";
+	var y = document.getElementsByClassName("done");
+	var i;
+	for (i = 0; i < y.length; i++) {
+	  y[i].innerHTML = "";
+	}
+	$('.next').removeClass('next').addClass('others');
+	$('.done').first().removeClass('done').addClass('next');
+	$('.done').removeClass('done').addClass('others');
+    
     for (var i = 0; i < buttons.length; i++) { 
        document.getElementById(buttons[i]).style.visibility = 'visible';
      }
 }
+function playAudio() {
+	var x = document.getElementById("myAudio");
+	x.play(); 
+}  
 </script>
 <%!
 	public Long randomQuestion(Long lid){
@@ -55,49 +69,114 @@ questionId = (request.getAttribute("questionId")).toString();
 ArrayList<Word> wordsRusKaz = (ArrayList<Word>)session.getAttribute("wordsRusKaz");
 
 int j = Integer.parseInt(questionId);
+Integer count=(Integer)request.getAttribute("count");
 
 %>
 <br>
 <section id="main">
-        <div class="question">
+   <div class="question">
  <%
  if(j>=wordsRusKaz.size()){
-		%>
-			<div class="well" style="background-color:pink;" align="center">
-			<h2>Список неверных слов: </h2>
+	List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
+	String userId = (String)session.getAttribute("userId");
+	String sql5 = "select studentClass from students where user_id='"+userId+"'";
+	PreparedStatement prepStmt5 = con.prepareStatement(sql5);
+	ResultSet rs5 = prepStmt5.executeQuery();
+	String classId = null;
+	if (rs5.next()){
+    	classId = rs5.getString(1);
+    }
+	 if(wrongWordsList.isEmpty()){ %>
+		<h1 class="text-center">Превосходно!</h1>
+		<h2 class="text-center">Ты ответил правильно на все вопросы!</h2>
+		<div class="row">	
+			<div class="col-sm-4 col-sm-offset-2" style="margin-top:15px;">
+				<div class="c100 p100 center">
+	                <span><%=wordsRusKaz.size()%> / <%=wordsRusKaz.size()%></span>
+	                <p class="prav">правильных</p>
+	                <p class="otv">ответов</p>
+	                <div class="slice">
+	                   <div class="bar"></div>
+	                   <div class="fill"></div>
+	                </div>
+                </div>
+			</div>
+		   	<div class="col-sm-4">
+		   		<img class="img-responsive img-centre" src="img/dragon.png" style="width:280px;">
+			</div>
+		 </div>
+	<%}
+	 else{  %>
+		 <h1 class="text-center">Список неверных слов:</h1>	
+		<div class="row">	
+			<div class="col-sm-4" style="margin-top:15px;">
+			<%  int rightAnswers = wordsRusKaz.size() - wrongWordsList.size();
+				int percntge = (100*rightAnswers)/wordsRusKaz.size();%>
+				<div class="c100 p<%=percntge%> center">
+	                 <span><%=rightAnswers%> / <%=wordsRusKaz.size()%></span>
+	                 <p class="prav">правильных</p>
+	                 <p class="otv">ответов</p>
+	                 <div class="slice">
+	                     <div class="bar"></div>
+	                     <div class="fill"></div>
+	                 </div>
+                </div>
+			</div>
+			<div class="col-sm-4">
 			<%
-				List<String> wrongWordsList=(List<String>) request.getAttribute("wrongWordsList");
-				if(wrongWordsList.isEmpty()){
-					%>
-					<h3>нет</h3>
-					<%
-				}
-				for(String wrongWord: wrongWordsList){
-					%>
-						<h3><%=wrongWord %></h3>
-					<%
-				}
+			for(String wrongWord: wrongWordsList){ 
+				  String sql6 = "select * from words where word_kaz='"+wrongWord+"'";
+				  PreparedStatement prepStmt6 = con.prepareStatement(sql6);
+				  ResultSet rs6 = prepStmt6.executeQuery();
+				  String wordID = null;
+				  if (rs6.next()){
+					  wordID = rs6.getString(1);
+				  }
 			%>
-			<br>
-			<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-success">Закончить</a>
+				<h3>
+				<audio id="myAudio">
+					<source src="audio/<%=wordID %>.mp3">
+				</audio>
+				<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
+				<span class="wrong-word-rus"> - <%=rs6.getString(2)%></span></h3>
+				<% } %>
+				</div>
+			   	<div class="col-sm-4">
+			   		<img class="img-responsive img-centre" src="img/dragon.png" style="width:280px;">
+				</div>
+			   	</div>
+			<% }%>
+		   	
+		   	
+		   	<div class="row" style="margin-top:50px;">
+			   	<div class="col-sm-3">
+			   	</div>
+			   	<div class="col-sm-3">
+					<a href="?navPage=trainings&topic_id=<%=topicId%>" class = "btn btn-warning">К списку тренировок</a>
+			   	</div>
+			   	<div class="col-sm-3">
+			   		<a href="?navPage=homeStudent&grade=one&classId=<%=classId%>" class = "btn btn-warning">Выбрать другую тему</a>
+			   	</div>
+			   	<div class="col-sm-3">
+		   		</div>
 		   	</div>
 		<%
 	}
 	else{		
  %>
-			<h1 class="text-center yellow">Собери слово из букв</h1>
+			<h1 class="text-center yellow"><span class="back-btn"><a href="index.jsp?navPage=trainings&topic_id=<%=topicId %>" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Назад</a></span>
+            	Собери слово из букв</h1>
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="text-center"><%=wordsRusKaz.get(j).rus %> </h2>
+			<h3 class="text-center"><%=wordsRusKaz.get(j).rus %> 
+			<audio id="myAudio">
+				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
+			</audio>
+			<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"></h3>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-12">
- 			<h2 class="text-center"><p name="input_letter" id="demo"></p></h2>
- 		</div>
- 	</div>
-		 <%
+ 	<%
 		 String word="";
 		 String clearWidth = "style='width:40px;'";
 		 String width = "style='width:180px;'";
@@ -107,32 +186,36 @@ int j = Integer.parseInt(questionId);
 				word+=ch;
 			}
 		%>
-		<div class="row" align="center">
-		<div class="col-sm-12">
-		<table>
-			<tr>
+	<div class="row">
+	<div class="col-sm-6 letters">	
+ 	<div class="row row-centered">
+		<% for(int i=0;i<word.length();i++){ %>
+			  <div class="col-sm-1 letter col-centered">
+			  <% if(i == 0){ %>
+			  		<button class="input-letter next"></button>
+			  <% } 
+			     else{%>
+			     	<button class="input-letter others"></button>
+			  <% }%>
+
+			  </div>
+	 	<% } %>
+ 	</div>
+	<div class="row row-centered">		
 			<%
 		 	for(int i=0;i<word.length();i++){
 		 	%>
-		 		<td>
-					<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn btn-success btn-block">
-					<% out.print(word.charAt(i)); %></button>
-				</td>
-				<td width="10px"></td>
+		 	<div class="col-sm-1 letter col-centered">
+				<button id=<% out.print(i); %> onclick="myFunction(this.id,'<% out.print(word.charAt(i)); %>')" class="btn btn-success btn-block">
+				<% out.print(word.charAt(i)); %></button>
+			</div>
 		   <%
 			}
-		    %>
-	 		</tr>
-	 	</table>
-	 	</div>
-	 </div>
-	 <div class="row">
-	 <div class="col-sm-4 col-sm-offset-4">
-	 <button onclick="myClear()" class="btn-answer btn">Заново</button>
+		    %>	 	
 	 </div>
 	 </div>
-	 <div class="row">
-	 <div class="col-sm-4 col-sm-offset-4">
+	 <div class="col-sm-4  col-sm-offset-1">
+	 <button onclick="myClear()" class="btn-answer btn zanovo">Заново</button>
  	 <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 		 <input type="hidden" name="topic_id" value="<%=topicId%>">
 		 <input type="hidden" name="questionId" value="<%=j%>">
@@ -141,9 +224,8 @@ int j = Integer.parseInt(questionId);
 		 <input type="hidden" name="demo" id="postData" value="">
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
 		 <input type="hidden" name="page" value="trainingThreeForm">
-	     <button class="btn-answer btn">Отправить</button>
+	     <button class="btn-answer btn zanovo">Отправить</button>
 	 </form>
-	 <br>
 	 </div>
 	 </div>
 	 <%	
@@ -153,10 +235,10 @@ int j = Integer.parseInt(questionId);
 </div>
 <div class="progress-holder">
           <div class="percent">
-            <%=j*10 %>
+            <%=j*100/count %>
           </div>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*10 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*10 %>%;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<%=j*100/count %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=j*100/count %>%;">
               <span class="sr-only">60%</span>
             </div>
           </div>

@@ -4,6 +4,13 @@
   /* Имя шрифта */
   src: url(../fonts/SignPainter.otf);
   /* Путь к файлу со шрифтом */ }
+  
+  
+@font-face {
+  font-family: 'Cat';
+  /* Имя шрифта */
+  src: url(../fonts/cheshirskiy_cat.ttf);
+  /* Путь к файлу со шрифтом */ }
 html {
   height: 100%; }
 
@@ -15,17 +22,39 @@ body {
   background-color: #bec3c7;
   height: 100%;
   font-family: 'Helvetica'; }
+body.login {
+	background-image: url(../img/login-bg2.jpg);
+	
+  background-size: 100% auto ;
+  padding-top: 100px;
+}
+body.login .modal-content {
+	background-color: rgba(255,255,255,0.5);
+}
+body.login  #content {
+	background-color: transparent;
+}
 
+body.login .modal-dialog {
+	width: 600px;
+}
+body.login #nav {
+	display: none;
+}
 h1, h2, h3, h4, h5, h6, .sp {
   font-family: 'SignPainter'; }
 
 p.sp {
   font-size: 20px;
   font-weight: 200;
-  color: #b1b1b1; }
+  color: #808080; }
 
 .helv {
   font-family: 'Helvetica'; }
+
+div .container {
+	margin-left: -15px;
+}
 
 #content {
   background-color: #ecf0f1;
@@ -53,19 +82,41 @@ p.sp {
       float: left; }
       #content #nav nav li a, #content #nav .user-link li a {
         display: block;
-        padding: 0px 30px;
-        color: #fff;
-        height: 60px;
-        line-height: 60px;
-        font-size: 16px;
-        text-decoration: none; }
+    padding: 0px 30px;
+    color: #fff;
+    height: 60px;
+    font-weight: 200;
+    font-family: 'Cat';
+    line-height: 60px;
+    font-size: 20px;
+    letter-spacing: 3px;
+    text-decoration: none; }
         #content #nav nav li a:hover, #content #nav .user-link li a:hover {
           background-color: #522764; }
     #content #nav .user-link {
       float: right; }
 
 #main {
-  margin: 50px 0px 0px; }
+  margin: 10px 0px 0px; }
+  #main .question div div h3 {
+			font-size: 34px; }
+	.letter {
+  	padding: 5px;
+	width: 55px;
+	height: 55px; }
+	.letter .input-letter{
+		border: 2px solid #8e44ad;
+		width: 45px;
+		height: 45px;
+		border-radius: 5px;
+		padding: 2px; 
+		color: #8e44ad;
+		font-family: 'SignPainter';
+		font-size: 30px;
+		margin-top: 0px;
+		float: left;}
+	.letter .btn-success{
+		font-size: 20px; }
 
 .subject {
   margin: 0px auto 40px;
@@ -90,7 +141,7 @@ p.sp {
           text-decoration: none; }
 
 .dostizh, .dictionary, .profile {
-  margin-top: 100px; }
+  margin-top: 50px; }
   .dostizh span, .dictionary span, .profile span {
     color: #8e44ad; }
 
@@ -99,7 +150,11 @@ p.sp {
   color: #fff; }
 .dictionary tbody tr:nth-child(odd) {
   background: #fff; }
-
+@media (max-width: 1024px) {
+	#content #nav nav li a, #content #nav .user-link li a {
+		font-size: 14px;
+	    padding: 0px 12px;}
+}
 @media (min-width: 1920px) {
   body {
     background-size: auto auto; } }
@@ -112,7 +167,7 @@ p.sp {
   height: 300px; }
 
 #prem {
-  margin-top: 80px; }
+  margin-top: 30px; }
   #prem img {
     width: 100px; }
 
@@ -126,7 +181,7 @@ p.sp {
       .classes li a.active, .classes li a:hover, .classes li a:focus {
         color: #8e44ad;
         text-decoration: none;
-        border-bottom: 2px dashed #8e44ad; }
+        border-bottom: 2px dashed #8e44ad; } 
 
 .question {
   width: 90%;
@@ -139,11 +194,11 @@ p.sp {
     padding: 25px 20px; }
 
 .progress-holder {
-  width: 90%;
+  width: 100%;
   margin: 0px auto;
   margin-top: 20px;
   background: #8e44ad;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px; }
   .progress-holder .progress {
     width: calc(100% - 70px);
@@ -224,6 +279,8 @@ p.sp {
   background: linear-gradient(to bottom, #5cb85c 0%, #4cae4c 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5cb85c', endColorstr='#4cae4c', GradientType=0 );
   border: 5px solid #bec3c7; }
+  .btn-correct:hover, .btn-correct:focus {
+    color: white;}
   .btn-incorrect {
   width: 100%;
   padding: 15px;
@@ -241,7 +298,153 @@ p.sp {
   background: linear-gradient(to bottom, #d9534f 0%, #d43f3a 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9534f', endColorstr='#d43f3a', GradientType=0 );
   border: 5px solid #bec3c7; }
- .btn-success{
- 	font-size: 17px;
- }
+    .btn-incorrect:hover, .btn-incorrect:focus {
+    color: white;}
+ .btn-success {
+ 	font-size: 17px; }
+ .disabled {
+    z-index: 1000;
+    background-color: lightgrey;
+    opacity: 0.6;
+    pointer-events: none;
+}
+.zvuk {
+	width: 40px;
+	margin-top: 32px;
+	cursor: pointer;
+}
+.back-btn {
+	float: left;
+	font-family: 'Helvetica';
+}
+.back-btn a {
+	font-size: 14px;
+	color: #fff;
+}
+
+.zvuk-text {
+	width: 40px;	
+}
+.zvuk-text:hover,.zvuk:hover, .zvuk-5:hover {
+	cursor: pointer;	
+}
+.home-text{
+	color: #808080;
+	font-family: 'SignPainter';
+	font-size: 18px;
+}
+.row-centered {
+	text-align:center;
+	margin: auto;
+}
+.col-centered {
+	display:inline-block;
+	float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.zanovo {
+	margin-bottom:0px;
+	height: 70px;
+}
+.letters {
+	margin-top: 40px;
+}
+.wrong-word-rus {
+	font-size: 26px;
+	color: #808080;
+}
+.reg {
+	width: 800px;
+	margin: 0px auto;
+}
+.btn-yellow {
+	background-color: #f1c40f;
+}
+.reg-title {
+	font-size: 23px;
+    margin-bottom: -5px !important;
+    word-spacing: 2px;
+    text-align: center;
+}
+.prov_sebya {
+	font-size: 46px;
+	font-family: 'Helvetica';
+	text-align: right; }
+.castellar {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #f1c40f, 2px 2px 0 #f1c40f,
+             3px -1px 0 #f1c40f, 4px 0 0 #f1c40f;
+}
+.castellar-snd {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #de4bd2, 2px 2px 0 #de4bd2,
+             3px -1px 0 #de4bd2, 4px 0 0 #de4bd2;
+}
+.castellar-thrd {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #43cf3c, 2px 2px 0 #43cf3c,
+             3px -1px 0 #43cf3c, 4px 0 0 #43cf3c;
+}
+.castellar-frth {
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #5f89e3, 2px 2px 0 #5f89e3,
+             3px -1px 0 #5f89e3, 4px 0 0 #5f89e3;
+}
+.profile-name span {
+	font-size: 12px;
+}
+.learnt {
+	padding: 0px;
+	list-style:none;
+}
+.learnt li {
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+}
+.learnt li:first-child {
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+.learnt li:last-child {
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+.profile i.glyphicon {
+	color: #f1c40f;
+}
+.profile a {
+	color: #000;
+}
+.profile {
+	margin-top: 25px;
+}
+.profile-block {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	padding: 20px;
+}
+.profile-block h1 {
+	margin-top: 0px;
+}
+.learnt li .stars {
+	width: 75px;
+	float:right;
+}
+.learnt li .stars img {
+	float: left;
+	width: 20px;
+	margin-right: 5px;
+}
+.delete_area{
+	background: #ddd;
+	border: 1px solid #bec3c7;
+	border-radius: 10px;
+}
+
+
 /*# sourceMappingURL=style.css.map */
