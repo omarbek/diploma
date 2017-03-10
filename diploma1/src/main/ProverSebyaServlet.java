@@ -69,7 +69,7 @@ public class ProverSebyaServlet extends HttpServlet {
 					int countOfTopic = 8;
 					double division = countOfTopic;
 					double multiple = 0;
-					if ("trainingThreeForm".equals(page) || "trainingFourForm".equals(page)) {
+					if ("trainingFourForm".equals(page)) {
 						multiple = Word.round(20 / division, 2);
 						score += multiple;
 					} else if ("trainingSixForm".equals(page)) {
