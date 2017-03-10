@@ -440,5 +440,11 @@ div .container {
 	width: 20px;
 	margin-right: 5px;
 }
+.delete_area{
+	background: #ddd;
+	border: 1px solid #bec3c7;
+	border-radius: 10px;
+}
+
 
 /*# sourceMappingURL=style.css.map */

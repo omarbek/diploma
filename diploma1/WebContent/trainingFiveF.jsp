@@ -133,7 +133,7 @@ Integer count=(Integer)request.getAttribute("count");
 				</audio>
                 <img onclick="playAudio()" src="img/icons/zvuk.png" alt="" class="img-responsive img-centre zvuk-5" width="350px">
             </div>
-            <div class="col-sm-5">          
+            <div class="col-sm-5" style="margin-top:30px;">          
 		 	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 				 <input type="hidden" name="topic_id" value="<%=topicId%>">
 				 <input type="hidden" name="questionId" value="<%=j%>">
