@@ -8,10 +8,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Sayatbek/git/kazakh/diploma1/WebContent/WEB-INF/lib/mysql-connector-java-5.1.36.jar"/>
-=======
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
@@ -21,6 +17,5 @@
 	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/pdfbox-app-2.0.0-RC1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/poi-3.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/poi-ooxml-3.11.jar"/>
->>>>>>> branch 'master' of https://github.com/Sayatbek/kazakh.git
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

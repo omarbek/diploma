@@ -29,8 +29,8 @@
         </div>
         <div class="profile">
           <div class="row">
-            <div class="col-md-4 col-md-offset-1" style="padding-left: 0px;">
-              <img src="img/dragon.png" class="img-responsive" alt="" style="width:350px;">
+            <div class="col-md-5" style="padding-left: 0px;">
+              <img src="img/zamok.png" class="img-responsive" alt="" style="width:350px;">
             </div>
             <div class="col-md-7">
             	<div class="profile-block">
