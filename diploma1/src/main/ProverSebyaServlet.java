@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 public class ProverSebyaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	double score = 0;
+	double multiple = 2.5;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,63 +37,22 @@ public class ProverSebyaServlet extends HttpServlet {
 		String wordID = request.getParameter("wordID");
 		String questionId = request.getParameter("questionId");
 		String correctAns = request.getParameter("correctAns");
-		List<Long> wrongIds = new ArrayList<Long>();
 		HttpSession session = request.getSession();
-		ArrayList<Integer> topicIds = (ArrayList<Integer>) session.getAttribute("topicIds");
-		ResultSet rs;
 		Connection con = (new DBConnection()).getConnection();
 		int j = Integer.parseInt(questionId);
 
 		if ("trainingThreeForm".equals(page)) {
 			variant = request.getParameter("demo");
 		}
-		if (!"trainingSixForm".equals(page)) {
-			wordID = request.getParameter("wordID");
-			questionId = request.getParameter("questionId");
-			correctAns = request.getParameter("correctAns");
-		} else {
-			StringTokenizer st = new StringTokenizer(variant, ",");
-			while (st.hasMoreElements()) {
-				String nextElement = st.nextElement().toString();
-				wrongIds.add(Long.parseLong(nextElement));
-			}
-		}
-
 		try {
 			if (j == 0) {
 				score = 0;
 			}
-			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
-					|| "trainingSixForm".equals(page)) {
-				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)
-						|| (wrongIds.isEmpty() && "trainingSixForm".equals(page))) {
-					int countOfTopic = 8;
-					double division = countOfTopic;
-					double multiple = 0;
-					if ("trainingFourForm".equals(page)) {
-						multiple = Word.round(20 / division, 2);
-						score += multiple;
-					} else if ("trainingSixForm".equals(page)) {
-						score += (countOfTopic - wrongIds.size()) * 5;
-					} else {
-						multiple = Word.round(10 / division, 2);
-						score += multiple;
-					}
-				} else if ("trainingSixForm".equals(page)) {
-					for (Long wordId : wrongIds) {
-						String sql3 = "SELECT * FROM results_test WHERE word_id=" + wordID + " and topic_id=" + topicID;
-						PreparedStatement prepStmt3 = con.prepareStatement(sql3);
-						rs = prepStmt3.executeQuery();
-
-						if (!rs.next()) {
-							String sql2 = "INSERT INTO `results_test`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`, `test_grade`)"
-									+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordId + "', '"
-									+ topicID + "', '" + task_type + "', '" + test_grade + "');";
-							PreparedStatement prepStmt2 = con.prepareStatement(sql2);
-							prepStmt2.executeUpdate();
-						}
-					}
-				} else {
+			if (variant != null && correctAns != null) {
+				if (variant.equals(correctAns)) {
+					score += multiple;
+				}
+				else {
 					String sql2 = "INSERT INTO `results_test`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`, `test_grade`)"
 							+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '" + topicID
 							+ "', '" + task_type + "', '" + test_grade + "');";
@@ -102,9 +62,7 @@ public class ProverSebyaServlet extends HttpServlet {
 				response.sendRedirect("index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j)
 						+ "&score=" + score);
 			}
-		} catch (
-
-		SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
