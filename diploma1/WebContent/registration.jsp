@@ -17,7 +17,6 @@ if(pass1!=pass2)
     document.getElementById("confirmPassword").setCustomValidity("Passwords Don't Match");
 else
     document.getElementById("confirmPassword").setCustomValidity('');
-//empty string means no validation error
 }
 </script>
 
@@ -25,8 +24,8 @@ else
 	<h1 class="text-center">Регистрация</h1>
 </div>
 <div class="hr-img">
-          <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
-        </div>
+    <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
+</div>
 <br>
 <div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="RegistrationServlet">
@@ -51,22 +50,20 @@ else
   <div class="form-group">
     <!--<label class="control-label col-xs-3" for="inputPassword"></label>-->
     <div class="">
-      <input type="password" class="form-control" id="inputPassword" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
-      			title="Пароль должен состоять минимум из 8 символов и должен иметь минимум одну цифру, одну строчную и одну прописную букву" placeholder="Введите пароль" required>
+      <input type="password" class="form-control" id="inputPassword" name="pwd" placeholder="Введите пароль" required>
     </div>
   </div>
   <div class="form-group">
     <!--<label class="control-label col-xs-3" for="confirmPassword"></label>-->
     <div class="">
-      <input type="password" class="form-control" id="confirmPassword" name="pwd2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
-      			title="Пароль должен состоять минимум из 8 символов и должен иметь минимум одну цифру, одну строчную и одну прописную букву" placeholder="Введите пароль ещё раз" required>
+      <input type="password" class="form-control" id="confirmPassword" name="pwd2" placeholder="Введите пароль ещё раз" required>
     </div>
   </div>
   <div class="row">
   <div class="form-group ">
     <!--<label class="control-label col-xs-3"></label>-->
     <div class="col-xs-4">
-      <select class="form-control" name="city">
+      <select class="form-control" name="city" required>
         <option disabled selected>Регион</option>
         <option value="Астана">г. Астана</option>
         <option value="Алматы">г. Алматы</option>
@@ -87,10 +84,10 @@ else
       </select>
     </div>
     <div class="col-xs-4">
-      <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы"/>
+      <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы" required/>
     </div>
     <div class="col-xs-4">
-      <select class="form-control" name="studentClass">
+      <select class="form-control" name="studentClass" required>
         <option disabled selected>Класс</option>
         <option value="1">1 класс</option>
         <option value="2">2 класс</option>

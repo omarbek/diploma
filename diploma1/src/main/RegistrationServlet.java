@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**
  * Servlet implementation class RegistrationServlet
  */
@@ -37,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
 		ResultSet rs;
 		ResultSet rs2;
 		ResultSet rs3;
-
+		String shaPassword = DigestUtils.sha1Hex(password);
 		try {
 			String sql = "SELECT email FROM users WHERE email = ?";
 			PreparedStatement prepStmt = con.prepareStatement(sql);
@@ -50,7 +52,7 @@ public class RegistrationServlet extends HttpServlet {
 
 			else {
 				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)" + " VALUES (0, '" + email
-						+ "', '" + password + "', '2');";
+						+ "', '" + shaPassword + "', '2');";
 				String sql3 = "";
 				PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 				prepStmt2.executeUpdate();

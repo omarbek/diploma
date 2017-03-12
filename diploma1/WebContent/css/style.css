@@ -313,6 +313,10 @@ div .container {
 	margin-top: 32px;
 	cursor: pointer;
 }
+.zvuk-dictionary {
+	width: 30px;
+	cursor: pointer;
+}
 .back-btn {
 	float: left;
 	font-family: 'Helvetica';

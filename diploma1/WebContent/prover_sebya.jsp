@@ -59,6 +59,14 @@
 			wordsRusKazTemp.clear();
 			topicIds.add(rs1.getInt(1));
 		}
+		String sqlForCleanResults = "select * from results_test where test_grade='" + test_grade + "'";
+		PreparedStatement prepStmtForCleanResults = con.prepareStatement(sqlForCleanResults);
+		ResultSet rsForCleanResults = prepStmtForCleanResults.executeQuery();
+		while (rsForCleanResults.next()){
+			String sqlForDeleteResults = "DELETE FROM `results_test` WHERE test_grade=" + test_grade;
+			PreparedStatement prepStmtForDeleteResults = con.prepareStatement(sqlForDeleteResults);
+			prepStmtForDeleteResults.executeUpdate();
+		} 
 		request.setAttribute("questionId", 0);
 	}
 	else{

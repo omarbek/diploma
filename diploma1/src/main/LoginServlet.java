@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -34,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 
 		String user = request.getParameter("username");
 		String pwd = request.getParameter("password");
+		String shaPwd = DigestUtils.sha1Hex(pwd);
 
 		Connection con = (new DBConnection()).getConnection();
 		ResultSet rs;
@@ -44,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			String sql = "SELECT * FROM users WHERE email = ? and password = ?";
 			PreparedStatement prepStmt = con.prepareStatement(sql);
 			prepStmt.setString(1, user);
-			prepStmt.setString(2, pwd);
+			prepStmt.setString(2, shaPwd);
 			rs = prepStmt.executeQuery();
 
 			if (rs.next()) {

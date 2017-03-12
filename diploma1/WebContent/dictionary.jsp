@@ -4,6 +4,13 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.ArrayList"%>
+
+<script type="text/javascript">
+function playAudio() {
+	var x = document.getElementById("myAudio");
+	x.play(); 
+}  
+</script>  
 <div class="container" id="content">
       <section id="main">
         <h1 class="text-center">
@@ -58,6 +65,9 @@
               <th>
                 Тема
               </th>
+              <th>
+                Аудио
+              </th>
             </thead>
             <tbody>
             <%  
@@ -79,10 +89,14 @@
 	                		if (rs3.next()){%>
 		                		<td><%=rs3.getString(3)%></td>
 		                		<td><%=rs3.getString(2)%></td>
-		                		 <%                		 
+		                	<%              		 
 	                		}
 	                		%>
-	                			<td><%=rs4.getString(1)%></td></tr>
+	                			<td><%=rs4.getString(1)%></td>
+	                			<td><audio id="myAudio">
+									<source src="audio/<%=rs2.getString(1)%>.mp3">
+								</audio>
+								<img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk-dictionary"></td></tr>
 	                		<% 	
 	                		i++;
                 		}        		
