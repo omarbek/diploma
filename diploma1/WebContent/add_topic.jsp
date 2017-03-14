@@ -71,7 +71,7 @@
   	if(topicId!=null){
   		pageValue="edit_topic";
   %>
-  <input type="hidden" name="topicId" value="<%= topicId %>">
+  <input type="hidden" name="topic_id" value="<%= topicId %>">
   <%
   	}else{
   		pageValue="add_topic";
@@ -87,7 +87,7 @@
   <br />
   <div class="form-group">
     <div class="col-xs-offset-3 col-xs-9">
-      <input type="submit" class="btn btn-primary" value="Добавить">
+      <input type="submit" class="btn btn-primary" value="Сохранить">
     </div>
   </div>
 </form>

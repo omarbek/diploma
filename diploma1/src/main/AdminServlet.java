@@ -36,7 +36,10 @@ public class AdminServlet extends HttpServlet {
 		String name = null;
 		String classNumber = null;
 		Long topicId = null;
+		Long wordId = null;
 		String page = null;
+		String rus = null;
+		String kaz = null;
 
 		boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
 		if (isMultiPart) {
@@ -57,8 +60,14 @@ public class AdminServlet extends HttpServlet {
 							name = value;
 						} else if (fieldName.equalsIgnoreCase("page")) {
 							page = value;
-						} else if (fieldName.equalsIgnoreCase("topicId")) {
+						} else if (fieldName.equalsIgnoreCase("topic_id")) {
 							topicId = Long.parseLong(value);
+						} else if (fieldName.equalsIgnoreCase("word_id")) {
+							wordId = Long.parseLong(value);
+						} else if (fieldName.equalsIgnoreCase("rus")) {
+							rus = value;
+						} else if (fieldName.equalsIgnoreCase("kaz")) {
+							kaz = value;
 						} else {
 							classNumber = value;
 						}
@@ -77,6 +86,7 @@ public class AdminServlet extends HttpServlet {
 								if (rs.next()) {
 									topicId = rs.getLong(1);
 								}
+
 							} catch (SQLException e) {
 								e.printStackTrace();
 							}
@@ -86,10 +96,36 @@ public class AdminServlet extends HttpServlet {
 							// item.getName().substring(item.getName().indexOf('.'),
 							// item.getName().length());
 							String nameOfImage = topicId + ".jpg";
-							Word.processFile(path, item, nameOfImage);
+							Word.processFile(path, item, nameOfImage, "img/subjects");
 
 							String grade = Word.getGrade(classNumber);
 							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+						}
+						if (page.equals("add_word")) {
+							try {
+								PreparedStatement insertWord = con.prepareStatement(
+										"insert into words (word_rus, word_kaz) values ('" + rus + "', '" + kaz + "')");
+								insertWord.executeUpdate();
+
+								PreparedStatement selectWord = con.prepareStatement(
+										"select * from words where word_rus='" + rus + "' and word_kaz='" + kaz + "'");
+								ResultSet rs = selectWord.executeQuery();
+								if (rs.next()) {
+									wordId = rs.getLong("word_id");
+									PreparedStatement insert = con
+											.prepareStatement("insert into topic_word (word_id, topic_id) values ("
+													+ wordId + ", " + topicId + ")");
+									insert.executeUpdate();
+								}
+
+								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+								String nameOfImage = wordId + ".jpg";
+								Word.processFile(path, item, nameOfImage, "img/questions");
+
+								response.sendRedirect("admin.jsp?navPage=words&topic_id=" + topicId);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
 						}
 						if ("edit_topic".equals(page)) {
 							try {
@@ -107,17 +143,45 @@ public class AdminServlet extends HttpServlet {
 								File file = new File(
 										"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/" + nameOfImage);
 								file.delete();
-								// file.renameTo(new
-								// File("C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/"
-								// + topicId + "_old.jpg"));
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 
-							Word.processFile(path, item, nameOfImage);
+							Word.processFile(path, item, nameOfImage, "img/subjects");
 
 							String grade = Word.getGrade(classNumber);
 							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+						}
+						if ("edit_word".equals(page)) {
+							try {
+								PreparedStatement updatePs = con.prepareStatement("update words set word_rus='" + rus
+										+ "', word_kaz='" + kaz + "' where word_id=" + wordId);
+								updatePs.executeUpdate();
+
+								PreparedStatement topicWord = con.prepareStatement(
+										"update topic_word set topic_id=" + topicId + " where word_id=" + wordId);
+								topicWord.executeUpdate();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+
+							if (!item.getName().isEmpty()) {
+								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+								String nameOfImage = wordId + ".jpg";
+
+								try {
+									File file = new File(
+											"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/questions/"
+													+ nameOfImage);
+									file.delete();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+
+								Word.processFile(path, item, nameOfImage, "img/questions");
+							}
+
+							response.sendRedirect("admin.jsp?navPage=words&topic_id=" + topicId);
 						}
 					}
 				}

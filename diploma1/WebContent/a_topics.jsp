@@ -100,7 +100,6 @@
 							<h3><a href="?navPage=words&topic_id=<%=rs.getLong("topic_id")%>"><%=rs.getString("topic_name") %></a></h3>
 						</div>
 						<div class="col-md-5 ">
-							<!-- <button><i class="fa fa-plus" aria-hidden="true"></i></button> -->
 							<a href="?navPage=add_topic&topic_id=<%=rs.getLong("topic_id")%>">Изменить</a>
 							<form action="TopicServlet" method="post">
 								<input type="hidden" name="page" value="remove">

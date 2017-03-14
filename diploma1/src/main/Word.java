@@ -42,9 +42,9 @@ public class Word {
 		return (double) tmp / factor;
 	}
 
-	public static boolean processFile(String path, FileItemStream item, String nameOfImage) {
+	public static boolean processFile(String path, FileItemStream item, String nameOfImage, String folder) {
 		try {
-			File f = new File(path + File.separator + "img/subjects");
+			File f = new File(path + File.separator + folder);
 			if (!f.exists()) {
 				f.mkdir();
 			}

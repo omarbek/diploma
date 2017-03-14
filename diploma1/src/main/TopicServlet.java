@@ -47,14 +47,40 @@ public class TopicServlet extends HttpServlet {
 					File file = new File(
 							"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/" + topicId + ".jpg");
 					file.delete();
-					// file.renameTo(new
-					// File("C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/"
-					// + topicId + "_old.jpg"));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
 				response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (page.equals("remove_word")) {
+			Long wordId = Long.parseLong(request.getParameter("word_id"));
+			Long topicId = Long.parseLong(request.getParameter("topic_id"));
+			try {
+				PreparedStatement results = con.prepareStatement("delete from results where word_id=" + wordId);
+				results.executeUpdate();
+
+				PreparedStatement resultTest = con.prepareStatement("delete from results_test where word_id=" + wordId);
+				resultTest.executeUpdate();
+
+				PreparedStatement topicWord = con.prepareStatement("delete from topic_word where word_id=" + wordId);
+				topicWord.executeUpdate();
+
+				PreparedStatement words = con.prepareStatement("delete from words where word_id=" + wordId);
+				words.executeUpdate();
+
+				try {
+					File file = new File(
+							"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/questions/" + wordId + ".jpg");
+					file.delete();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				response.sendRedirect("admin.jsp?navPage=words&topic_id=" + topicId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

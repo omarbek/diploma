@@ -56,12 +56,6 @@
           <li>
             <a href="?navPage=add_topic">Добавить урок</a>
           </li>
-          <li>
-            <a href="?navPage=dictionary">Мой словарь</a>
-          </li>
-          <li>
-            <a href="?navPage=profile">Мой профиль</a>
-          </li>
 		  <% } %>
         </nav>
         <ul class="user-link list-inline">
@@ -125,27 +119,11 @@
 			<jsp:include page="words.jsp" />
 					<%			
 				}
-			else if(navPage.equals("trainingTwo")){	
+			else if(navPage.equals("edit_word")){	
 					%>
-			<jsp:include page="trainingTwo.jsp" />
+			<jsp:include page="edit_word.jsp" />
 					<%			
 				} 
-			else if(navPage.equals("trainingThree")){
-					%>
-			<jsp:include page="trainingThree.jsp" />
-					<%			
-				}else if(navPage.equals("trainingFour")){
-					%>
-			<jsp:include page="trainingFour.jsp" />
-					<%			
-				}else if(navPage.equals("trainingFive")){
-					%>
-			<jsp:include page="trainingFive.jsp" />
-					<%			
-				}else if(navPage.equals("trainingSix")){
-					%>
-			<jsp:include page="trainingSix.jsp" />
-					<% } 
 					}%>
     </div>
 
