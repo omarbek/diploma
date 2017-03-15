@@ -129,6 +129,12 @@
 		<jsp:include page="delete_profile.jsp" />
 				<%
 			}
+			else if(navPage.equals("edit_profile")){	
+				
+				%>
+		<jsp:include page="edit_profile.jsp" />
+				<%
+			}
 			else if(navPage.equals("tests")){	
 				
 				%>

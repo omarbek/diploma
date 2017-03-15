@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 			prepStmt.setString(2, shaPwd);
 			rs = prepStmt.executeQuery();
 
-			if (rs.next()) {
+			if (rs.next() && !rs.getString(4).equals("0")) {
 
 				ArrayList<Cookie> cookies = new ArrayList<Cookie>();
 				cookies.add(new Cookie("userId", rs.getString(1)));
