@@ -32,6 +32,16 @@ public class TopicServlet extends HttpServlet {
 			Long topicId = Long.parseLong(request.getParameter("topic_id"));
 			PreparedStatement removePs;
 			try {
+				PreparedStatement results = con.prepareStatement("delete from results where topic_id=" + topicId);
+				results.executeUpdate();
+
+				PreparedStatement resultTest = con
+						.prepareStatement("delete from results_test where topic_id=" + topicId);
+				resultTest.executeUpdate();
+
+				PreparedStatement userTopic = con.prepareStatement("delete from user_topic where topic_id=" + topicId);
+				userTopic.executeUpdate();
+
 				PreparedStatement selectPs = con.prepareStatement("select grade from topics where topic_id=" + topicId);
 				ResultSet rs = selectPs.executeQuery();
 				String classNumber = null;

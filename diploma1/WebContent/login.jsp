@@ -25,7 +25,7 @@
                               </div>
                               <div id="loginErrorMsg" class="alert alert-error hide">Неверная почта или пароль</div>
                               <button type="submit" class="btn btn-yellow btn-block">Готово</button>
-                              <a href="/forgot/" class="btn btn-default btn-block">Забыли пароль?</a>
+                              <a href="?navPage=forgot" class="btn btn-default btn-block">Забыли пароль?</a>
                           </form>
                       </div>
                       <div class="col-xs-12">

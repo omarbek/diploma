@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/pdfbox-app-2.0.0-RC1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/poi-3.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/poi-ooxml-3.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Омарбек/git/kazakh/diploma1/WebContent/WEB-INF/lib/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

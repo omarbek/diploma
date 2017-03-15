@@ -118,9 +118,30 @@ public class AdminServlet extends HttpServlet {
 									insert.executeUpdate();
 								}
 
-								// PreparedStatement userTopic =
-								// con.prepareStatement("");//TODO add to
-								// user_topic
+								PreparedStatement psUsers = con
+										.prepareStatement("SELECT DISTINCT user_id FROM user_topic");
+								ResultSet rsUsers = psUsers.executeQuery();
+								while (rsUsers.next()) {
+									PreparedStatement psGrade = con
+											.prepareStatement("select grade from topics where topic_id=" + topicId);
+									ResultSet rsGrade = psGrade.executeQuery();
+									int grade = 0;
+									if (rsGrade.next()) {
+										grade = rsGrade.getInt(1);
+									}
+
+									PreparedStatement stGrade = con.prepareStatement(
+											"select studentClass from students where user_id=" + rsUsers.getLong(1));
+									ResultSet rsStGrade = stGrade.executeQuery();
+									if (rsStGrade.next()) {
+										if (rsStGrade.getInt(1) >= grade) {
+											PreparedStatement insertPs = con.prepareStatement(
+													"insert into user_topic (user_id, topic_id) values ("
+															+ rsUsers.getLong(1) + ", " + topicId + ")");
+											insertPs.executeUpdate();
+										}
+									}
+								}
 
 								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
 								String nameOfImage = wordId + ".jpg";
@@ -136,6 +157,31 @@ public class AdminServlet extends HttpServlet {
 								PreparedStatement updatePs = con.prepareStatement("update topics set topic_name='"
 										+ name + "', grade=" + classNumber + " where topic_id=" + topicId);
 								updatePs.executeUpdate();
+
+								PreparedStatement psUsers = con
+										.prepareStatement("SELECT DISTINCT user_id FROM user_topic");
+								ResultSet rsUsers = psUsers.executeQuery();
+								while (rsUsers.next()) {
+
+									PreparedStatement stGrade = con.prepareStatement(
+											"select studentClass from students where user_id=" + rsUsers.getLong(1));
+									ResultSet rsStGrade = stGrade.executeQuery();
+									if (rsStGrade.next()) {
+										if (rsStGrade.getInt(1) < Integer.parseInt(classNumber)) {
+											PreparedStatement deletePs = con
+													.prepareStatement("delete from user_topic where user_id="
+															+ rsUsers.getLong(1) + " and topic_id=" + topicId);
+											deletePs.executeUpdate();
+										} else {
+											PreparedStatement deletePs = con
+													.prepareStatement("insert into user_topic (user_id, topic_id)"
+															+ " values (" + rsUsers.getLong(1) + ", " + topicId
+															+ ") ON DUPLICATE KEY UPDATE user_id=" + rsUsers.getLong(1)
+															+ ", topic_id=" + topicId);
+											deletePs.executeUpdate();
+										}
+									}
+								}
 							} catch (SQLException e) {
 								e.printStackTrace();
 							}

@@ -172,7 +172,12 @@
 				}else if(navPage.equals("trainingSix")){
 					%>
 			<jsp:include page="trainingSix.jsp" />
-					<% } 
+					<% 
+				}else if(navPage.equals("forgot")){
+					%>
+			<jsp:include page="forgot.jsp" />	
+					<%
+				}
 					}%>
     </div>
 
