@@ -47,7 +47,7 @@
               	| №<%=schoolName%> школа | <%=studentClass%> класс<br>        	
               </p>
               </div>
-              	<div class="col-md-4">	<p class="text-right"><a href=""><i class="glyphicon glyphicon-pencil"></i> Редактировать</a><br/><a href="?navPage=delete_profile" style="color:red;"><i class="glyphicon glyphicon-trash"></i> Удалить Профиль</a></p>
+              	<div class="col-md-4">	<p class="text-right"><a href="?navPage=edit_profile"><i class="glyphicon glyphicon-pencil"></i> Редактировать</a><br/><a href="?navPage=delete_profile" style="color:red;"><i class="glyphicon glyphicon-trash"></i> Удалить Профиль</a></p>
               </div>
               
               </div>

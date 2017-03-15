@@ -14,7 +14,7 @@ function validatePassword(){
 var pass2=document.getElementById("confirmPassword").value;
 var pass1=document.getElementById("inputPassword").value;
 if(pass1!=pass2)
-    document.getElementById("confirmPassword").setCustomValidity("Passwords Don't Match");
+    document.getElementById("confirmPassword").setCustomValidity("Пароли не совпадают!");
 else
     document.getElementById("confirmPassword").setCustomValidity('');
 }
