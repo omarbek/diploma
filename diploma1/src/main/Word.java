@@ -30,7 +30,21 @@ public class Word {
 		}
 		return grade;
 	}
-
+	
+	public static String getClassNumber(String grade) {
+		String classNumber = null;
+		if ("one".equals(grade)) {
+			classNumber = "1";
+		} else if ("two".equals(grade)) {
+			classNumber = "2";
+		} else if ("three".equals(grade)) {
+			classNumber = "3";
+		} else {
+			classNumber = "4";
+		}
+		return classNumber;
+	}
+	
 	public static double round(double value, int places) {
 		if (places < 0) {
 			throw new IllegalArgumentException();

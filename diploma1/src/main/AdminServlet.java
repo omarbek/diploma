@@ -118,6 +118,10 @@ public class AdminServlet extends HttpServlet {
 									insert.executeUpdate();
 								}
 
+								// PreparedStatement userTopic =
+								// con.prepareStatement("");//TODO add to
+								// user_topic
+
 								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
 								String nameOfImage = wordId + ".jpg";
 								Word.processFile(path, item, nameOfImage, "img/questions");

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="main.Word"%>
 <%@include file="mysql.jsp" %>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
@@ -9,6 +10,7 @@
     <div class="container" id="content">
 	<% 
 		String grade = request.getParameter("grade"); 
+	    int gradeInt=Integer.parseInt(Word.getClassNumber(grade));
 	    int classId = Integer.parseInt(request.getParameter("classId")); 
 	%>
       <section id="main" class="subjects">
@@ -133,8 +135,11 @@
 		  			String subject=null;
 		  			if(rs.next()){
 		  				subject="subject";
+		  				
 		  			}else{
 		  				subject="subject disabled";
+		  				if(classId>gradeInt)
+		  					subject="subject";
 		  			}
 		  		%>
 		            <div class="<%=subject%>">
