@@ -10,6 +10,7 @@ import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -39,11 +40,12 @@ public class ForgotServlet extends HttpServlet {
 		Connection con = (new DBConnection()).getConnection();
 
 		String email = request.getParameter("email");
+
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(100) + 100;
 		String password = String.valueOf(randomInt);
 		String shaPassword = DigestUtils.sha1Hex(password);
-		String message = password;
+		String message = email;
 		try {
 			PreparedStatement psSelect = con.prepareStatement("select * from users where email='" + email + "'");
 			ResultSet rs = psSelect.executeQuery();
@@ -53,56 +55,43 @@ public class ForgotServlet extends HttpServlet {
 				PreparedStatement ps = con.prepareStatement(
 						"update users set password='" + shaPassword + "' where email='" + email + "'");
 				ps.executeUpdate();
+				sendEmail(email, password);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		response.sendRedirect("index.jsp?navPage=forgot&message=" + message);
-		// sendEmail(email);
 	}
 
-	@SuppressWarnings("unused")
-	private void sendEmail(String email) {
-		// Recipient's email ID needs to be mentioned.
-		String to = email;
+	private void sendEmail(String email, String text) {
+		final String username = "";// TODO open general gmail
+		final String password = "";
 
-		// Sender's email ID needs to be mentioned
-		String from = "web@gmail.com";
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
 
-		// Assuming you are sending email from localhost
-		String host = "localhost";
-
-		// Get system properties
-		Properties properties = System.getProperties();
-
-		// Setup mail server
-		properties.setProperty("mail.smtp.host", host);
-
-		// Get the default Session object.
-		Session session = Session.getDefaultInstance(properties);
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 
 		try {
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+			message.setSubject("Восстановление пароля");
+			message.setText("Ваш пароль изменен на " + text);
 
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
-
-			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-			// Set Subject: header field
-			message.setSubject("This is the Subject Line!");
-
-			// Now set the actual message
-			message.setText("This is actual message");
-
-			// Send message
 			Transport.send(message);
-			System.out.println("Sent message successfully....");
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

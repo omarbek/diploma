@@ -13,18 +13,18 @@
 </div>
 <br>
 <% 
+	String message=null;
 	if(request.getParameter("message")!=null){
-		String message=null;
 		if(request.getParameter("message").isEmpty()){
-			message="Неправильная почта, повторите еще раз!";
-		}else{
-			message="Ваш пароль изменен на "+(String)request.getParameter("message");
+			message="Такой почты не существует, повторите еще раз!";
+		} else {
+			message="Ваш пароль выслан на вашу почту "+(String)request.getParameter("message");
 		}
 %>
 <div class="" >
 	<h1 class="text-center"><font color="white"><%=message %></font></h1>
 </div>
-<%} %>
+<% } %>
 <br>
 <div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="ForgotServlet">
