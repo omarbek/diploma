@@ -9,19 +9,27 @@
           Мой профиль
         </h1>
         <%  String userID = (String) session.getAttribute("userId");
-        	String studentEmail = (String) session.getAttribute("userEmail");
-        	String studentFirstName = (String) session.getAttribute("userFirstName");
-			String studentLastName = (String) session.getAttribute("userLastName");
-			String schoolID = (String) session.getAttribute("studentSchoolId");
-			String studentClass = (String) session.getAttribute("studentClass");
-        	String sql = "select * from schools where school_id="+schoolID; 
+        	String sql = "select * from students where user_id="+userID;
+        	String sql2 = "select * from users where user_id="+userID;
         	PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+			PreparedStatement ps2 = con.prepareStatement(sql2);
+			ResultSet rs2 = ps2.executeQuery();
 			String schoolName = null;
 			String schoolCity = null;
+			String studentLastName = null;
+			String studentFirstName = null;
+			String studentEmail = null;
+			String studentClass = null;
 			if (rs.next()){
-				schoolName = rs.getString(2);
-				schoolCity = rs.getString(3);
+				studentClass = rs.getString(3);
+				studentFirstName = rs.getString(4);
+				studentLastName = rs.getString(5);
+				schoolName = rs.getString(6);
+				schoolCity = rs.getString(7);
+			}
+			if (rs2.next()){
+				studentEmail = rs2.getString(2);
 			}
 			%>
         <div class="hr-img">
@@ -101,45 +109,12 @@
 		       				+" where ut.user_id='"+session.getAttribute("userId")+"' AND (one AND two AND three AND four AND five AND six) > 0";
 					PreparedStatement psAll = con.prepareStatement(sqlAll);
 					ResultSet rsAll = psAll.executeQuery();
-					int numberOfTheme = 2;
-					if (rsAll.next()){%>
+					int numberOfTheme = 1;
+					boolean enterToLoop=false;
+					%>
 						<h3>Изучено:</h3>
 						<ul class="learnt">
-						<li><a href="?navPage=trainings&topic_id=<%=rsAll.getLong("topic_id")%>">Урок 1. <%=rsAll.getString("topic_name")%>
-							<%  double average=(rsAll.getDouble("one")+rsAll.getDouble("two")+rsAll.getDouble("three")
-										+rsAll.getDouble("four")+rsAll.getDouble("five")+rsAll.getDouble("six"))/6;
-								if(average==100){ %>
-			        			<div class="stars">
-									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
-									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
-									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
-								</div>
-								<%
-								} else if(average>=75&&average<100){
-								%>
-								<div class="stars">
-									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
-									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
-									<img src="img/icons/zvezda.png" class="img-star" alt="">
-								</div>	
-								<%
-								} else if(average>=50&&average<75){
-								%>
-								<div class="stars">
-									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
-									<img src="img/icons/zvezda.png" class="img-star" alt="">
-									<img src="img/icons/zvezda.png" class="img-star" alt="">
-								</div>
-								<%
-								}else{
-								%>
-								<div class="stars">
-									<img src="img/icons/zvezda.png" class="img-star" alt="">
-									<img src="img/icons/zvezda.png" class="img-star" alt="">
-									<img src="img/icons/zvezda.png" class="img-star" alt="">
-								</div>
-								<% } %>
-			        		</a></li>
+						
 					<%	while (rsAll.next()){ %>
 							<li><a href="?navPage=trainings&topic_id=<%=rsAll.getLong("topic_id")%>">Урок <%=numberOfTheme%>. <%=rsAll.getString("topic_name")%>
 							<%  double average2=(rsAll.getDouble("one")+rsAll.getDouble("two")+rsAll.getDouble("three")
@@ -151,7 +126,7 @@
 									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
 								</div>
 								<%
-								} else if(average2>=75&&average<100){
+								} else if(average2>=75&&average2<100){
 								%>
 								<div class="stars">
 									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
@@ -159,7 +134,7 @@
 									<img src="img/icons/zvezda.png" class="img-star" alt="">
 								</div>	
 								<%
-								} else if(average2>=50&&average<75){
+								} else if(average2>=50&&average2<75){
 								%>
 								<div class="stars">
 									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
@@ -177,11 +152,12 @@
 								<% } %>
 			        		</a></li>
 						<% numberOfTheme++;
+						enterToLoop=true;
 						}
 					%>
 				</ul>
-				<% 	} 
-					else { %>
+				<% 	if(!enterToLoop){
+					 %>
 					<h3>К сожалению, ты еще не прошел ни один урок!</h3>
 					<% } %>
 

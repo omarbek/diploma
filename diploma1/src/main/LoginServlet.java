@@ -26,11 +26,15 @@ public class LoginServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;//
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {}
+
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -60,35 +64,20 @@ public class LoginServlet extends HttpServlet {
 
 				if (rs.getString(4).equals("1")) {
 					PreparedStatement prepStmt2 = con
-							.prepareStatement("SELECT * FROM teachers WHERE user_id = " + rs.getString(1));
-					rs2 = prepStmt2.executeQuery();
-
-					if (rs2.next()) {
-						session.setAttribute("teacherId", rs2.getString(1));
-						session.setAttribute("teacherSchool", rs2.getString(3));
-						session.setAttribute("userFirstName", rs2.getString(4));
-						session.setAttribute("userLastName", rs2.getString(5));
-					}
-				}
-
-				else if (rs.getString(4).equals("2")) {
-					PreparedStatement prepStmt2 = con
-							.prepareStatement("SELECT * FROM students WHERE user_id = " + rs.getString(1));
+							.prepareStatement("SELECT * FROM students WHERE user_id = "
+									+ rs.getString(1));
 					rs2 = prepStmt2.executeQuery();
 
 					if (rs2.next()) {
 						session.setAttribute("studentID", rs2.getString(1));
 						session.setAttribute("studentClass", rs2.getString(3));
-						session.setAttribute("userFirstName", rs2.getString(4));
-						session.setAttribute("userLastName", rs2.getString(5));
-						session.setAttribute("studentSchoolId", rs2.getString(6));
 					}
 				}
 
 				for (Cookie c : cookies) {
 					response.addCookie(c);
 				}
-				if (rs.getString(4).equals("3")) {
+				if (rs.getString(4).equals("2")) {
 					response.sendRedirect("admin.jsp");
 				} else {
 					response.sendRedirect("index.jsp");

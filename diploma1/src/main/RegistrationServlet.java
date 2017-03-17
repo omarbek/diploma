@@ -21,8 +21,8 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -51,51 +51,49 @@ public class RegistrationServlet extends HttpServlet {
 			}
 
 			else {
-				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)" + " VALUES (0, '" + email
-						+ "', '" + shaPassword + "', '2');";
+				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)"
+						+ " VALUES (0, '"
+						+ email
+						+ "', '"
+						+ shaPassword
+						+ "', '1');";
 				String sql3 = "";
 				PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 				prepStmt2.executeUpdate();
 
-				String sql4 = "select * from schools where school_name='" + school + "' and city='" + city + "'";
-				PreparedStatement prepStmt5 = con.prepareStatement(sql4);
-				rs3 = prepStmt5.executeQuery();
-				if (rs3.next()) {
-					schoolID = rs3.getString(1);
-				} else {
-					String sql5 = "INSERT INTO `schools`(`school_id`, `school_name`, `city`) VALUES (0,'" + school
-							+ "','" + city + "');";
-					PreparedStatement prepStmt6 = con.prepareStatement(sql5);
-					prepStmt6.executeUpdate();
-					rs3 = prepStmt5.executeQuery();
-					if (rs3.next()) {
-						schoolID = rs3.getString(1);
-					}
-				}
-
 				PreparedStatement prepStmt4 = con
-						.prepareStatement("select user_id from users where email='" + email + "'");
+						.prepareStatement("select user_id from users where email='"
+								+ email + "'");
 				rs2 = prepStmt4.executeQuery();
 
 				if (rs2.next()) {
 					userID = rs2.getString(1);
 				}
-				sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_id`)"
-						+ " VALUES (0, '" + userID + "', '" + studentClass + "', '" + userFirstName + "', '"
-						+ userLastName + "', '" + schoolID + "');";
+				sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`)"
+						+ " VALUES (0, '"
+						+ userID
+						+ "', '"
+						+ studentClass
+						+ "', '"
+						+ userFirstName
+						+ "', '"
+						+ userLastName
+						+ "', '" + school + "' , '" + city + "');";
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 				prepStmt3.executeUpdate();
 
 				int studClass = Integer.parseInt(studentClass);
 
 				for (int i = 1; i <= studClass * 8; i++) {
-					String sql6 = "INSERT INTO user_topic (user_id, topic_id) values (" + userID + ", " + i + ")";
+					String sql6 = "INSERT INTO user_topic (user_id, topic_id) values ("
+							+ userID + ", " + i + ")";
 					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
 					prepStmt6.executeUpdate();
 				}
 
 				for (int i = 1; i <= studClass; i++) {
-					String sql6 = "insert into test (user_id, grade) values (" + userID + ", " + i + ")";
+					String sql6 = "insert into test (user_id, grade) values ("
+							+ userID + ", " + i + ")";
 					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
 					prepStmt6.executeUpdate();
 				}

@@ -64,7 +64,7 @@ else
     <!--<label class="control-label col-xs-3"></label>-->
     <div class="col-xs-4">
       <select class="form-control" name="city" required>
-        <option disabled selected>Регион</option>
+        <option value="">Регион</option>
         <option value="Астана">г. Астана</option>
         <option value="Алматы">г. Алматы</option>
         <option value="Акмолинская">Акмолинская обл.</option>
@@ -88,7 +88,7 @@ else
     </div>
     <div class="col-xs-4">
       <select class="form-control" name="studentClass" required>
-        <option disabled selected>Класс</option>
+        <option value="">Класс</option>
         <option value="1">1 класс</option>
         <option value="2">2 класс</option>
         <option value="3">3 класс</option>
