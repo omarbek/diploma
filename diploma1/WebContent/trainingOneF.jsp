@@ -164,14 +164,14 @@ Integer count=(Integer)request.getAttribute("count");
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
 							<audio id="myAudio">
-								<source src="audio/<%=wordsRusKaz.get(0).id %>.mp3">
+								<source src="audio/<%=wordsRusKaz.get(numbers.get(0)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
 							<audio id="myAudio">
-								<source src="audio/<%=wordsRusKaz.get(1).id %>.mp3">
+								<source src="audio/<%=wordsRusKaz.get(numbers.get(1)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
@@ -181,7 +181,7 @@ Integer count=(Integer)request.getAttribute("count");
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
 							<audio id="myAudio">
-								<source src="audio/<%=wordsRusKaz.get(0).id %>.mp3">
+								<source src="audio/<%=wordsRusKaz.get(numbers.get(0)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
@@ -195,7 +195,7 @@ Integer count=(Integer)request.getAttribute("count");
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
 							<audio id="myAudio">
-								<source src="audio/<%=wordsRusKaz.get(1).id %>.mp3">
+								<source src="audio/<%=wordsRusKaz.get(numbers.get(1)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
@@ -205,14 +205,14 @@ Integer count=(Integer)request.getAttribute("count");
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
 							<audio id="myAudio">
-								<source src="audio/<%=wordsRusKaz.get(0).id %>.mp3">
+								<source src="audio/<%=wordsRusKaz.get(numbers.get(0)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
 							<audio id="myAudio">
-								<source src="audio/<%=wordsRusKaz.get(1).id %>.mp3">
+								<source src="audio/<%=wordsRusKaz.get(numbers.get(1)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
