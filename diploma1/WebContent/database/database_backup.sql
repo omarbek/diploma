@@ -7,14 +7,9 @@
 -- Версия сервера: 10.1.19-MariaDB
 -- Версия PHP: 5.6.28
 
+SET names 'utf8';
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `funny_kazakh`
@@ -86,7 +81,7 @@ CREATE TABLE `test` (
   `user_id` int(11) NOT NULL,
   `grade` int(11) NOT NULL,
   `score` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `test`
@@ -548,7 +543,7 @@ CREATE TABLE `user_topic` (
   `four` float NOT NULL DEFAULT '0',
   `five` float NOT NULL DEFAULT '0',
   `six` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `user_topic`
@@ -760,7 +755,10 @@ INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
 (97, 'страна', 'ел'),
 (98, 'столица', 'елорда'),
 (99, 'земля', 'жер'),
-(100, 'грязный', 'лас'),
+(100, 'грязный', 'лас');
+
+
+INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
 (101, 'чистый', 'таза'),
 (102, 'чистить', 'тазалау'),
 (103, 'лопата', 'күрек'),
@@ -860,7 +858,9 @@ INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
 (197, 'знание', 'білім'),
 (198, 'горький', 'ащы'),
 (199, 'родник', 'бұлақ'),
-(200, 'облако', 'бұлт'),
+(200, 'облако', 'бұлт');
+
+INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
 (201, 'дождь', 'жаңбыр'),
 (202, 'лед', 'мұз'),
 (203, 'река', 'өзен'),
@@ -1093,6 +1093,3 @@ ALTER TABLE `user_topic`
 --
 ALTER TABLE `words`
   MODIFY `word_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

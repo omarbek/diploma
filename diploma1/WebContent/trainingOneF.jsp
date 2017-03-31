@@ -10,8 +10,8 @@
     
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
-function playAudio(id) {
-	var x = document.getElementById(id);
+function playAudio(y) {
+	var x = document.getElementById("myAudio"+y);
 	x.play(); 
 }  
 </script>  
@@ -89,10 +89,10 @@ Integer count=(Integer)request.getAttribute("count");
 				  }
 			%>
 				<h3>
-				<audio id="myAudio">
+				<audio id="myAudio<%=wordID %>">
 					<source src="audio/<%=wordID %>.mp3">
 				</audio>
-				<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
+				<img onclick="playAudio(<%=wordID %>)" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
 				<span class="wrong-word-rus"> - <%=rs6.getString(2)%></span></h3>
 				<% } %>
 				</div>
@@ -156,21 +156,21 @@ Integer count=(Integer)request.getAttribute("count");
 						 %>
 					 	<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(j).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(j).id %>">
 								<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(numbers.get(0)).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(numbers.get(0)).id %>">
 								<source src="audio/<%=wordsRusKaz.get(numbers.get(0)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(numbers.get(0)).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(numbers.get(1)).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(numbers.get(1)).id %>">
 								<source src="audio/<%=wordsRusKaz.get(numbers.get(1)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(numbers.get(1)).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
@@ -180,21 +180,21 @@ Integer count=(Integer)request.getAttribute("count");
 						 %>		 
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(numbers.get(0)).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(numbers.get(0)).id %>">
 								<source src="audio/<%=wordsRusKaz.get(numbers.get(0)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(numbers.get(0)).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(j).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(j).id %>">
 								<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1"  correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(numbers.get(1)).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(numbers.get(1)).id %>">
 								<source src="audio/<%=wordsRusKaz.get(numbers.get(1)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(numbers.get(1)).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
@@ -204,21 +204,21 @@ Integer count=(Integer)request.getAttribute("count");
 						 %>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(0)).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(numbers.get(0)).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(numbers.get(0)).id %>">
 								<source src="audio/<%=wordsRusKaz.get(numbers.get(0)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(numbers.get(0)).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="0"><%=wordsRusKaz.get(numbers.get(1)).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(numbers.get(1)).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(numbers.get(1)).id %>">
 								<source src="audio/<%=wordsRusKaz.get(numbers.get(1)).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(numbers.get(1)).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-9"><button class="btn btn-answer btn-block train1" correct="1"><%=wordsRusKaz.get(j).kaz%></button></div>
-							<audio id="<%=wordsRusKaz.get(j).id %>">
+							<audio id="myAudio<%=wordsRusKaz.get(j).id %>">
 								<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 							</audio>
 							<div class="col-sm-3"><img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="img-responsive zvuk"></div>
