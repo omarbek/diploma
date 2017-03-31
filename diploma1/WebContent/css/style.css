@@ -14,7 +14,7 @@
 html {
   height: 100%; }
 
-body {
+body.authorized {
   background-image: url(../img/bg.jpg);
   background-position: bottom;
   background-size: auto 100%;
@@ -24,9 +24,8 @@ body {
   font-family: 'Helvetica'; }
 body.login {
 	background-image: url(../img/login-bg2.jpg);
-	
-  background-size: 100% auto ;
-  padding-top: 100px;
+  	background-size: 100% auto ;
+  	padding-top: 100px;
 }
 body.login .modal-content {
 	background-color: rgba(255,255,255,0.5);
@@ -95,6 +94,13 @@ div .container {
           background-color: #522764; }
     #content #nav .user-link {
       float: right; }
+
+#copyright {
+	background-color: #ecf0f1;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
 
 #main {
   margin: 10px 0px 0px; }
