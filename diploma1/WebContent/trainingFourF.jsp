@@ -27,6 +27,12 @@ int j = Integer.parseInt(questionId);
 Integer count=(Integer)request.getAttribute("count");
 
 %>
+<script>
+function playAudio(y) {
+	var x = document.getElementById("myAudio"+y);
+	x.play(); 
+}  
+</script>
 <br>
 <section id="main">
    <div class="question">
@@ -89,10 +95,10 @@ Integer count=(Integer)request.getAttribute("count");
 				  }
 			%>
 				<h3>
-				<audio id="myAudio">
+				<audio id="myAudio<%=wordID %>">
 					<source src="audio/<%=wordID %>.mp3">
 				</audio>
-				<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
+				<img onclick="playAudio(<%=wordID %>)" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
 				<span class="wrong-word-rus"> - <%=rs6.getString(2)%></span></h3>
 				<% } %>
 				</div>

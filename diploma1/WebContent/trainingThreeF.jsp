@@ -40,8 +40,8 @@ function myClear(){
        document.getElementById(buttons[i]).style.visibility = 'visible';
      }
 }
-function playAudio() {
-	var x = document.getElementById("myAudio");
+function playAudio(y) {
+	var x = document.getElementById("myAudio"+y);
 	x.play(); 
 }  
 </script>
@@ -134,10 +134,10 @@ Integer count=(Integer)request.getAttribute("count");
 				  }
 			%>
 				<h3>
-				<audio id="myAudio">
+				<audio id="myAudio<%=wordID %>">
 					<source src="audio/<%=wordID %>.mp3">
 				</audio>
-				<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
+				<img onclick="playAudio(<%=wordID %>)" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
 				<span class="wrong-word-rus"> - <%=rs6.getString(2)%></span></h3>
 				<% } %>
 				</div>
@@ -170,10 +170,10 @@ Integer count=(Integer)request.getAttribute("count");
 	<div class="row">
 		<div class="col-sm-12">
 			<h3 class="text-center"><%=wordsRusKaz.get(j).rus %> 
-			<audio id="myAudio">
+			<audio id="myAudio<%=wordsRusKaz.get(j).id %>">
 				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 			</audio>
-			<img onclick="playAudio()" src="img/icons/zvuk.png" class="zvuk-text"></h3>
+			<img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="zvuk-text"></h3>
 		</div>
 	</div>
  	<%
