@@ -10,8 +10,8 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript">
-function playAudio(y) {
-	var x = document.getElementById("myAudio"+y);
+function playAudio(id) {
+	var x = document.getElementById(id);
 	x.play(); 
 }  
 </script>   
@@ -89,7 +89,7 @@ Integer count=(Integer)request.getAttribute("count");
 				  }
 			%>
 				<h3>
-				<audio id="myAudio<%=wordID %>">
+				<audio id="<%=wordID %>">
 					<source src="audio/<%=wordID %>.mp3">
 				</audio>
 				<img onclick="playAudio(<%=wordID %>)" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 
@@ -128,7 +128,7 @@ Integer count=(Integer)request.getAttribute("count");
             <div class="col-sm-6">
             
             <h2 class="text-center text-uppercase helv"><%=wordsRusKaz.get(j).kaz%>
-            <audio id="myAudio<%=wordsRusKaz.get(j).id %>">
+            <audio id="<%=wordsRusKaz.get(j).id %>">
 				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 			</audio>
             <img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="zvuk-text"></h2>    

@@ -36,9 +36,9 @@ public class TrainingOneServlet extends HttpServlet {
 		String topicID = request.getParameter("topic_id");
 		String task_type = request.getParameter("task_type");
 		String variant = request.getParameter("variant");
+		String questionId = request.getParameter("questionId");
 		String wordID = null;
-		String questionId = null;
-		int j = 0;
+		int j = Integer.parseInt(questionId);
 		int countOfTopic = 0;
 		String correctAns = null;
 		List<Long> wrongIds = new ArrayList<Long>();
@@ -61,16 +61,13 @@ public class TrainingOneServlet extends HttpServlet {
 		}
 		if (!"trainingSixForm".equals(page)) {
 			wordID = request.getParameter("wordID");
-			questionId = request.getParameter("questionId");
 			correctAns = request.getParameter("correctAns");
-			j = Integer.parseInt(questionId);
 		} else {
 			StringTokenizer st = new StringTokenizer(variant, ",");
 			while (st.hasMoreElements()) {
 				String nextElement = st.nextElement().toString();
 				wrongIds.add(Long.parseLong(nextElement));
 			}
-			j = countOfTopic - 1;
 		}
 
 		HttpSession session = request.getSession();
@@ -82,7 +79,12 @@ public class TrainingOneServlet extends HttpServlet {
 						+ " and topic_id = " + topicID + " and task_type='" + task_type + "'";
 				PreparedStatement prepStmt = con.prepareStatement(sql);
 				prepStmt.executeUpdate();
+			} else {
+				if ("trainingSixForm".equals(page)) {
+					j = countOfTopic - 1;
+				}
 			}
+
 			if ((variant != null && correctAns != null && !"trainingSixForm".equals(page))
 					|| "trainingSixForm".equals(page)) {
 				if (variant.equals(correctAns) && !"trainingSixForm".equals(page)

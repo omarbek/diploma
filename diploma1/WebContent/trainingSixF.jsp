@@ -81,8 +81,8 @@ function myClear(id,count){
 	   document.getElementById(i).style.background='#5cb85c';
     }
 }
-function playAudio(y) {
-	var x = document.getElementById("myAudio"+y);
+function playAudio(id) {
+	var x = document.getElementById(id);
 	x.play(); 
 }  
 </script>
@@ -160,7 +160,7 @@ Integer count=(Integer)request.getAttribute("count");
 				  }
 			%>
 				<h3>
-				<audio id="myAudio<%=wordID %>">
+				<audio id="<%=wordID %>">
 					<source src="audio/<%=wordID %>.mp3">
 				</audio>
 				<img onclick="playAudio(<%=wordID %>)" src="img/icons/zvuk.png" class="zvuk-text"> <%=wrongWord%> 

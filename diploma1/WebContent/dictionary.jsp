@@ -6,8 +6,8 @@
 <%@page import="java.util.ArrayList"%>
 
 <script type="text/javascript">
-function playAudio() {
-	var x = document.getElementById("myAudio");
+function playAudio(id) {
+	var x = document.getElementById(id);
 	x.play(); 
 }  
 </script>  
@@ -42,36 +42,32 @@ function playAudio() {
 	        }
 	        
 	        int i=1; 
+	        boolean enterToLoop=false;
 	       // int classId = Integer.parseInt(request.getParameter("classId")); 
-	        if (!rs1.next()){ %>
-	        	<h3 class="text-center">
-		          К сожалению, ваш словарь пуст. <br>
-		          Чтобы добавить сюда слова, вам нужно пройти тренировки!</h3>
-		        <h2 class="text-center"><a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Перейти на страницу тренировки</a></h2>
-	       <%  }
-	        else { %>
-        <div class="dictionary table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <th>
-                №
-              </th>
-              <th>
-                На казахском
-              </th>
-              <th>
-                На русском
-              </th>
-              <th>
-                Тема
-              </th>
-              <th>
-                Аудио
-              </th>
-            </thead>
-            <tbody>
-            <%  
+
                 while (rs1.next()){
+                	if (i==1){%>
+                	<div class="dictionary table-responsive">
+			          <table class="table table-bordered">
+			            <thead>
+			              <th>
+			                №
+			              </th>
+			              <th>
+			                На казахском
+			              </th>
+			              <th>
+			                На русском
+			              </th>
+			              <th>
+			                Тема
+			              </th>
+			              <th>
+			                Аудио
+			              </th>
+			            </thead>
+			            <tbody>
+                	<%}
                 	sql2 = "select topic_word.word_id from topic_word where topic_word.topic_id='"+rs1.getString(1)+"' and topic_word.word_id not in ( select results.word_id from results where results.student_id='"+studentId+"')";
                 	PreparedStatement prepStmt2 = con.prepareStatement(sql2);
                 	rs2 = prepStmt2.executeQuery();
@@ -93,21 +89,28 @@ function playAudio() {
 	                		}
 	                		%>
 	                			<td><%=rs4.getString(1)%></td>
-	                			<td><audio id="myAudio">
+	                			<td><audio id="<%=rs2.getString(1)%>">
 									<source src="audio/<%=rs2.getString(1)%>.mp3">
 								</audio>
-								<img onclick="playAudio()" src="img/icons/zvuk.png" class="img-responsive zvuk-dictionary"></td></tr>
+								<img onclick="playAudio(<%=rs2.getString(1)%>)" src="img/icons/zvuk.png" class="img-responsive zvuk-dictionary"></td></tr>
 	                		<% 	
 	                		i++;
                 		}        		
                 	} 
-                }                              
-               %>
-         
-            </tbody>
-          </table>
-        </div>
-        <% } %>
+                	enterToLoop = true;
+                } 
+                if (enterToLoop){%>                              
+                </tbody>
+		          </table>
+		        </div>
+		        <% }
+                else if (!enterToLoop){ %>
+		        	<h3 class="text-center">
+			          К сожалению, ваш словарь пуст. <br>
+			          Чтобы добавить сюда слова, вам нужно пройти тренировки!</h3>
+			        <h2 class="text-center"><a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Перейти на страницу тренировки</a></h2>
+	       <%  }
+ %>
       </section>
       
     </div>
