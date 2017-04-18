@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>SpeakKaзakh</title>
+    <title>Тіл Кемел</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -35,12 +35,16 @@
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
 
-	PreparedStatement ps=con.prepareStatement("select studentClass from students where user_id="+userId);
-	ResultSet rs = ps.executeQuery();
 	String classId=null;
-	if(rs.next()){
-		classId=rs.getString(1);
+	
+	if(con==null){
+		con = (new DBConnection()).getConnection();
 	}
+		PreparedStatement ps=con.prepareStatement("select studentClass from students where user_id="+userId);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()){
+			classId=rs.getString(1);
+		}
 	%>
   <body  <%
 		if((userId == null)){
