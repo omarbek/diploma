@@ -65,8 +65,8 @@ public class ForgotServlet extends HttpServlet {
 	}
 
 	private void sendEmail(String email, String text) {
-		final String username = "";// TODO open general gmail
-		final String password = "";
+		final String username = "speakkazakh@gmail.com";
+		final String password = "SpKz2017";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
