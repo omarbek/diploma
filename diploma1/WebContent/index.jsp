@@ -198,7 +198,7 @@
     <div class="row">
     	<div class="col-sm-6 col-sm-offset-3">
 			<div class="text-center" id="copyright">
-			© Динасил О., Нурбай С., Ашенова Ш., 2017 
+			©IITU Динасил О., Нурбай С., Ашенова Ш., 2017 
 			</div>
 		</div>
 	</div>
