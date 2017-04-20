@@ -7,7 +7,10 @@
 <%@include file="mysql.jsp" %>
 <meta charset="utf-8">
 <% 
-	Long topicId=null;
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+Long topicId=null;
 	Long wordId=null;
 	String rus=null;
 	String kaz=null;

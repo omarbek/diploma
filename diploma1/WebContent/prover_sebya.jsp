@@ -9,7 +9,11 @@
 <%@page import="java.util.List"%>
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%  String test_grade = null;
+<%  
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+String test_grade = null;
 	test_grade = request.getParameter("test_grade");
 	
 	String questionId = null;

@@ -8,6 +8,9 @@
   <body>
     <div class="container" id="content">
 	<% 
+	if(con==null){
+   		con = (new DBConnection()).getConnection();
+   	   }
 		String grade = request.getParameter("grade"); 
 	    int classId = Integer.parseInt(request.getParameter("classId")); 
 	%>

@@ -33,6 +33,9 @@
   </head>
   <body>
 	<%
+	if(con==null){
+   		con = (new DBConnection()).getConnection();
+   	}
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");

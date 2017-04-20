@@ -119,7 +119,10 @@
     		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
        				+" where t.grade=4 and ut.user_id="+session.getAttribute("userId");
        }
-		PreparedStatement prepStmt = con.prepareStatement(sql);
+       if(con==null){
+   		con = (new DBConnection()).getConnection();
+   	   }
+        PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
 		
 		PreparedStatement ps=con.prepareStatement(sqlAll);

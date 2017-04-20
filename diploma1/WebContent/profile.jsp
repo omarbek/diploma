@@ -8,7 +8,11 @@
         <h1 class="text-center">
           Мой профиль
         </h1>
-        <%  String userID = (String) session.getAttribute("userId");
+        <%  
+        if(con==null){
+       		con = (new DBConnection()).getConnection();
+       	}
+    		String userID = (String) session.getAttribute("userId");
         	String sql = "select * from students where user_id="+userID;
         	String sql2 = "select * from users where user_id="+userID;
         	PreparedStatement ps = con.prepareStatement(sql);

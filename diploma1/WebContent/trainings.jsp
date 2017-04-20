@@ -6,7 +6,11 @@
 
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <% String qwerty = null;
+ <% 
+ if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+	String qwerty = null;
 	qwerty = request.getParameter("topic_id");
  %>
 

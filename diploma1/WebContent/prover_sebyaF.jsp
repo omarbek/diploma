@@ -60,6 +60,10 @@ public List<Integer> shuffle(Integer a){
 }
 	%>
 <%
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+
 String test_grade = null;
 test_grade = (String)request.getAttribute("test_grade");
 String questionId = null;

@@ -16,7 +16,11 @@
           Пройди все виды тренировок со словами из разных тем определеного класса.
         </h3>
         <br>
-     <% String studentId = (String)session.getAttribute("studentID");
+     <% 
+     if(con==null){
+    		con = (new DBConnection()).getConnection();
+    	}
+ 	String studentId = (String)session.getAttribute("studentID");
        	String sql1 = "select studentClass from students where student_id='"+studentId+"'";
        	PreparedStatement prepStmt1 = con.prepareStatement(sql1);
        	ResultSet rs1 = prepStmt1.executeQuery();

@@ -10,6 +10,9 @@
 <h2>Уроки</h2>
  
 <%
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
 String sql = "SELECT * FROM classes";
 PreparedStatement prepStmt = con.prepareStatement(sql);
 ResultSet rs = prepStmt.executeQuery();

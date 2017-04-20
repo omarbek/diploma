@@ -87,6 +87,9 @@ function playAudio(id) {
 }  
 </script>
 <%
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
 String topicId = null;
 topicId = (String)request.getAttribute("topic_id");
 String questionId = null;

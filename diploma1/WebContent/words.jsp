@@ -6,6 +6,10 @@
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <% 
+ if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+	
  	Long topicId = Long.parseLong(request.getParameter("topic_id"));
  	String sql = "select * from topics where topic_id="+topicId;
  	PreparedStatement prepStmt = con.prepareStatement(sql);

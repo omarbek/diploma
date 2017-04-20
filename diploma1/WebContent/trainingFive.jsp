@@ -9,7 +9,10 @@
 <%@page import="java.util.List"%>
 
 <%
-	String topicId = null;
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+String topicId = null;
 	topicId = request.getParameter("topic_id");
 	
 	String questionId = null;

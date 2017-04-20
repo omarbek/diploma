@@ -13,7 +13,10 @@
 </div>
 <br>
 <% 
-	String message=null;
+if(con==null){
+		con = (new DBConnection()).getConnection();
+	}
+String message=null;
 	if(request.getParameter("message")!=null){
 		if(request.getParameter("message").isEmpty()){
 			message="Такой почты не существует, повторите еще раз!";
