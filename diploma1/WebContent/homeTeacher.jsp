@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -13,6 +14,7 @@
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
+try{
 String sql = "SELECT * FROM classes";
 PreparedStatement prepStmt = con.prepareStatement(sql);
 ResultSet rs = prepStmt.executeQuery();
@@ -30,5 +32,9 @@ while(rs.next()){
 			</div>
 		</div>
 	<%}
+}
+}
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
 }
 %>

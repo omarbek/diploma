@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="main.Word"%>
@@ -122,12 +123,13 @@
        if(con==null){
    		con = (new DBConnection()).getConnection();
    	   }
+        try{
         PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
 		
 		PreparedStatement ps=con.prepareStatement(sqlAll);
 		ResultSet rsAll=ps.executeQuery();
-		
+        
 		int i=0;
 		while(rsAll.next()){
 			if(i%4 == 0){%>
@@ -195,7 +197,11 @@
 			</div>
 			<%}
 			i++;
-		} %>
+		}
+		}
+        catch(MySQLNonTransientConnectionException e){
+        	con = (new DBConnection()).getConnection();
+        }%>
       </section>
       
     </div>

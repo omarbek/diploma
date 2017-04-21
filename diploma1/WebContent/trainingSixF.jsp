@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
@@ -90,7 +91,9 @@ function playAudio(id) {
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
-String topicId = null;
+try{
+	String topicId = null;
+
 topicId = (String)request.getAttribute("topic_id");
 String questionId = null;
 questionId = (request.getAttribute("questionId")).toString();
@@ -268,5 +271,10 @@ Integer count=(Integer)request.getAttribute("count");
           <div class="clear"></div>
         </div>
       </section>
-      
+      <%
+      }
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
+}
+%>
    

@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="main.Word"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,6 +11,7 @@
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
+try{
 Long topicId=null;
 	Long wordId=null;
 	String rus=null;
@@ -76,4 +78,8 @@ Long topicId=null;
       <input type="submit" class="btn btn-primary" value="Сохранить">
     </div>
   </div>
+  <%}
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
+} %>
 </form>

@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -7,6 +8,7 @@
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <% 
+ try{
  if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
@@ -110,5 +112,10 @@
     </div>
 
 
-
+<%
+}
+catch(Exception e){
+	con = (new DBConnection()).getConnection();
+}
+%>
  

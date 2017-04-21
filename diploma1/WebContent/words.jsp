@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -9,7 +10,7 @@
  if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
-	
+try{	
  	Long topicId = Long.parseLong(request.getParameter("topic_id"));
  	String sql = "select * from topics where topic_id="+topicId;
  	PreparedStatement prepStmt = con.prepareStatement(sql);
@@ -73,3 +74,9 @@
         </div>
       </section>
     </div>
+    <%
+    }
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
+}
+%>

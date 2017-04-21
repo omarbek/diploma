@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -31,6 +32,7 @@
   </head>
   
 	<%
+	try{
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
@@ -193,7 +195,11 @@
 			<jsp:include page="forgot.jsp" />	
 					<%
 				}
-					}%>
+					}
+					}
+    catch(MySQLNonTransientConnectionException e){
+    	con = (new DBConnection()).getConnection();
+    }%>
     </div>
     <div class="row">
     	<div class="col-sm-6 col-sm-offset-3">

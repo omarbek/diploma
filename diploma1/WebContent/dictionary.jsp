@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -26,7 +27,9 @@ function playAudio(id) {
           На этой странице находятся все слова, которые Вы изучили. <br>
           Вы можете в любой момент зайти сюда и повторить их, чтобы не забыть!    
         </h3>
-        <%  String userId = (String)session.getAttribute("userId");
+        <%  
+        try{
+        	String userId = (String)session.getAttribute("userId");
 	    	String studentId = (String)session.getAttribute("studentID");
 	   		ResultSet rs1, rs2, rs3, rs4, rs5;
 	        String sql1 = "SELECT topic_id FROM user_topic WHERE user_id='"+userId+"' AND (one AND two AND three AND four AND five AND six) > 0"; 
@@ -113,6 +116,10 @@ function playAudio(id) {
 			          Чтобы добавить сюда слова, вам нужно пройти тренировки!</h3>
 			        <h2 class="text-center"><a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Перейти на страницу тренировки</a></h2>
 	       <%  }
+        }
+        catch(MySQLNonTransientConnectionException e){
+        	con = (new DBConnection()).getConnection();
+        }
  %>
       </section>
       

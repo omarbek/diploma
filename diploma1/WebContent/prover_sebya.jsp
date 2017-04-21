@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
@@ -13,6 +14,7 @@
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
+try{
 String test_grade = null;
 	test_grade = request.getParameter("test_grade");
 	
@@ -80,7 +82,10 @@ String test_grade = null;
 	session.setAttribute("topicIds", topicIds);
 	request.setAttribute("test_grade", test_grade);
 	request.setAttribute("score", score);
-
+}
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
+}
 %>
 
 <jsp:include page="prover_sebyaF.jsp" />

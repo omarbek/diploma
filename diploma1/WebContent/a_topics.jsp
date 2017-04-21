@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -11,6 +12,7 @@
 	if(con==null){
    		con = (new DBConnection()).getConnection();
    	   }
+	try{
 		String grade = request.getParameter("grade"); 
 	    int classId = Integer.parseInt(request.getParameter("classId")); 
 	%>
@@ -117,7 +119,11 @@
 			</div>
 			<%}
 			i++;
-		} %>
+		} 
+				}
+        catch(MySQLNonTransientConnectionException e){
+        	con = (new DBConnection()).getConnection();
+        }%>
       </section>
       
     </div>

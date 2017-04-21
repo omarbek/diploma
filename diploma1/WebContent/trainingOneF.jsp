@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@include file="mysql.jsp" %>
@@ -16,6 +17,7 @@ function playAudio(id) {
 }  
 </script>  
 <%
+try{
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
@@ -249,5 +251,9 @@ Integer count=(Integer)request.getAttribute("count");
           <div class="clear"></div>
         </div>
       </section>
-      
+      <%
+      }
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
+}%>
    

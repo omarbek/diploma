@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,7 @@
 <%@page import="java.util.List"%>
 
 <%
+try{
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
@@ -68,7 +70,11 @@ if(con==null){
 	
 	session.setAttribute("wordsRusKaz", wordsRusKaz);
 	request.setAttribute("topic_id", topicId);
-%>
+
+}
+catch(MySQLNonTransientConnectionException e){
+	con = (new DBConnection()).getConnection();
+}%>
 
 <jsp:include page="trainingFourF.jsp" />
 				

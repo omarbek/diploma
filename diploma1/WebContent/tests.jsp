@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -22,6 +23,7 @@
     	}
  	String studentId = (String)session.getAttribute("studentID");
        	String sql1 = "select studentClass from students where student_id='"+studentId+"'";
+       try{
        	PreparedStatement prepStmt1 = con.prepareStatement(sql1);
        	ResultSet rs1 = prepStmt1.executeQuery();
        	if (rs1.next()){%>
@@ -129,6 +131,11 @@
 	         <% } %>
           </div>
         </div>
-       <% } %>
+       <% }
+       }
+       catch(MySQLNonTransientConnectionException e){
+       	con = (new DBConnection()).getConnection();
+       }
+       	%>
 	</section>   
 </div>

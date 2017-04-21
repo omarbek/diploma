@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@include file="mysql.jsp" %>
@@ -63,7 +64,7 @@ public List<Integer> shuffle(Integer a){
 if(con==null){
 		con = (new DBConnection()).getConnection();
 	}
-
+try{
 String test_grade = null;
 test_grade = (String)request.getAttribute("test_grade");
 String questionId = null;
@@ -527,7 +528,11 @@ int j = Integer.parseInt(questionId); %>
 		String sql="update test set score="+score+" where grade="+test_grade+" and score<"+score+" and user_id="+session.getAttribute("userId");
 		PreparedStatement prepStmt = con.prepareStatement(sql);
 		prepStmt.executeUpdate(); %>
-<%  } %>
+<%  } 
+}
+    catch(MySQLNonTransientConnectionException e){
+    	con = (new DBConnection()).getConnection();
+    }%>
 	</div>
 </section>
       

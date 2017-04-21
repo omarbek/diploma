@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -12,6 +13,7 @@
         if(con==null){
        		con = (new DBConnection()).getConnection();
        	}
+        try{
     		String userID = (String) session.getAttribute("userId");
         	String sql = "select * from students where user_id="+userID;
         	String sql2 = "select * from users where user_id="+userID;
@@ -158,12 +160,17 @@
 						<% numberOfTheme++;
 						enterToLoop=true;
 						}
+        
 					%>
 				</ul>
 				<% 	if(!enterToLoop){
 					 %>
 					<h3>К сожалению, ты еще не прошел ни один урок!</h3>
-					<% } %>
+					<% }
+				}
+        catch(MySQLNonTransientConnectionException e){
+        	con = (new DBConnection()).getConnection();
+        }%>
 
             </div>
           </div>
