@@ -33,6 +33,8 @@ public class RegistrationServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		String school = request.getParameter("school");
 		String studentClass = request.getParameter("studentClass");
+		String classLetter = request.getParameter("classLetter");
+		String userStatus = request.getParameter("userStatus");
 		String userID = "";
 		String schoolID = " ";
 		Connection con = (new DBConnection()).getConnection();
@@ -56,7 +58,7 @@ public class RegistrationServlet extends HttpServlet {
 						+ email
 						+ "', '"
 						+ shaPassword
-						+ "', '1');";
+						+ "', " + userStatus + ");";
 				String sql3 = "";
 				PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 				prepStmt2.executeUpdate();
@@ -69,34 +71,55 @@ public class RegistrationServlet extends HttpServlet {
 				if (rs2.next()) {
 					userID = rs2.getString(1);
 				}
-				sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`)"
-						+ " VALUES (0, '"
-						+ userID
-						+ "', '"
-						+ studentClass
-						+ "', '"
-						+ userFirstName
-						+ "', '"
-						+ userLastName
-						+ "', '" + school + "' , '" + city + "');";
+				if (userStatus.equals("1")) {
+					sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`)"
+							+ " VALUES (0, '"
+							+ userID
+							+ "', '"
+							+ studentClass
+							+ "', '"
+							+ userFirstName
+							+ "', '"
+							+ userLastName
+							+ "', '"
+							+ school
+							+ "' , '"
+							+ city
+							+ "', '"
+							+ classLetter + "');";
+					int studClass = Integer.parseInt(studentClass);
+
+					for (int i = 1; i <= studClass * 8; i++) {
+						String sql6 = "INSERT INTO user_topic (user_id, topic_id) values ("
+								+ userID + ", " + i + ")";
+						PreparedStatement prepStmt6 = con
+								.prepareStatement(sql6);
+						prepStmt6.executeUpdate();
+					}
+
+					for (int i = 1; i <= studClass; i++) {
+						String sql6 = "insert into test (user_id, grade) values ("
+								+ userID + ", " + i + ")";
+						PreparedStatement prepStmt6 = con
+								.prepareStatement(sql6);
+						prepStmt6.executeUpdate();
+					}
+				} else if (userStatus.equals("3")) {
+					sql3 = "INSERT INTO `teachers`(`teacher_id`, `user_id`, `first_name`, `last_name`, `school_name`, `city`)"
+							+ " VALUES (0, '"
+							+ userID
+							+ "', '"
+							+ userFirstName
+							+ "', '"
+							+ userLastName
+							+ "', '"
+							+ school
+							+ "' , '"
+							+ city + "');";
+				}
+
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 				prepStmt3.executeUpdate();
-
-				int studClass = Integer.parseInt(studentClass);
-
-				for (int i = 1; i <= studClass * 8; i++) {
-					String sql6 = "INSERT INTO user_topic (user_id, topic_id) values ("
-							+ userID + ", " + i + ")";
-					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
-					prepStmt6.executeUpdate();
-				}
-
-				for (int i = 1; i <= studClass; i++) {
-					String sql6 = "insert into test (user_id, grade) values ("
-							+ userID + ", " + i + ")";
-					PreparedStatement prepStmt6 = con.prepareStatement(sql6);
-					prepStmt6.executeUpdate();
-				}
 
 				response.sendRedirect("index.jsp");
 			}

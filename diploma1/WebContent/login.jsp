@@ -31,6 +31,7 @@
                       <div class="col-xs-12">
                   	
                       <p><h4 class="reg-title">	<br>Хочу начать обучение! <a href="?navPage=registration" class="">Регистрация</a></h4></p>
+                      <p><h4 class="reg-title"><a href="?navPage=registrationTeacher" class="">Регистрация для учителей</a></h4></p>
                   </div>
                   </div>
                   

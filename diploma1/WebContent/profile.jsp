@@ -24,12 +24,14 @@
 			String studentFirstName = null;
 			String studentEmail = null;
 			String studentClass = null;
+			String studentClassLetter = null;
 			if (rs.next()){
 				studentClass = rs.getString(3);
 				studentFirstName = rs.getString(4);
 				studentLastName = rs.getString(5);
 				schoolName = rs.getString(6);
 				schoolCity = rs.getString(7);
+				studentClassLetter = rs.getString(8);
 			}
 			if (rs2.next()){
 				studentEmail = rs2.getString(2);
@@ -55,7 +57,7 @@
               		else {%> 
               			<%=schoolCity%> область
               	<%  } %>
-              	| №<%=schoolName%> школа | <%=studentClass%> класс<br>        	
+              	| №<%=schoolName%> школа | <%=studentClass%><%=studentClassLetter %> класс<br>        	
               </p>
               </div>
               	<div class="col-md-4">	<p class="text-right"><a href="?navPage=edit_profile"><i class="glyphicon glyphicon-pencil"></i> Редактировать</a><br/><a href="?navPage=delete_profile" style="color:red;"><i class="glyphicon glyphicon-trash"></i> Удалить Профиль</a></p>

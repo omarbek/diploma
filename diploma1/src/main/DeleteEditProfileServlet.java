@@ -47,6 +47,7 @@ public class DeleteEditProfileServlet extends HttpServlet {
 				String city = request.getParameter("city");
 				String school = request.getParameter("school");
 				String studentClass = request.getParameter("studentClass");
+				String classLetter = request.getParameter("classLetter");
 
 				if (email != null && email != "") {
 					String updateUserProfile = "UPDATE `users` SET `email`='"
@@ -99,7 +100,67 @@ public class DeleteEditProfileServlet extends HttpServlet {
 							.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
+				if (classLetter != null && classLetter != "") {
+					String updateUserProfile = "UPDATE `students` SET `classLetter`='"
+							+ classLetter + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+				}
 				response.sendRedirect("index.jsp?navPage=profile");
+			} else if (function_type.equals("editProfileTeacher")) {
+				String userLastName = request.getParameter("lastName");
+				String userFirstName = request.getParameter("firstName");
+				String email = request.getParameter("email");
+				String password = request.getParameter("pwd");
+				String city = request.getParameter("city");
+				String school = request.getParameter("school");
+
+				if (email != null && email != "") {
+					String updateUserProfile = "UPDATE `users` SET `email`='"
+							+ email + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+				}
+				if (password != null && password != "") {
+					String shaPassword = DigestUtils.sha1Hex(password);
+					String updateUserProfile = "UPDATE `users` SET `password`='"
+							+ shaPassword + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+				}
+				if (userLastName != null && userLastName != "") {
+					String updateUserProfile = "UPDATE `teachers` SET `last_name`='"
+							+ userLastName + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+				}
+				if (userFirstName != null && userFirstName != "") {
+					String updateUserProfile = "UPDATE `teachers` SET `first_name`='"
+							+ userFirstName + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+				}
+				if (school != null && school != "") {
+					String updateUserProfile = "UPDATE `teachers` SET `school_name`='"
+							+ school + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+
+				}
+				if (city != null && city != "") {
+					String updateUserProfile = "UPDATE `teachers` SET `city`='"
+							+ city + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con
+							.prepareStatement(updateUserProfile);
+					prepStmt2.executeUpdate();
+				}
+				response.sendRedirect("teacher.jsp?navPage=profileTeacher");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

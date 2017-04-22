@@ -1,4 +1,3 @@
-<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,13 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Тіл Кемел</title>
+
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- bxSlider CSS file -->
     <link href="css/jquery.bxslider.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/style.css?v=1.24">
-    <link rel="stylesheet" type="text/css" href="css/circle.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,22 +31,13 @@
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
   </head>
-  
-	<%
-	try{
+  	<%
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
 
-	String classId=null;
-	
-		PreparedStatement ps=con.prepareStatement("select studentClass from students where user_id="+userId);
-		ResultSet rs = ps.executeQuery();
-		if(rs.next()){
-			classId=rs.getString(1);
-		}
 	%>
-  <body  <%
+  <body <%
 		if((userId == null)){
 			%>
 			class="login"
@@ -56,6 +48,7 @@
 			class="authorized"
 			<%
 		}%>>
+
     <div class="container" id="content">
       <div id="nav" class="row" href="sad">
         <nav class="list-inline">
@@ -66,22 +59,13 @@
         		else{
         		%>
           <li>
-            <a href="index.jsp">Главная</a>
+            <a href="teacher.jsp">Главная</a>
           </li>
           <li>
-            <a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Уроки</a>
+            <a href="?navPage=homeTeacher">Успеваемость учеников</a>
           </li>
           <li>
-            <a href="?navPage=tests">Проверь себя</a>
-          </li>
-          <li>
-            <a href="?navPage=dictionary">Мой словарь</a>
-          </li>
-          <li>
-            <a href="?navPage=profile">Мой профиль</a>
-          </li>
-          <li>
-            <a href="?navPage=review">Отзывы</a>
+            <a href="?navPage=profileTeacher">Мой профиль</a>
           </li>
 		  <% } %>
         </nav>
@@ -121,105 +105,30 @@
 			<jsp:include page="home.jsp" />
 				<%
 				}
-			else if(navPage.equals("homeStudent")){	
+			else if(navPage.equals("homeTeacher")){
 					
 					%>
-			<jsp:include page="homeStudent.jsp" />
+			<jsp:include page="homeTeacher.jsp" />
 					<%
 				}
-			else if(navPage.equals("dictionary")){	
+			else if(navPage.equals("profileTeacher")){	
 				
 				%>
-		<jsp:include page="dictionary.jsp" />
-				<%
-			}
-			else if(navPage.equals("profile")){	
-				
-				%>
-		<jsp:include page="profile.jsp" />
-				<%
-			}
+		<jsp:include page="profileTeacher.jsp" />
+				<% 	}
 			else if(navPage.equals("delete_profile")){	
 				
 				%>
 		<jsp:include page="delete_profile.jsp" />
 				<%
 			}
-			else if(navPage.equals("edit_profile")){	
+			else if(navPage.equals("edit_profileTeacher")){	
 				
 				%>
-		<jsp:include page="edit_profile.jsp" />
+		<jsp:include page="edit_profileTeacher.jsp" />
 				<%
-			}
-			else if(navPage.equals("tests")){	
-				
-				%>
-		<jsp:include page="tests.jsp" />
-				<%
-			}
-			else if(navPage.equals("prover_sebya")){	
-				
-				%>
-		<jsp:include page="prover_sebya.jsp" />
-				<%
-			}
-			else if(navPage.equals("trainings")){	
-					%>
-			<jsp:include page="trainings.jsp" />
-					<%			
-				}
-			
-			else if(navPage.equals("trainingOne")){	
-					%>
-			<jsp:include page="trainingOne.jsp" />
-					<%			
-				}
-			else if(navPage.equals("trainingTwo")){	
-					%>
-			<jsp:include page="trainingTwo.jsp" />
-					<%			
-				} 
-			else if(navPage.equals("trainingThree")){
-					%>
-			<jsp:include page="trainingThree.jsp" />
-					<%			
-				}else if(navPage.equals("trainingFour")){
-					%>
-			<jsp:include page="trainingFour.jsp" />
-					<%			
-				}else if(navPage.equals("trainingFive")){
-					%>
-			<jsp:include page="trainingFive.jsp" />
-					<%			
-				}else if(navPage.equals("trainingSix")){
-					%>
-			<jsp:include page="trainingSix.jsp" />
-					<% 
-				}else if(navPage.equals("forgot")){
-					%>
-			<jsp:include page="forgot.jsp" />	
-					<%
-				}else if(navPage.equals("review")){
-					%>
-			<jsp:include page="review.jsp" />	
-					<%
-				}
-					}
-					}
-    catch(MySQLNonTransientConnectionException e){
-    }%>
+			} }%>
     </div>
-    <div class="row">
-    	<div class="col-sm-6 col-sm-offset-3">
-			<div class="text-center" id="copyright">
-			©IITU Динасил О., Нурбай С., Ашенова Ш., 2017 
-			</div>
-		</div>
-	</div>
-
-
-
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

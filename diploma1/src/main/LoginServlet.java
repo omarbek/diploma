@@ -73,15 +73,18 @@ public class LoginServlet extends HttpServlet {
 						session.setAttribute("studentClass", rs2.getString(3));
 					}
 				}
-
 				for (Cookie c : cookies) {
 					response.addCookie(c);
 				}
 				if (rs.getString(4).equals("2")) {
 					response.sendRedirect("admin.jsp");
+				}
+				if (rs.getString(4).equals("3")) {
+					response.sendRedirect("teacher.jsp");
 				} else {
 					response.sendRedirect("index.jsp");
 				}
+
 			} else {
 				response.sendRedirect("index.jsp");
 			}

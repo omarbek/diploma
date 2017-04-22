@@ -21,7 +21,7 @@ else
 </script>
 
 <div class="" >
-	<h1 class="text-center">Регистрация</h1>
+	<h1 class="text-center">Регистрация для Учителя</h1>
 </div>
 <div class="hr-img">
     <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
@@ -29,7 +29,7 @@ else
 <br>
 <div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="RegistrationServlet">
-<input type="hidden" name="userStatus" value="1">
+<input type="hidden" name="userStatus" value="3">
   <div class="form-group ">
     <!--<label class="control-label col-xs-3" for="lastName"></label>-->
     <div class="">
@@ -63,7 +63,7 @@ else
   <div class="row">
   <div class="form-group ">
     <!--<label class="control-label col-xs-3"></label>-->
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <select class="form-control" name="city" required>
         <option value="">Регион</option>
         <option value="Астана">г. Астана</option>
@@ -84,20 +84,8 @@ else
         <option value="Южно-Казахстанская">Южно-Казахстанская обл.</option>
       </select>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-6">
       <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы" required/>
-    </div>
-    <div class="col-xs-3">
-      <select class="form-control" name="studentClass" required>
-        <option value="">Класс</option>
-        <option value="1">1 класс</option>
-        <option value="2">2 класс</option>
-        <option value="3">3 класс</option>
-        <option value="4">4 класс</option>
-      </select>
-    </div>
-    <div class="col-xs-2">
-      <input type="text" name="classLetter" class="form-control" id="classLetter" placeholder="Буква класса" required/>
     </div>
   </div>
   </div>

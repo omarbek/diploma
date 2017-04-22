@@ -81,7 +81,7 @@ div .container {
       float: left; }
       #content #nav nav li a, #content #nav .user-link li a {
         display: block;
-    padding: 0px 30px;
+    padding: 0px 23px;
     color: #fff;
     height: 60px;
     font-weight: 200;
@@ -460,5 +460,10 @@ div .container {
 		height: 40px;
 		margin-right: 20px;}
 
+.reviewText {
+	height: 120px;
+	min-height:120px;  
+  	max-height:120px;
+}
 
 /*# sourceMappingURL=style.css.map */

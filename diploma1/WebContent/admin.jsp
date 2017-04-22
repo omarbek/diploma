@@ -31,13 +31,27 @@
   	<script src="js/bootstrap.min.js"></script>
   	<script src="js/main.js"></script>
   </head>
-  <body>
-	<%
+  	<%
+	if(con==null){
+   		con = (new DBConnection()).getConnection();
+   	}
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
 
 	%>
+  <body <%
+		if((userId == null)){
+			%>
+			class="login"
+			<%
+		}
+		else {
+			%>
+			class="authorized"
+			<%
+		}%>>
+
     <div class="container" id="content">
       <div id="nav" class="row" href="sad">
         <nav class="list-inline">
@@ -81,6 +95,11 @@
 		else if ((userId == null) && (navPage.equals("registration"))){
 			%>
 			<jsp:include page="registration.jsp"/>
+			<%
+		}
+		else if ((userId == null) && (navPage.equals("registrationTeacher"))){
+			%>
+			<jsp:include page="registrationTeacher.jsp"/>
 			<%
 		}
 		else{
