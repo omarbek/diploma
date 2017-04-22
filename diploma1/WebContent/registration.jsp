@@ -29,6 +29,7 @@ else
 <br>
 <div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="RegistrationServlet">
+<input type="hidden" name="userStatus" value="1">
   <div class="form-group ">
     <!--<label class="control-label col-xs-3" for="lastName"></label>-->
     <div class="">
@@ -83,10 +84,10 @@ else
         <option value="Южно-Казахстанская">Южно-Казахстанская обл.</option>
       </select>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы" required/>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <select class="form-control" name="studentClass" required>
         <option value="">Класс</option>
         <option value="1">1 класс</option>
@@ -94,6 +95,9 @@ else
         <option value="3">3 класс</option>
         <option value="4">4 класс</option>
       </select>
+    </div>
+    <div class="col-xs-2">
+      <input type="text" name="classLetter" class="form-control" id="classLetter" placeholder="Буква класса" required/>
     </div>
   </div>
   </div>

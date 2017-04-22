@@ -25,7 +25,7 @@ else
 <br>
 <div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="DeleteEditProfileServlet">
-<input type="hidden" name="function_type" value="editProfile">
+<input type="hidden" name="function_type" value="editProfileTeacher">
   <div class="form-group ">
     <!--<label class="control-label col-xs-3" for="lastName"></label>-->
     <div class="">
@@ -59,7 +59,7 @@ else
   <div class="row">
   <div class="form-group ">
     <!--<label class="control-label col-xs-3"></label>-->
-    <div class="col-xs-4">
+    <div class="col-xs-6">
       <select class="form-control" name="city">
         <option value="">Регион</option>
         <option value="Астана">г. Астана</option>
@@ -80,27 +80,15 @@ else
         <option value="Южно-Казахстанская">Южно-Казахстанская обл.</option>
       </select>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-6">
       <input type="number" name="school" class="form-control" id="school" placeholder="Номер школы"/>
-    </div>
-    <div class="col-xs-3">
-      <select class="form-control" name="studentClass">
-        <option value="">Класс</option>
-        <option value="1">1 класс</option>
-        <option value="2">2 класс</option>
-        <option value="3">3 класс</option>
-        <option value="4">4 класс</option>
-      </select>
-    </div>
-    <div class="col-xs-2">
-      <input type="text" name="classLetter" class="form-control" id="classLetter" placeholder="Буква класса" required/>
     </div>
   </div>
   </div>
   <br />
   <div class="form-group">
     <div class="text-center">
-      <a href="?navPage=profile" class="btn btn-yellow" style="color:#000;"><i class="glyphicon glyphicon-menu-left"></i> Назад</a>
+      <a href="?navPage=profileTeacher" class="btn btn-yellow" style="color:#000;"><i class="glyphicon glyphicon-menu-left"></i> Назад</a>
       <input type="reset" class="btn btn-default " value="Очистить форму">
       <input type="submit" class="btn btn-yellow " value="Готово">
     </div>

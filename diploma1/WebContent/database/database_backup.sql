@@ -3,13 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 17 2017 г., 17:38
+-- Время создания: Апр 22 2017 г., 13:32
 -- Версия сервера: 10.1.19-MariaDB
 -- Версия PHP: 5.6.28
 
-SET names 'utf8';
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `funny_kazakh`
@@ -29,6 +34,18 @@ CREATE TABLE `results` (
   `task_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `results`
+--
+
+INSERT INTO `results` (`id`, `student_id`, `word_id`, `topic_id`, `task_type`) VALUES
+(8, 19, 19, 3, 'one'),
+(9, 19, 20, 3, 'one'),
+(10, 19, 21, 3, 'one'),
+(11, 19, 24, 3, 'one'),
+(12, 19, 25, 3, 'one'),
+(13, 19, 26, 3, 'one');
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +61,43 @@ CREATE TABLE `results_test` (
   `test_grade` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `results_test`
+--
+
+INSERT INTO `results_test` (`id`, `student_id`, `word_id`, `topic_id`, `task_type`, `test_grade`) VALUES
+(33, 19, 18, 2, 'one', 1),
+(34, 19, 29, 4, 'one', 1),
+(35, 19, 43, 5, 'one', 1),
+(36, 19, 47, 6, 'one', 1),
+(37, 19, 52, 7, 'one', 1),
+(38, 19, 62, 8, 'one', 1),
+(39, 19, 18, 2, 'two', 1),
+(40, 19, 27, 3, 'two', 1),
+(41, 19, 29, 4, 'two', 1),
+(42, 19, 43, 5, 'two', 1),
+(43, 19, 52, 7, 'two', 1),
+(44, 19, 62, 8, 'two', 1),
+(45, 19, 7, 1, 'three', 1),
+(46, 19, 27, 3, 'three', 1),
+(47, 19, 29, 4, 'three', 1),
+(48, 19, 43, 5, 'three', 1),
+(49, 19, 47, 6, 'three', 1),
+(50, 19, 52, 7, 'three', 1),
+(51, 19, 62, 8, 'three', 1),
+(52, 19, 7, 1, 'four', 1),
+(53, 19, 18, 2, 'four', 1),
+(54, 19, 27, 3, 'four', 1),
+(55, 19, 29, 4, 'four', 1),
+(56, 19, 43, 5, 'four', 1),
+(57, 19, 47, 6, 'four', 1),
+(58, 19, 52, 7, 'four', 1),
+(59, 19, 62, 8, 'four', 1),
+(60, 19, 18, 2, 'five', 1),
+(61, 19, 27, 3, 'five', 1),
+(62, 19, 29, 4, 'five', 1),
+(63, 19, 62, 8, 'five', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -57,18 +111,44 @@ CREATE TABLE `students` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `school_name` int(255) NOT NULL,
-  `city` varchar(255) NOT NULL
+  `city` varchar(255) NOT NULL,
+  `classLetter` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `students`
 --
 
-INSERT INTO `students` (`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`) VALUES
-(17, 24, 4, 'Омарбек', 'Динасил', 44, 'Кызылординская'),
-(19, 27, 2, 'Яков', 'Яковлев', 79, 'Акмолинская'),
-(20, 29, 1, 'Сымбат', 'Нурбай', 11, 'Алматы'),
-(21, 31, 4, 'Ййййййй', 'Ййййййййй', 12, 'Костанайская');
+INSERT INTO `students` (`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`, `classLetter`) VALUES
+(17, 24, 4, 'Омарбек', 'Динасил', 44, 'Кызылординская', 'А'),
+(19, 27, 2, 'Яков', 'Яковлев', 79, 'Акмолинская', 'Б'),
+(20, 29, 1, 'Сымбат', 'Нурбай', 11, 'Алматы', 'В'),
+(21, 31, 4, 'Ййййййй', 'Ййййййййй', 12, 'Костанайская', 'Г'),
+(22, 32, 4, 'Колобок', 'Колобоков', 55, 'Мангистауская', 'Д'),
+(23, 33, 2, 'Сымбат', 'Нурбай', 123, 'Астана', 'А'),
+(24, 34, 3, 'Кошкарбай', 'Кошкарбаев', 111, 'Кызылординская', 'А');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `teachers`
+--
+
+CREATE TABLE `teachers` (
+  `teacher_id` int(255) NOT NULL,
+  `user_id` int(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `school_name` int(255) NOT NULL,
+  `city` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `teachers`
+--
+
+INSERT INTO `teachers` (`teacher_id`, `user_id`, `first_name`, `last_name`, `school_name`, `city`) VALUES
+(1, 35, 'Салтанат', 'Болат', 99, 'Акмолинская');
 
 -- --------------------------------------------------------
 
@@ -81,7 +161,7 @@ CREATE TABLE `test` (
   `user_id` int(11) NOT NULL,
   `grade` int(11) NOT NULL,
   `score` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `test`
@@ -104,13 +184,22 @@ INSERT INTO `test` (`id`, `user_id`, `grade`, `score`) VALUES
 (14, 25, 2, 0),
 (15, 25, 3, 0),
 (16, 25, 4, 0),
-(18, 27, 1, 0),
+(18, 27, 1, 22.5),
 (19, 27, 2, 0),
 (20, 29, 1, 0),
 (21, 31, 1, 0),
 (22, 31, 2, 0),
 (23, 31, 3, 0),
-(24, 31, 4, 0);
+(24, 31, 4, 0),
+(25, 32, 1, 0),
+(26, 32, 2, 0),
+(27, 32, 3, 0),
+(28, 32, 4, 0),
+(29, 33, 1, 0),
+(30, 33, 2, 0),
+(31, 34, 1, 0),
+(32, 34, 2, 0),
+(33, 34, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -160,7 +249,8 @@ INSERT INTO `topics` (`topic_id`, `topic_name`, `grade`) VALUES
 (29, 'Явления природы', 4),
 (30, 'Охрана Окружающей среды', 4),
 (31, 'Путешествие в космос', 4),
-(32, 'Путешествие в будущее', 4);
+(32, 'Путешествие в будущее', 4),
+(35, 'asdfghj', 1);
 
 -- --------------------------------------------------------
 
@@ -525,7 +615,11 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `status`) VALUES
 (27, 'yakov@mail.ru', '752ae7bdbb96bf25280b55990570beabf2048ce0', 1),
 (29, 'symbat@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
 (30, 'user03@gmail.com', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', 1),
-(31, 'qqqq@mail.ru', '33a9e269dd782e92489a8e547b7ed582e0e1d42b', 1);
+(31, 'qqqq@mail.ru', '33a9e269dd782e92489a8e547b7ed582e0e1d42b', 1),
+(32, 'kolobok@gmail.com', '80014e12e8795cccba230400d32401dfea1a4783', 1),
+(33, 'symbat01011996@gmail.com', 'a2e33d344f272e100d4a8efeabc7ae8a60a8ba7a', 1),
+(34, 'koshkarbay@mail.ru', '6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2', 1),
+(35, 'bolat_saltanat@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 3);
 
 -- --------------------------------------------------------
 
@@ -543,7 +637,7 @@ CREATE TABLE `user_topic` (
   `four` float NOT NULL DEFAULT '0',
   `five` float NOT NULL DEFAULT '0',
   `six` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Дамп данных таблицы `user_topic`
@@ -584,7 +678,7 @@ INSERT INTO `user_topic` (`id`, `user_id`, `topic_id`, `one`, `two`, `three`, `f
 (218, 24, 32, 0, 0, 0, 0, 0, 0),
 (228, 27, 1, 100, 90, 90, 80, 100, 90),
 (229, 27, 2, 60, 70, 50, 50, 60, 70),
-(230, 27, 3, 0, 0, 0, 0, 0, 0),
+(230, 27, 3, 40, 0, 0, 0, 0, 0),
 (231, 27, 4, 0, 0, 0, 0, 0, 0),
 (232, 27, 5, 0, 0, 0, 0, 0, 0),
 (233, 27, 6, 0, 0, 0, 0, 0, 0),
@@ -637,7 +731,84 @@ INSERT INTO `user_topic` (`id`, `user_id`, `topic_id`, `one`, `two`, `three`, `f
 (280, 31, 29, 0, 0, 0, 0, 0, 0),
 (281, 31, 30, 0, 0, 0, 0, 0, 0),
 (282, 31, 31, 0, 0, 0, 0, 0, 0),
-(283, 31, 32, 0, 0, 0, 0, 0, 0);
+(283, 31, 32, 0, 0, 0, 0, 0, 0),
+(284, 32, 1, 0, 0, 0, 0, 0, 0),
+(285, 32, 2, 0, 0, 0, 0, 0, 0),
+(286, 32, 3, 0, 0, 0, 0, 0, 0),
+(287, 32, 4, 0, 0, 0, 0, 0, 0),
+(288, 32, 5, 0, 0, 0, 0, 0, 0),
+(289, 32, 6, 0, 0, 0, 0, 0, 0),
+(290, 32, 7, 0, 0, 0, 0, 0, 0),
+(291, 32, 8, 0, 0, 0, 0, 0, 0),
+(292, 32, 9, 0, 0, 0, 0, 0, 0),
+(293, 32, 10, 0, 0, 0, 0, 0, 0),
+(294, 32, 11, 0, 0, 0, 0, 0, 0),
+(295, 32, 12, 0, 0, 0, 0, 0, 0),
+(296, 32, 13, 0, 0, 0, 0, 0, 0),
+(297, 32, 14, 0, 0, 0, 0, 0, 0),
+(298, 32, 15, 0, 0, 0, 0, 0, 0),
+(299, 32, 16, 0, 0, 0, 0, 0, 0),
+(300, 32, 17, 0, 0, 0, 0, 0, 0),
+(301, 32, 18, 0, 0, 0, 0, 0, 0),
+(302, 32, 19, 0, 0, 0, 0, 0, 0),
+(303, 32, 20, 0, 0, 0, 0, 0, 0),
+(304, 32, 21, 0, 0, 0, 0, 0, 0),
+(305, 32, 22, 0, 0, 0, 0, 0, 0),
+(306, 32, 23, 0, 0, 0, 0, 0, 0),
+(307, 32, 24, 0, 0, 0, 0, 0, 0),
+(308, 32, 25, 0, 0, 0, 0, 0, 0),
+(309, 32, 26, 0, 0, 0, 0, 0, 0),
+(310, 32, 27, 0, 0, 0, 0, 0, 0),
+(311, 32, 28, 0, 0, 0, 0, 0, 0),
+(312, 32, 29, 0, 0, 0, 0, 0, 0),
+(313, 32, 30, 0, 0, 0, 0, 0, 0),
+(314, 32, 31, 0, 0, 0, 0, 0, 0),
+(315, 32, 32, 0, 0, 0, 0, 0, 0),
+(316, 24, 35, 0, 0, 0, 0, 0, 0),
+(317, 27, 35, 0, 0, 0, 0, 0, 0),
+(318, 29, 35, 0, 0, 0, 0, 0, 0),
+(319, 31, 35, 0, 0, 0, 0, 0, 0),
+(320, 32, 35, 0, 0, 0, 0, 0, 0),
+(321, 33, 1, 0, 0, 0, 0, 0, 0),
+(322, 33, 2, 0, 0, 0, 0, 0, 0),
+(323, 33, 3, 0, 0, 0, 0, 0, 0),
+(324, 33, 4, 0, 0, 0, 0, 0, 0),
+(325, 33, 5, 0, 0, 0, 0, 0, 0),
+(326, 33, 6, 0, 0, 0, 0, 0, 0),
+(327, 33, 7, 0, 0, 0, 0, 0, 0),
+(328, 33, 8, 0, 0, 0, 0, 0, 0),
+(329, 33, 9, 0, 0, 0, 0, 0, 0),
+(330, 33, 10, 0, 0, 0, 0, 0, 0),
+(331, 33, 11, 0, 0, 0, 0, 0, 0),
+(332, 33, 12, 0, 0, 0, 0, 0, 0),
+(333, 33, 13, 0, 0, 0, 0, 0, 0),
+(334, 33, 14, 0, 0, 0, 0, 0, 0),
+(335, 33, 15, 0, 0, 0, 0, 0, 0),
+(336, 33, 16, 0, 0, 0, 0, 0, 0),
+(337, 34, 1, 0, 0, 0, 0, 0, 0),
+(338, 34, 2, 0, 0, 0, 0, 0, 0),
+(339, 34, 3, 0, 0, 0, 0, 0, 0),
+(340, 34, 4, 0, 0, 0, 0, 0, 0),
+(341, 34, 5, 0, 0, 0, 0, 0, 0),
+(342, 34, 6, 0, 0, 0, 0, 0, 0),
+(343, 34, 7, 0, 0, 0, 0, 0, 0),
+(344, 34, 8, 0, 0, 0, 0, 0, 0),
+(345, 34, 9, 0, 0, 0, 0, 0, 0),
+(346, 34, 10, 0, 0, 0, 0, 0, 0),
+(347, 34, 11, 0, 0, 0, 0, 0, 0),
+(348, 34, 12, 0, 0, 0, 0, 0, 0),
+(349, 34, 13, 0, 0, 0, 0, 0, 0),
+(350, 34, 14, 0, 0, 0, 0, 0, 0),
+(351, 34, 15, 0, 0, 0, 0, 0, 0),
+(352, 34, 16, 0, 0, 0, 0, 0, 0),
+(353, 34, 17, 0, 0, 0, 0, 0, 0),
+(354, 34, 18, 0, 0, 0, 0, 0, 0),
+(355, 34, 19, 0, 0, 0, 0, 0, 0),
+(356, 34, 20, 0, 0, 0, 0, 0, 0),
+(357, 34, 21, 0, 0, 0, 0, 0, 0),
+(358, 34, 22, 0, 0, 0, 0, 0, 0),
+(359, 34, 23, 0, 0, 0, 0, 0, 0),
+(360, 34, 24, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -755,10 +926,7 @@ INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
 (97, 'страна', 'ел'),
 (98, 'столица', 'елорда'),
 (99, 'земля', 'жер'),
-(100, 'грязный', 'лас');
-
-
-INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
+(100, 'грязный', 'лас'),
 (101, 'чистый', 'таза'),
 (102, 'чистить', 'тазалау'),
 (103, 'лопата', 'күрек'),
@@ -858,9 +1026,7 @@ INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
 (197, 'знание', 'білім'),
 (198, 'горький', 'ащы'),
 (199, 'родник', 'бұлақ'),
-(200, 'облако', 'бұлт');
-
-INSERT INTO `words` (`word_id`, `word_rus`, `word_kaz`) VALUES
+(200, 'облако', 'бұлт'),
 (201, 'дождь', 'жаңбыр'),
 (202, 'лед', 'мұз'),
 (203, 'река', 'өзен'),
@@ -1007,6 +1173,12 @@ ALTER TABLE `students`
   ADD PRIMARY KEY (`student_id`);
 
 --
+-- Индексы таблицы `teachers`
+--
+ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`teacher_id`);
+
+--
 -- Индексы таблицы `test`
 --
 ALTER TABLE `test`
@@ -1052,27 +1224,32 @@ ALTER TABLE `words`
 -- AUTO_INCREMENT для таблицы `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT для таблицы `results_test`
 --
 ALTER TABLE `results_test`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT для таблицы `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `student_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT для таблицы `teachers`
+--
+ALTER TABLE `teachers`
+  MODIFY `teacher_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблицы `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT для таблицы `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `topic_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT для таблицы `topic_word`
 --
@@ -1082,14 +1259,17 @@ ALTER TABLE `topic_word`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `user_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT для таблицы `user_topic`
 --
 ALTER TABLE `user_topic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 --
 -- AUTO_INCREMENT для таблицы `words`
 --
 ALTER TABLE `words`
   MODIFY `word_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
