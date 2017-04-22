@@ -83,6 +83,9 @@
           <li>
             <a href="?navPage=profile">Мой профиль</a>
           </li>
+          <li>
+            <a href="?navPage=review">Отзывы</a>
+          </li>
 		  <% } %>
         </nav>
         <ul class="user-link list-inline">
@@ -193,6 +196,10 @@
 				}else if(navPage.equals("forgot")){
 					%>
 			<jsp:include page="forgot.jsp" />	
+					<%
+				}else if(navPage.equals("review")){
+					%>
+			<jsp:include page="review.jsp" />	
 					<%
 				}
 					}
