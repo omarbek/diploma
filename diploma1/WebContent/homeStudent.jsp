@@ -120,9 +120,6 @@
     		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
        				+" where t.grade=4 and ut.user_id="+session.getAttribute("userId");
        }
-       if(con==null){
-   		con = (new DBConnection()).getConnection();
-   	   }
         try{
         PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
@@ -200,7 +197,6 @@
 		}
 		}
         catch(MySQLNonTransientConnectionException e){
-        	con = (new DBConnection()).getConnection();
         }%>
       </section>
       

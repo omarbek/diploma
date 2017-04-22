@@ -7,9 +7,6 @@
 <%@page import="java.util.ArrayList"%>
 
 <script type="text/javascript">
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 function playAudio(id) {
 	var x = document.getElementById(id);
 	x.play(); 
@@ -118,7 +115,6 @@ function playAudio(id) {
 	       <%  }
         }
         catch(MySQLNonTransientConnectionException e){
-        	con = (new DBConnection()).getConnection();
         }
  %>
       </section>

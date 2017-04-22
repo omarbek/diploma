@@ -10,9 +10,6 @@
 <%@page import="java.util.List"%>
 
 <%
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 try{
 	String topicId = null;
 	topicId = request.getParameter("topic_id");
@@ -72,7 +69,6 @@ try{
 	request.setAttribute("topic_id", topicId);
 }
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 }
 %>
 

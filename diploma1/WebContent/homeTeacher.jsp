@@ -11,9 +11,6 @@
 <h2>Уроки</h2>
  
 <%
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 try{
 String sql = "SELECT * FROM classes";
 PreparedStatement prepStmt = con.prepareStatement(sql);
@@ -35,6 +32,5 @@ while(rs.next()){
 }
 }
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 }
 %>

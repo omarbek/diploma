@@ -11,9 +11,6 @@
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%  
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 try{
 String test_grade = null;
 	test_grade = request.getParameter("test_grade");
@@ -84,7 +81,6 @@ String test_grade = null;
 	request.setAttribute("score", score);
 }
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 }
 %>
 

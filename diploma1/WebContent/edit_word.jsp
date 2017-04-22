@@ -8,9 +8,6 @@
 <%@include file="mysql.jsp" %>
 <meta charset="utf-8">
 <% 
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 try{
 Long topicId=null;
 	Long wordId=null;
@@ -80,6 +77,5 @@ Long topicId=null;
   </div>
   <%}
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 } %>
 </form>

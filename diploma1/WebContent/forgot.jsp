@@ -13,9 +13,6 @@
 </div>
 <br>
 <% 
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 String message=null;
 	if(request.getParameter("message")!=null){
 		if(request.getParameter("message").isEmpty()){

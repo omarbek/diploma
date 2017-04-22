@@ -39,9 +39,6 @@
 
 	String classId=null;
 	
-	if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 		PreparedStatement ps=con.prepareStatement("select studentClass from students where user_id="+userId);
 		ResultSet rs = ps.executeQuery();
 		if(rs.next()){
@@ -198,7 +195,6 @@
 					}
 					}
     catch(MySQLNonTransientConnectionException e){
-    	con = (new DBConnection()).getConnection();
     }%>
     </div>
     <div class="row">

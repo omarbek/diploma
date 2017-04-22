@@ -7,9 +7,6 @@
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <% 
- if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 try{	
  	Long topicId = Long.parseLong(request.getParameter("topic_id"));
  	String sql = "select * from topics where topic_id="+topicId;
@@ -77,6 +74,5 @@ try{
     <%
     }
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 }
 %>

@@ -18,10 +18,6 @@ function playAudio(id) {
 </script>  
 <%
 try{
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
-
 String topicId = null;
 topicId = (String)request.getAttribute("topic_id");
 String questionId = null;
@@ -254,6 +250,5 @@ Integer count=(Integer)request.getAttribute("count");
       <%
       }
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 }%>
    

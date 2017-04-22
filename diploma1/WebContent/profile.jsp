@@ -10,9 +10,6 @@
           Мой профиль
         </h1>
         <%  
-        if(con==null){
-       		con = (new DBConnection()).getConnection();
-       	}
         try{
     		String userID = (String) session.getAttribute("userId");
         	String sql = "select * from students where user_id="+userID;
@@ -169,7 +166,6 @@
 					<% }
 				}
         catch(MySQLNonTransientConnectionException e){
-        	con = (new DBConnection()).getConnection();
         }%>
 
             </div>

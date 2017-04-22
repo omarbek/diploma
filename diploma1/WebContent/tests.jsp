@@ -18,9 +18,6 @@
         </h3>
         <br>
      <% 
-     if(con==null){
-    		con = (new DBConnection()).getConnection();
-    	}
  	String studentId = (String)session.getAttribute("studentID");
        	String sql1 = "select studentClass from students where student_id='"+studentId+"'";
        try{
@@ -134,7 +131,6 @@
        <% }
        }
        catch(MySQLNonTransientConnectionException e){
-       	con = (new DBConnection()).getConnection();
        }
        	%>
 	</section>   

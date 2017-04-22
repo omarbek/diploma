@@ -11,9 +11,6 @@
 
 <%
 try{
-if(con==null){
-		con = (new DBConnection()).getConnection();
-	}
 
 	String topicId = null;
 	topicId = request.getParameter("topic_id");
@@ -73,7 +70,6 @@ if(con==null){
 
 }
 catch(MySQLNonTransientConnectionException e){
-	con = (new DBConnection()).getConnection();
 }%>
 
 <jsp:include page="trainingFourF.jsp" />

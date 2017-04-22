@@ -9,9 +9,6 @@
   <body>
     <div class="container" id="content">
 	<% 
-	if(con==null){
-   		con = (new DBConnection()).getConnection();
-   	   }
 	try{
 		String grade = request.getParameter("grade"); 
 	    int classId = Integer.parseInt(request.getParameter("classId")); 
@@ -122,7 +119,6 @@
 		} 
 				}
         catch(MySQLNonTransientConnectionException e){
-        	con = (new DBConnection()).getConnection();
         }%>
       </section>
       
