@@ -53,36 +53,49 @@ public class LoginServlet extends HttpServlet {
 			prepStmt.setString(1, user);
 			prepStmt.setString(2, shaPwd);
 			rs = prepStmt.executeQuery();
+			if (rs.next()) {
+				String userState = rs.getString(4);
+				if (!userState.equals("0")) {
+					ArrayList<Cookie> cookies = new ArrayList<Cookie>();
+					cookies.add(new Cookie("userId", rs.getString(1)));
+					session.setAttribute("userId", rs.getString(1));
+					session.setAttribute("userEmail", rs.getString(2));
+					session.setAttribute("userStatus", rs.getString(4));
+					if (userState.equals("1")) {
+						PreparedStatement prepStmt2 = con
+								.prepareStatement("SELECT * FROM students WHERE user_id = "
+										+ rs.getString(1));
+						rs2 = prepStmt2.executeQuery();
 
-			if (rs.next() && !rs.getString(4).equals("0")) {
-
-				ArrayList<Cookie> cookies = new ArrayList<Cookie>();
-				cookies.add(new Cookie("userId", rs.getString(1)));
-				session.setAttribute("userId", rs.getString(1));
-				session.setAttribute("userEmail", rs.getString(2));
-				session.setAttribute("userStatus", rs.getString(4));
-
-				if (rs.getString(4).equals("1")) {
-					PreparedStatement prepStmt2 = con
-							.prepareStatement("SELECT * FROM students WHERE user_id = "
-									+ rs.getString(1));
-					rs2 = prepStmt2.executeQuery();
-
-					if (rs2.next()) {
-						session.setAttribute("studentID", rs2.getString(1));
-						session.setAttribute("studentClass", rs2.getString(3));
+						if (rs2.next()) {
+							session.setAttribute("studentID", rs2.getString(1));
+							session.setAttribute("studentClass",
+									rs2.getString(3));
+						}
+						for (Cookie c : cookies) {
+							response.addCookie(c);
+						}
+						response.sendRedirect("index.jsp");
 					}
-				}
-				for (Cookie c : cookies) {
-					response.addCookie(c);
-				}
-				if (rs.getString(4).equals("2")) {
-					response.sendRedirect("admin.jsp");
-				}
-				if (rs.getString(4).equals("3")) {
-					response.sendRedirect("teacher.jsp");
-				} else {
-					response.sendRedirect("index.jsp");
+
+					else if (userState.equals("2")) {
+						response.sendRedirect("admin.jsp");
+					} else if (userState.equals("3")) {
+						PreparedStatement prepStmt2 = con
+								.prepareStatement("SELECT * FROM teachers WHERE user_id = "
+										+ rs.getString(1));
+						rs2 = prepStmt2.executeQuery();
+
+						if (rs2.next()) {
+							session.setAttribute("teacherID", rs2.getString(1));
+						}
+						for (Cookie c : cookies) {
+							response.addCookie(c);
+						}
+						response.sendRedirect("teacher.jsp");
+					} else {
+						response.sendRedirect("index.jsp");
+					}
 				}
 
 			} else {
@@ -93,5 +106,4 @@ public class LoginServlet extends HttpServlet {
 		}
 
 	}
-
 }

@@ -403,6 +403,30 @@ div .container {
     text-shadow: -1px 0 0 #5f89e3, 2px 2px 0 #5f89e3,
              3px -1px 0 #5f89e3, 4px 0 0 #5f89e3;
 }
+.castellar-one {
+	margin-left: 20px;
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #5478c7, 2px 2px 0 #5478c7,
+             3px -1px 0 #5478c7, 4px 0 0 #5478c7;
+}
+.castellar-snd-two {
+	margin-left: 20px;
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #ffc830, 2px 2px 0 #ffc830,
+             3px -1px 0 #ffc830, 4px 0 0 #ffc830;
+}
+.castellar-thrd-three {
+	margin-left: 20px;
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #ff5e5e, 2px 2px 0 #ff5e5e,
+             3px -1px 0 #ff5e5e, 4px 0 0 #ff5e5e;
+}
+.castellar-frth-four {
+	margin-left: 20px;
+    color: #FFFFFF;
+    text-shadow: -1px 0 0 #60cf38, 2px 2px 0 #60cf38,
+             3px -1px 0 #60cf38, 4px 0 0 #60cf38;
+}
 .profile-name span {
 	font-size: 12px;
 }
