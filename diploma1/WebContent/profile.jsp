@@ -36,6 +36,24 @@
 			if (rs2.next()){
 				studentEmail = rs2.getString(2);
 			}
+			
+			String sqlImg = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
+       				+" where t.grade="+studentClass+" and ut.user_id="+userID;
+			PreparedStatement psImg=con.prepareStatement(sqlImg);
+			ResultSet rsImg=psImg.executeQuery();
+			int sumOfStars=0;
+			while(rsImg.next()){
+				double average=(rsImg.getDouble("one")+rsImg.getDouble("two")+rsImg.getDouble("three")
+					+rsImg.getDouble("four")+rsImg.getDouble("five")+rsImg.getDouble("six"))/6;
+				if(average>=90){
+					sumOfStars+=3;
+				} else if(average>=75&&average<90){
+					sumOfStars+=2;
+				} else if(average>=50&&average<75){
+					sumOfStars+=1;
+				}
+			}
+			String img=studentClass+"-"+sumOfStars;
 			%>
         <div class="hr-img">
           <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
@@ -43,7 +61,7 @@
         <div class="profile">
           <div class="row">
             <div class="col-md-5" style="padding-left: 0px;">
-              <img src="img/zamok.png" class="img-responsive" alt="" style="width:350px;">
+              <img src="img/dragons/<%=img %>.png" class="img-responsive" alt="" style="width:350px;">
             </div>
             <div class="col-md-7">
             	<div class="profile-block">

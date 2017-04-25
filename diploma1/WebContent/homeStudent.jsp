@@ -153,7 +153,7 @@
 						<%
 							double average=(rsAll.getDouble("one")+rsAll.getDouble("two")+rsAll.getDouble("three")
 									+rsAll.getDouble("four")+rsAll.getDouble("five")+rsAll.getDouble("six"))/6;
-							if(average==100){
+							if(average>=90){
 						%>
 								<div class="col-md-5 ">
 									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
@@ -161,7 +161,7 @@
 									<img src="img/icons/zvezda_full.png" class="img-star" alt="">
 								</div>	
 						<%
-							} else if(average>=75&&average<100){
+							} else if(average>=75&&average<90){
 						%>
 							<div class="col-md-5 ">
 								<img src="img/icons/zvezda_full.png" class="img-star" alt="">
