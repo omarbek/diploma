@@ -21,8 +21,8 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -53,26 +53,21 @@ public class RegistrationServlet extends HttpServlet {
 			}
 
 			else {
-				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)"
-						+ " VALUES (0, '"
-						+ email
-						+ "', '"
-						+ shaPassword
-						+ "', " + userStatus + ");";
+				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)" + " VALUES (0, '" + email
+						+ "', '" + shaPassword + "', " + userStatus + ");";
 				String sql3 = "";
 				PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 				prepStmt2.executeUpdate();
 
-				PreparedStatement prepStmt4 = con
-						.prepareStatement("select user_id from users where email='"
-								+ email + "'");
+				PreparedStatement prepStmt4 = con.prepareStatement("select user_id from users where email='" + email
+						+ "'");
 				rs2 = prepStmt4.executeQuery();
 
 				if (rs2.next()) {
 					userID = rs2.getString(1);
 				}
 				if (userStatus.equals("1")) {
-					sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`)"
+					sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`, `classLetter`)"
 							+ " VALUES (0, '"
 							+ userID
 							+ "', '"
@@ -80,28 +75,18 @@ public class RegistrationServlet extends HttpServlet {
 							+ "', '"
 							+ userFirstName
 							+ "', '"
-							+ userLastName
-							+ "', '"
-							+ school
-							+ "' , '"
-							+ city
-							+ "', '"
-							+ classLetter + "');";
+							+ userLastName + "', '" + school + "' , '" + city + "', '" + classLetter + "');";
 					int studClass = Integer.parseInt(studentClass);
 
 					for (int i = 1; i <= studClass * 8; i++) {
-						String sql6 = "INSERT INTO user_topic (user_id, topic_id) values ("
-								+ userID + ", " + i + ")";
-						PreparedStatement prepStmt6 = con
-								.prepareStatement(sql6);
+						String sql6 = "INSERT INTO user_topic (user_id, topic_id) values (" + userID + ", " + i + ")";
+						PreparedStatement prepStmt6 = con.prepareStatement(sql6);
 						prepStmt6.executeUpdate();
 					}
 
 					for (int i = 1; i <= studClass; i++) {
-						String sql6 = "insert into test (user_id, grade) values ("
-								+ userID + ", " + i + ")";
-						PreparedStatement prepStmt6 = con
-								.prepareStatement(sql6);
+						String sql6 = "insert into test (user_id, grade) values (" + userID + ", " + i + ")";
+						PreparedStatement prepStmt6 = con.prepareStatement(sql6);
 						prepStmt6.executeUpdate();
 					}
 				} else if (userStatus.equals("3")) {
@@ -113,9 +98,7 @@ public class RegistrationServlet extends HttpServlet {
 							+ "', '"
 							+ userLastName
 							+ "', '"
-							+ school
-							+ "' , '"
-							+ city + "');";
+							+ school + "' , '" + city + "');";
 				}
 
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
