@@ -130,7 +130,7 @@ Integer count=(Integer)request.getAttribute("count");
               <h2 class="text-center text-uppercase helv"><%=wordsRusKaz.get(j).rus%></h2>
               <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre">
             </div>
-            <div class="col-sm-5 col-sm-offset-1">
+            <div class="col-sm-5 col-sm-offset-1" style="margin-top: 26px;">
 	            
 	                      
 			 	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">

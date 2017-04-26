@@ -136,7 +136,7 @@ Integer count=(Integer)request.getAttribute("count");
             <img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="zvuk-text"></h2>    
             <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre">
             </div>
-            <div class="col-sm-5 col-sm-offset-1">          
+            <div class="col-sm-5 col-sm-offset-1" style="margin-top: 34px;">          
 		 	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
 				 <input type="hidden" name="topic_id" value="<%=topicId%>">
 				 <input type="hidden" name="questionId" value="<%=j%>">

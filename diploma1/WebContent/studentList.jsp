@@ -139,6 +139,7 @@
                 		
                 	</tr>
 		    <% enterToLoop = true;
+		    i++;
 		    }
 		    	if (enterToLoop){%>                              
                 </tbody>
