@@ -27,6 +27,16 @@ else
     <img src="img/hr.png" style="width: 75px;" class="img-centre" alt="">
 </div>
 <br>
+<% 
+String message=null;
+	if(request.getParameter("message")!=null){
+		message="Этот электронный адрес уже зарегистрирован!";
+%>
+<div class="" >
+	<h3 class="text-center"><font color="purple"><%=message %></font></h3>
+</div>
+<% } %>
+<br>
 <div class="reg" >
 <form class="form-horizontal" id="registrationForm" method="POST" action="RegistrationServlet">
 <input type="hidden" name="userStatus" value="1">

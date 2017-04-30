@@ -37,6 +37,7 @@ public class RegistrationServlet extends HttpServlet {
 		String userStatus = request.getParameter("userStatus");
 		String userID = "";
 		String schoolID = " ";
+
 		Connection con = (new DBConnection()).getConnection();
 		ResultSet rs;
 		ResultSet rs2;
@@ -47,12 +48,17 @@ public class RegistrationServlet extends HttpServlet {
 			PreparedStatement prepStmt = con.prepareStatement(sql);
 			prepStmt.setString(1, email);
 			rs = prepStmt.executeQuery();
-
+			String msg2 = "already have";
 			if (rs.next()) {
-				response.sendRedirect("index.jsp?navPage=registration");
+				if (userStatus.equals("1")) {
+					response.sendRedirect("index.jsp?navPage=registration&message=" + msg2);
+				} else if (userStatus.equals("3")) {
+					response.sendRedirect("index.jsp?navPage=registrationTeacher&message=" + msg2);
+				}
 			}
 
 			else {
+				String msg = "done";
 				String sql2 = "INSERT INTO `users`(`user_id`, `email`, `password`, `status`)" + " VALUES (0, '" + email
 						+ "', '" + shaPassword + "', " + userStatus + ");";
 				String sql3 = "";
@@ -104,7 +110,7 @@ public class RegistrationServlet extends HttpServlet {
 				PreparedStatement prepStmt3 = con.prepareStatement(sql3);
 				prepStmt3.executeUpdate();
 
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("index.jsp?message=" + msg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
