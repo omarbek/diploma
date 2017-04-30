@@ -129,7 +129,7 @@
 		        <br>
 		        
 		        <%  String sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
-		       				+" where ut.user_id='"+session.getAttribute("userId")+"' AND (one AND two AND three AND four AND five AND six) > 0";
+		       				+" where t.grade="+studentClass + " AND ut.user_id='"+session.getAttribute("userId")+"' AND (one AND two AND three AND four AND five AND six) > 0";
 					PreparedStatement psAll = con.prepareStatement(sqlAll);
 					ResultSet rsAll = psAll.executeQuery();
 					int numberOfTheme = 1;

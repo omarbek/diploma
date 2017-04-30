@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="mysql.jsp" %>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+
+
 <div id="slider" class="row">
         <ul class="bxslider">
           <li><img src="img/slider/1.jpg" /></li>
@@ -11,7 +16,18 @@
 	      
 	      <div class="col-sm-6 col-sm-offset-1" style="margin-top:25px">
 	        <h1 class="text-center">
-	          Добро пожаловать, Мой Друг!
+	        <%  if(session.getAttribute("userStatus").equals("1")){
+					String userID = (String) session.getAttribute("userId");
+					String sql = "select first_name from students where user_id="+userID;
+					PreparedStatement ps = con.prepareStatement(sql);
+					ResultSet rs = ps.executeQuery();
+					if(rs.next()){%>
+						Добро пожаловать, <%=rs.getString(1)%>!
+				<%	}
+				}
+	        	else {%>
+	        		Добро пожаловать!
+	        <%	}%>         
 	        </h1>
 	        <p class="sp text-center">SpeakKaзakh - это интересный и увлекательный способ изучить казахский язык. <br> Здесь ты будешь учить все самое нужное и необходимое для понимания и освоения основ казахской речи.<br> Чем больше слов ты изучишь, тем больше станет твой дракон!</p>
 	      </div>

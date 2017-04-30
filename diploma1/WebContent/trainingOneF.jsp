@@ -128,7 +128,7 @@ Integer count=(Integer)request.getAttribute("count");
  		<div class="row">
             <div class="col-sm-6">
               <h2 class="text-center text-uppercase helv"><%=wordsRusKaz.get(j).rus%></h2>
-              <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre">
+              <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre img-rounded">
             </div>
             <div class="col-sm-5 col-sm-offset-1" style="margin-top: 26px;">
 	            

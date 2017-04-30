@@ -152,9 +152,10 @@ function playAudio(y) {
 		 <input type="hidden" name="wordID" value="<%=wordsRusKaz.get(j).id%>">
 		 <input type="hidden" name="page" value="trainingFourForm">
 		 <input type="hidden" name="correctAns" value="<%=wordsRusKaz.get(j).kaz%>">
-		 <input type="text" name="variant" class="form-control" placeholder="Ваш ответ"><br>
+		 <h2 class="text-center text-uppercase helv" style="margin-top: 30px;"><%=wordsRusKaz.get(j).rus%></h2>
+		 <input type="text" name="variant" class="form-control" placeholder="Ваш ответ" style="margin-top: 60px;"><br>
  		</div>
- 		 <button class="btn-answer btn">Отправить</button>
+ 		 <button class="btn-answer btn" style="margin-top: 0px;">Отправить</button>
 	 </form>
 	 </div>
 	 </div>

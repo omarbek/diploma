@@ -134,7 +134,7 @@ Integer count=(Integer)request.getAttribute("count");
 				<source src="audio/<%=wordsRusKaz.get(j).id %>.mp3">
 			</audio>
             <img onclick="playAudio(<%=wordsRusKaz.get(j).id %>)" src="img/icons/zvuk.png" class="zvuk-text"></h2>    
-            <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre">
+            <img src="img/questions/<%=wordsRusKaz.get(j).id%>.jpg" alt="" class="img-responsive img-centre img-rounded">
             </div>
             <div class="col-sm-5 col-sm-offset-1" style="margin-top: 34px;">          
 		 	  <form method="post" action="TrainingOneServlet" id="trainingOneForm">
