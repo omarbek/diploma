@@ -74,15 +74,12 @@ public class AdminServlet extends HttpServlet {
 					} else {
 						if ("add_topic".equals(page)) {
 							try {
-								PreparedStatement insertPs = con
-										.prepareStatement("INSERT INTO `topics` (topic_name,grade) values ('" + name
-												+ "', " + classNumber + ")");
-								insertPs.executeUpdate();
+								PreparedStatement ps = con.prepareStatement("");
+								ps.executeUpdate("INSERT INTO `topics` (topic_name,grade) values ('" + name + "', "
+										+ classNumber + ")");
 
-								PreparedStatement selectPs = con
-										.prepareStatement("select topic_id from topics where topic_name='" + name
-												+ "' and grade=" + classNumber);
-								ResultSet rs = selectPs.executeQuery();
+								ResultSet rs = ps.executeQuery("select topic_id from topics where topic_name='" + name
+										+ "' and grade=" + classNumber);
 								if (rs.next()) {
 									topicId = rs.getLong(1);
 								}
@@ -96,7 +93,9 @@ public class AdminServlet extends HttpServlet {
 							// item.getName().substring(item.getName().indexOf('.'),
 							// item.getName().length());
 							String nameOfImage = topicId + ".jpg";
-							Word.processFile(path, item, nameOfImage, "img/subjects");
+							if (!item.getName().isEmpty()) {
+								Word.processFile(path, item, nameOfImage, "img/subjects");
+							}
 
 							String grade = Word.getGrade(classNumber);
 							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
@@ -145,7 +144,9 @@ public class AdminServlet extends HttpServlet {
 
 								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
 								String nameOfImage = wordId + ".jpg";
-								Word.processFile(path, item, nameOfImage, "img/questions");
+								if (!item.getName().isEmpty()) {
+									Word.processFile(path, item, nameOfImage, "img/questions");
+								}
 
 								response.sendRedirect("admin.jsp?navPage=words&topic_id=" + topicId);
 							} catch (SQLException e) {
@@ -196,8 +197,9 @@ public class AdminServlet extends HttpServlet {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-
-							Word.processFile(path, item, nameOfImage, "img/subjects");
+							if (!item.getName().isEmpty()) {
+								Word.processFile(path, item, nameOfImage, "img/subjects");
+							}
 
 							String grade = Word.getGrade(classNumber);
 							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
@@ -227,8 +229,9 @@ public class AdminServlet extends HttpServlet {
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
-
-								Word.processFile(path, item, nameOfImage, "img/questions");
+								if (!item.getName().isEmpty()) {
+									Word.processFile(path, item, nameOfImage, "img/questions");
+								}
 							}
 
 							response.sendRedirect("admin.jsp?navPage=words&topic_id=" + topicId);

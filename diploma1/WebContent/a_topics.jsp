@@ -5,7 +5,7 @@
 	response.sendRedirect("index.jsp");
 	}else{
 %>
-<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
+<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -125,7 +125,8 @@
 			i++;
 		} 
 				}
-        catch(MySQLNonTransientConnectionException e){
+        catch(SQLException e){
+        	e.printStackTrace();
         }%>
       </section>
       
