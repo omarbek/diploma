@@ -1,3 +1,10 @@
+<% 
+	session=request.getSession(false);
+	if(session==null){
+		session.invalidate();
+	response.sendRedirect("index.jsp");
+	}else{
+%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -138,3 +145,4 @@
     <script src="js/script.js"></script>
   </body>
 </html>
+<%}%>

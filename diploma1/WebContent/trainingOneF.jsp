@@ -1,3 +1,10 @@
+<% 
+	session=request.getSession(false);
+	if(session==null){
+		session.invalidate();
+	response.sendRedirect("index.jsp");
+	}else{
+%>
 <%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
@@ -251,4 +258,4 @@ Integer count=(Integer)request.getAttribute("count");
       }
 catch(MySQLNonTransientConnectionException e){
 }%>
-   
+<%}%>

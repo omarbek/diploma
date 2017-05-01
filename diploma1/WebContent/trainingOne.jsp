@@ -1,3 +1,10 @@
+<% 
+	session=request.getSession(false);
+	if(session==null){
+		session.invalidate();
+	response.sendRedirect("index.jsp");
+	}else{
+%>
 <%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
@@ -73,6 +80,4 @@ catch(MySQLNonTransientConnectionException e){
 %>
 
 <jsp:include page="trainingOneF.jsp" />
-				
-
-  
+<%}%>
