@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JOptionPane"%>
 <% 
 	session=request.getSession(false);
 	if(session==null){
@@ -5,7 +6,6 @@
 	response.sendRedirect("index.jsp");
 	}else{
 %>
-<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@include file="mysql.jsp" %>
@@ -256,6 +256,8 @@ Integer count=(Integer)request.getAttribute("count");
       </section>
       <%
       }
-catch(MySQLNonTransientConnectionException e){
+catch(Exception e){
+	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+	e.printStackTrace();
 }%>
 <%}%>

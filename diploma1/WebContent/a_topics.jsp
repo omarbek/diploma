@@ -1,3 +1,5 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="javax.swing.JOptionPane"%>
 <% 
 	session=request.getSession(false);
 	if(session==null){
@@ -5,7 +7,6 @@
 	response.sendRedirect("index.jsp");
 	}else{
 %>
-<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -112,7 +113,7 @@
 							<a href="?navPage=add_topic&topic_id=<%=rs.getLong("topic_id")%>">Изменить</a>
 							<form action="TopicServlet" method="post">
 								<input type="hidden" name="page" value="remove">
-								<input type="hidden" name="topic_id" value="<%=rs.getLong("topic_id")%>">
+								<input type="hidden" name="topic_id" value="<%=rs.getLong("topic_ids")%>">
 								<button>Удалить</button>
 							</form>
 						</div>	
@@ -125,7 +126,8 @@
 			i++;
 		} 
 				}
-        catch(SQLException e){
+        catch(Exception e){
+        	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
         	e.printStackTrace();
         }%>
       </section>

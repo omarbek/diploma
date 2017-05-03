@@ -1,4 +1,4 @@
-<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -69,7 +69,7 @@
             <a href="index.jsp">Главная</a>
           </li>
           <li>
-            <a href="?navPage=homeStudent&grade=one&classId=<%=classId%>">Уроки</a>
+            <a href="?navPage=homeStudent&grade=one&classId=<%=classId%>&userId=<%=userId%>">Уроки</a>
           </li>
           <li>
             <a href="?navPage=tests">Проверь себя</a>
@@ -206,7 +206,9 @@
 				}
 					}
 					}
-    catch(MySQLNonTransientConnectionException e){
+    catch(Exception e){
+    	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+    	e.printStackTrace();
     }%>
     </div>
     <div class="row">

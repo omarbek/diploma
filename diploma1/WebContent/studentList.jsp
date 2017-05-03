@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JOptionPane"%>
 <% 
 	session=request.getSession(false);
 	if(session==null){
@@ -5,7 +6,6 @@
 	response.sendRedirect("index.jsp");
 	}else{
 %>
-<%@page import="com.mysql.jdbc.exceptions.MySQLNonTransientConnectionException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -160,7 +160,9 @@
 			 }                            
 
         }
-        catch(MySQLNonTransientConnectionException e){
+        catch(Exception e){
+        	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+        	e.printStackTrace();
         }
  %>
       </section>
