@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@page import="main.Word"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,7 +16,7 @@ Long topicId=null;
 	if(request.getParameter("word_id")!=null&&request.getParameter("topic_id")!=null){
 		wordId=Long.parseLong(request.getParameter("word_id"));
 		topicId=Long.parseLong(request.getParameter("topic_id"));
-		PreparedStatement ps=con.prepareStatement("select * from words where word_id="+wordId);
+		PreparedStatement ps=con.prepareStatement("select *s from words where word_id="+wordId);
 		ResultSet rs=ps.executeQuery();
 		String grade=null;
 		if(rs.next()){
@@ -84,8 +77,11 @@ Long topicId=null;
   </div>
   <%}
 catch(Exception e){
-	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-	e.printStackTrace();
+	session = request.getSession(false);
+	if (session == null) {
+		session.invalidate();
+	} else {
+		JOptionPane.showMessageDialog(null, "edit_word.jsp\n"+e.getLocalizedMessage());
+	}
 } %>
 </form>
-<% } %>

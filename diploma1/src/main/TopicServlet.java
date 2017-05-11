@@ -61,7 +61,7 @@ public class TopicServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 
-				response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+				response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4&refresh=false");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

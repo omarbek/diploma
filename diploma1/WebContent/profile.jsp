@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -193,9 +186,13 @@
 					<% }
 				}
         catch(Exception e){
-        	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-        	e.printStackTrace();
-        }%>
+        	session = request.getSession(false);
+        	if (session == null) {
+        		session.invalidate();
+        	} else {
+        		JOptionPane.showMessageDialog(null, "profile.jsp\n"+e.getLocalizedMessage());
+        	}
+}%>
 
             </div>
           </div>
@@ -204,4 +201,3 @@
       </section>
       
     </div>
-<% } %>

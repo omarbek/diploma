@@ -1,12 +1,4 @@
-<%@page import="java.sql.SQLException"%>
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -16,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <body>
     <div class="container" id="content">
-	<% 
+	<%
 	try{
 		String grade = request.getParameter("grade"); 
 	    int classId = Integer.parseInt(request.getParameter("classId")); 
@@ -113,7 +105,7 @@
 							<a href="?navPage=add_topic&topic_id=<%=rs.getLong("topic_id")%>">Изменить</a>
 							<form action="TopicServlet" method="post">
 								<input type="hidden" name="page" value="remove">
-								<input type="hidden" name="topic_id" value="<%=rs.getLong("topic_ids")%>">
+								<input type="hidden" name="topic_id" value="<%=rs.getLong("topic_id")%>">
 								<button>Удалить</button>
 							</form>
 						</div>	
@@ -127,9 +119,13 @@
 		} 
 				}
         catch(Exception e){
-        	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-        	e.printStackTrace();
-        }%>
+        	session = request.getSession(false);
+        	if (session == null) {
+        		session.invalidate();
+        	} else {
+        		JOptionPane.showMessageDialog(null, "a_topics.jsp\n"+e.getLocalizedMessage());
+        	}
+}%>
       </section>
       
     </div>
@@ -143,4 +139,3 @@
     <script src="js/script.js"></script>
   </body>
 </html>
-<%}%>

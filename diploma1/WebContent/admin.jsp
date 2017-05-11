@@ -1,11 +1,5 @@
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -39,10 +33,11 @@
   	<script src="js/main.js"></script>
   </head>
   	<%
+  	try{
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
-
+	String refresh = request.getParameter("refresh");
 	%>
   <body <%
 		if((userId == null)){
@@ -69,7 +64,7 @@
             <a href="admin.jsp">Главная</a>
           </li>
           <li>
-            <a href="?navPage=a_topics&grade=one&classId=4">Уроки</a>
+            <a href="?navPage=a_topics&grade=one&classId=4&refresh=false">Уроки</a>
           </li>
           <li>
             <a href="?navPage=add_topic">Добавить урок</a>
@@ -113,11 +108,12 @@
 				<%
 				}
 			else if(navPage.equals("a_topics")){
-					
-					%>
+				if(refresh.equals("true"))
+					response.setIntHeader("Refresh", 5);
+				%>
 			<jsp:include page="a_topics.jsp" />
-					<%
-				}
+				<%
+			}
 			else if(navPage.equals("dictionary")){	
 				
 				%>
@@ -147,9 +143,19 @@
 			<jsp:include page="edit_word.jsp" />
 					<%			
 				} 
-					}%>
+					}
+  	}catch(Exception e){
+    	session = request.getSession(false);
+    	if (session == null) {
+    		JOptionPane.showMessageDialog(null, "Ваша сессия истекла. \nПожалуйста, зайдите заново!");
+    		response.sendRedirect("?login.jsp");
+    	} else {
+    		JOptionPane.showMessageDialog(null, "admin.jsp\n"+e.getLocalizedMessage());
+    	}
+    }
+	
+	%>
     </div>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -158,4 +164,3 @@
     <script src="js/script.js"></script>
   </body>
 </html>
-<%}%>

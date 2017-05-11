@@ -98,7 +98,8 @@ public class AdminServlet extends HttpServlet {
 							}
 
 							String grade = Word.getGrade(classNumber);
-							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+							response.sendRedirect(
+									"admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4&refresh=true");
 						}
 						if (page.equals("add_word")) {
 							try {

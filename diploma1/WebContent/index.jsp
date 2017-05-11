@@ -207,8 +207,13 @@
 					}
 					}
     catch(Exception e){
-    	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-    	e.printStackTrace();
+    	session = request.getSession(false);
+    	if (session == null) {
+    		JOptionPane.showMessageDialog(null, "Ваша сессия истекла. \nПожалуйста, зайдите заново!");
+    		response.sendRedirect("?login.jsp");
+    	} else {
+    		JOptionPane.showMessageDialog(null, "index.jsp\n"+e.getLocalizedMessage());
+    	}
     }%>
     </div>
     <div class="row">

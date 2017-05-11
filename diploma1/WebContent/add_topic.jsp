@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@page import="main.Word"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -102,8 +95,11 @@
   </div>
   <%}
     catch(Exception e){
-    	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-    	e.printStackTrace();
-    } %>
+    	session = request.getSession(false);
+    	if (session == null) {
+    		session.invalidate();
+    	} else {
+    		JOptionPane.showMessageDialog(null, "add_topic.jsp\n"+e.getLocalizedMessage());
+    	}
+} %>
 </form>
-<% } %>

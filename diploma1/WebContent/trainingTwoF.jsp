@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@include file="mysql.jsp" %>
@@ -229,8 +222,11 @@ Integer count=(Integer)request.getAttribute("count");
    
    }
 catch(Exception e){
-	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-	e.printStackTrace();
+	session = request.getSession(false);
+	if (session == null) {
+		session.invalidate();
+	} else {
+		JOptionPane.showMessageDialog(null, "trainingTwoF.jsp\n"+e.getLocalizedMessage());
+	}
 }
 %>   
-<%}%>

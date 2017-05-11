@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Random"%>
@@ -88,10 +81,13 @@ String test_grade = null;
 	request.setAttribute("score", score);
 }
 catch(Exception e){
-	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-	e.printStackTrace();
+	session = request.getSession(false);
+	if (session == null) {
+		session.invalidate();
+	} else {
+		JOptionPane.showMessageDialog(null, "prover_sebya.jsp\n"+e.getLocalizedMessage());
+	}
 }
 %>
 
 <jsp:include page="prover_sebyaF.jsp" />
-<%}%>

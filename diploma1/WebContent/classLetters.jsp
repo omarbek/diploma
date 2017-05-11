@@ -1,15 +1,12 @@
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<% String student_grade = request.getParameter("student_grade"); %>
+<% 
+try{
+	String student_grade = request.getParameter("student_grade"); 
+%>
 <div class="container"  id="content">
 	<section id="main" class="trener">
     	<h1 class="text-center">Выберите класс</h1>    
@@ -69,4 +66,13 @@
 		</div>
 	</section>   
 </div>
-<% } %>
+<%
+}catch(Exception e){
+	session = request.getSession(false);
+	if (session == null) {
+		session.invalidate();
+	} else {
+		JOptionPane.showMessageDialog(null, "classLetters.jsp\n"+e.getLocalizedMessage());
+	}
+}
+%>

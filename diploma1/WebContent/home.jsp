@@ -1,10 +1,4 @@
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="mysql.jsp" %>
@@ -23,7 +17,8 @@
 	      
 	      <div class="col-sm-6 col-sm-offset-1" style="margin-top:25px">
 	        <h1 class="text-center">
-	        <%  if(session.getAttribute("userStatus").equals("1")){
+	        <%try{  
+	        if(session.getAttribute("userStatus").equals("1")){
 					String userID = (String) session.getAttribute("userId");
 					String sql = "select first_name from students where user_id="+userID;
 					PreparedStatement ps = con.prepareStatement(sql);
@@ -34,7 +29,17 @@
 				}
 	        	else {%>
 	        		Добро пожаловать!
-	        <%	}%>         
+	        <%	}
+	        }catch(Exception e){
+	        	session = request.getSession(false);
+	        	if (session == null) {
+	        		session.invalidate();
+	        	} else {
+	        		JOptionPane.showMessageDialog(null, "trainingFourF.jsp\n"+e.getLocalizedMessage());
+	        	}
+	        }
+	        
+	        %>         
 	        </h1>
 	        <p class="sp text-center">SpeakKaзakh - это интересный и увлекательный способ изучить казахский язык. <br> Здесь ты будешь учить все самое нужное и необходимое для понимания и освоения основ казахской речи.<br> Чем больше слов ты изучишь, тем больше станет твой дракон!</p>
 	      </div>
@@ -65,4 +70,3 @@
         </div>
       </div>
       </section>
-<%}%>

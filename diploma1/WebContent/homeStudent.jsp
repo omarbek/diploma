@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	Long userId=Long.parseLong(request.getParameter("userId"));//TODO
-	if(userId==null){
-		session.invalidate();
-		response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="main.Word"%>
@@ -204,9 +197,13 @@
 		}
 		}
         catch(Exception e){
-        	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-        	e.printStackTrace();
-        }%>
+        	session = request.getSession(false);
+        	if (session == null) {
+        		session.invalidate();
+        	} else {
+        		JOptionPane.showMessageDialog(null, "homeStudent.jsp\n"+e.getLocalizedMessage());
+        	}
+}%>
       </section>
       
     </div>
@@ -220,4 +217,3 @@
     <script src="js/script.js"></script>
   </body>
 </html>
-<%}%>

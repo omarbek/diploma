@@ -1,10 +1,4 @@
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -39,6 +33,7 @@
   	<script src="js/main.js"></script>
   </head>
   	<%
+  	try{
 	String userId = (String)session.getAttribute("userId");
 	String userStatus = (String)session.getAttribute("userStatus");
 	String navPage = request.getParameter("navPage");
@@ -134,7 +129,20 @@
 				%>
 		<jsp:include page="edit_profileTeacher.jsp" />
 				<%
-			} }%>
+			} }
+  	} catch(Exception e){
+
+    	session = request.getSession(false);
+    	if (session == null) {
+    		JOptionPane.showMessageDialog(null, "Ваша сессия истекла. \nПожалуйста, зайдите заново!");
+    		response.sendRedirect("?login.jsp");
+    	} else {
+    		JOptionPane.showMessageDialog(null, "index.jsp\n"+e.getLocalizedMessage());
+    	}
+    
+  	}
+			
+			%>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -145,4 +153,3 @@
     <script src="js/script.js"></script>
   </body>
 </html>
-<%}%>

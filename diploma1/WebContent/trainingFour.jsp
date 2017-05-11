@@ -1,11 +1,4 @@
 <%@page import="javax.swing.JOptionPane"%>
-<% 
-	session=request.getSession(false);
-	if(session==null){
-		session.invalidate();
-	response.sendRedirect("index.jsp");
-	}else{
-%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -77,9 +70,12 @@ try{
 
 }
 catch(Exception e){
-	JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-	e.printStackTrace();
+	session = request.getSession(false);
+	if (session == null) {
+		session.invalidate();
+	} else {
+		JOptionPane.showMessageDialog(null, "trainingFour.jsp\n"+e.getLocalizedMessage());
+	}
 }%>
 
 <jsp:include page="trainingFourF.jsp" />
-<%}%>
