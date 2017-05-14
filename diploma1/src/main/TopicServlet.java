@@ -25,13 +25,12 @@ public class TopicServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		String page = request.getParameter("page");
 		Connection con = (new DBConnection()).getConnection();
-
-		if (page.equals("remove")) {
-			Long topicId = Long.parseLong(request.getParameter("topic_id"));
-			PreparedStatement removePs;
-			try {
+		try {
+			String page = request.getParameter("page");
+			if (page.equals("remove")) {
+				Long topicId = Long.parseLong(request.getParameter("topic_id"));
+				PreparedStatement removePs;
 				PreparedStatement results = con.prepareStatement("delete from results where topic_id=" + topicId);
 				results.executeUpdate();
 
@@ -62,14 +61,10 @@ public class TopicServlet extends HttpServlet {
 				}
 
 				response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4&refresh=false");
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
-		}
-		if (page.equals("remove_word")) {
-			Long wordId = Long.parseLong(request.getParameter("word_id"));
-			Long topicId = Long.parseLong(request.getParameter("topic_id"));
-			try {
+			if (page.equals("remove_word")) {
+				Long wordId = Long.parseLong(request.getParameter("word_id"));
+				Long topicId = Long.parseLong(request.getParameter("topic_id"));
 				PreparedStatement results = con.prepareStatement("delete from results where word_id=" + wordId);
 				results.executeUpdate();
 
@@ -91,9 +86,18 @@ public class TopicServlet extends HttpServlet {
 				}
 
 				response.sendRedirect("admin.jsp?navPage=words&topic_id=" + topicId);
-			} catch (SQLException e) {
-				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			response.sendRedirect("index.jsp");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
+
 	}
 }

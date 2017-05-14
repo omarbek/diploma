@@ -76,6 +76,9 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingFour.jsp\n"+e.getLocalizedMessage());
 	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>
 
 <jsp:include page="trainingFourF.jsp" />

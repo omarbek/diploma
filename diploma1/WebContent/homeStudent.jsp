@@ -10,6 +10,7 @@
   <body>
     <div class="container" id="content">
 	<% 
+        try{
 		String grade = request.getParameter("grade"); 
 	    int gradeInt=Integer.parseInt(Word.getClassNumber(grade));
 	    int classId = Integer.parseInt(request.getParameter("classId")); 
@@ -120,7 +121,6 @@
     		sqlAll = "SELECT * FROM topics t left join user_topic ut on ut.topic_id=t.topic_id"
        				+" where t.grade=4 and ut.user_id="+session.getAttribute("userId");
        }
-        try{
         PreparedStatement prepStmt = con.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
 		
@@ -203,7 +203,10 @@
         	} else {
         		JOptionPane.showMessageDialog(null, "homeStudent.jsp\n"+e.getLocalizedMessage());
         	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>
       </section>
       
     </div>

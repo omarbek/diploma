@@ -103,9 +103,9 @@ function playAudio(id) {
                 	enterToLoop = true;
                 } 
                 if (enterToLoop){%>                              
-                </tbody>
+                 </tbody>
 		          </table>
-		        </div>
+		        </div> 
 		        <% }
                 else if (!enterToLoop){ %>
 		        	<h3 class="text-center">
@@ -121,6 +121,8 @@ function playAudio(id) {
         	} else {
         		JOptionPane.showMessageDialog(null, "dictionary.jsp\n"+e.getLocalizedMessage());
         	}
+}finally{
+	 if(con != null)  con.close(); 
 }
  %>
       </section>

@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import org.apache.tomcat.util.http.fileupload.FileItemStream;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
@@ -239,8 +238,16 @@ public class AdminServlet extends HttpServlet {
 						}
 					}
 				}
-			} catch (FileUploadException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				response.sendRedirect("index.jsp");
+			} finally {
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}

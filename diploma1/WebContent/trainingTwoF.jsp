@@ -228,5 +228,7 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingTwoF.jsp\n"+e.getLocalizedMessage());
 	}
+}finally{
+	 if(con != null)  con.close(); 
 }
 %>   

@@ -3,6 +3,7 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +22,8 @@ public class DeleteEditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		Connection con = (new DBConnection()).getConnection();
@@ -32,13 +33,11 @@ public class DeleteEditProfileServlet extends HttpServlet {
 		try {
 			if (function_type.equals("deleteProfile")) {
 				String deleteFromUsers = "UPDATE `users` SET `status`=? WHERE user_id=?";
-				PreparedStatement prepStmt = con
-						.prepareStatement(deleteFromUsers);
+				PreparedStatement prepStmt = con.prepareStatement(deleteFromUsers);
 				prepStmt.setString(1, "0");
 				prepStmt.setString(2, user_id);
 				prepStmt.executeUpdate();
-				request.getRequestDispatcher("LogoutServlet").forward(request,
-						response);
+				request.getRequestDispatcher("LogoutServlet").forward(request, response);
 			} else if (function_type.equals("editProfile")) {
 				String userLastName = request.getParameter("lastName");
 				String userFirstName = request.getParameter("firstName");
@@ -50,61 +49,51 @@ public class DeleteEditProfileServlet extends HttpServlet {
 				String classLetter = request.getParameter("classLetter");
 
 				if (email != null && email != "") {
-					String updateUserProfile = "UPDATE `users` SET `email`='"
-							+ email + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `users` SET `email`='" + email + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (password != null && password != "") {
 					String shaPassword = DigestUtils.sha1Hex(password);
-					String updateUserProfile = "UPDATE `users` SET `password`='"
-							+ shaPassword + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `users` SET `password`='" + shaPassword + "' WHERE user_id="
+							+ user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (userLastName != null && userLastName != "") {
-					String updateUserProfile = "UPDATE `students` SET `last_name`='"
-							+ userLastName + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `students` SET `last_name`='" + userLastName + "' WHERE user_id="
+							+ user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (userFirstName != null && userFirstName != "") {
-					String updateUserProfile = "UPDATE `students` SET `first_name`='"
-							+ userFirstName + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `students` SET `first_name`='" + userFirstName
+							+ "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (studentClass != null && studentClass != "") {
-					String updateUserProfile = "UPDATE `students` SET `studentClass`='"
-							+ studentClass + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `students` SET `studentClass`='" + studentClass
+							+ "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (school != null && school != "") {
-					String updateUserProfile = "UPDATE `students` SET `school_name`='"
-							+ school + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `students` SET `school_name`='" + school + "' WHERE user_id="
+							+ user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 
 				}
 				if (city != null && city != "") {
-					String updateUserProfile = "UPDATE `students` SET `city`='"
-							+ city + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `students` SET `city`='" + city + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (classLetter != null && classLetter != "") {
-					String updateUserProfile = "UPDATE `students` SET `classLetter`='"
-							+ classLetter + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `students` SET `classLetter`='" + classLetter
+							+ "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				response.sendRedirect("index.jsp?navPage=profile");
@@ -117,53 +106,53 @@ public class DeleteEditProfileServlet extends HttpServlet {
 				String school = request.getParameter("school");
 
 				if (email != null && email != "") {
-					String updateUserProfile = "UPDATE `users` SET `email`='"
-							+ email + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `users` SET `email`='" + email + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (password != null && password != "") {
 					String shaPassword = DigestUtils.sha1Hex(password);
-					String updateUserProfile = "UPDATE `users` SET `password`='"
-							+ shaPassword + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `users` SET `password`='" + shaPassword + "' WHERE user_id="
+							+ user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (userLastName != null && userLastName != "") {
-					String updateUserProfile = "UPDATE `teachers` SET `last_name`='"
-							+ userLastName + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `teachers` SET `last_name`='" + userLastName + "' WHERE user_id="
+							+ user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (userFirstName != null && userFirstName != "") {
-					String updateUserProfile = "UPDATE `teachers` SET `first_name`='"
-							+ userFirstName + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `teachers` SET `first_name`='" + userFirstName
+							+ "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				if (school != null && school != "") {
-					String updateUserProfile = "UPDATE `teachers` SET `school_name`='"
-							+ school + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `teachers` SET `school_name`='" + school + "' WHERE user_id="
+							+ user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 
 				}
 				if (city != null && city != "") {
-					String updateUserProfile = "UPDATE `teachers` SET `city`='"
-							+ city + "' WHERE user_id=" + user_id;
-					PreparedStatement prepStmt2 = con
-							.prepareStatement(updateUserProfile);
+					String updateUserProfile = "UPDATE `teachers` SET `city`='" + city + "' WHERE user_id=" + user_id;
+					PreparedStatement prepStmt2 = con.prepareStatement(updateUserProfile);
 					prepStmt2.executeUpdate();
 				}
 				response.sendRedirect("teacher.jsp?navPage=profileTeacher");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			response.sendRedirect("index.jsp");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

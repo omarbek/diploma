@@ -1,3 +1,4 @@
+<%@page import="com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.util.Random"%>
 <%@page import="main.Word"%>
@@ -75,6 +76,8 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingOne.jsp\n"+e.getLocalizedMessage());
 	}
+}finally{
+	 if(con != null)  con.close(); 
 }
 %>
 

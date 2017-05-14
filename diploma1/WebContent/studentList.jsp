@@ -6,22 +6,24 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.ArrayList"%>
 
-<%  int class_letter_number = Integer.parseInt(request.getParameter("class_letter"));
-	int student_grade = Integer.parseInt(request.getParameter("student_grade"));
-	String clsas_letter = null;
-	switch (class_letter_number){
-	case 1: clsas_letter="А";
-			break;
-	case 2: clsas_letter="Б";
-			break;
-	case 3: clsas_letter="В";
-			break;
-	case 4: clsas_letter="Г";
-			break;
-	case 5: clsas_letter="Д";
-			break;
-	case 6: clsas_letter="Ж";
-			break;
+<%  
+	try{
+		int class_letter_number = Integer.parseInt(request.getParameter("class_letter"));
+		int student_grade = Integer.parseInt(request.getParameter("student_grade"));
+		String clsas_letter = null;
+		switch (class_letter_number){
+		case 1: clsas_letter="А";
+				break;
+		case 2: clsas_letter="Б";
+				break;
+		case 3: clsas_letter="В";
+				break;
+		case 4: clsas_letter="Г";
+				break;
+		case 5: clsas_letter="Д";
+				break;
+		case 6: clsas_letter="Ж";
+				break;
 	}%>
 
 <div class="container" id="content">
@@ -33,7 +35,6 @@
           <img src="img/hr.png" style="width: 50px;" class="img-centre" alt="">
         </div>
         <%  
-        try{
         	String userId = (String)session.getAttribute("userId");
 	    	String teacher_id = (String)session.getAttribute("teacherID");
 	    	String sqlFindSchool = "SELECT school_name, city FROM teachers where teacher_id="+teacher_id;
@@ -160,6 +161,8 @@
         	} else {
         		JOptionPane.showMessageDialog(null, "studentList.jsp\n"+e.getLocalizedMessage());
         	}
+}finally{
+	 if(con != null)  con.close(); 
 }
  %>
       </section>

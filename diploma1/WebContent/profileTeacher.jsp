@@ -66,7 +66,10 @@
         	} else {
         		JOptionPane.showMessageDialog(null, "profileTeacher.jsp\n"+e.getLocalizedMessage());
         	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>
 
             </div>
           </div>

@@ -74,6 +74,8 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingFive.jsp\n"+e.getLocalizedMessage());
 	}
+}finally{
+	 if(con != null)  con.close(); 
 }
 %>
 

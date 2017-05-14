@@ -3,11 +3,7 @@ package main;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,8 +47,7 @@ public class ProverSebyaServlet extends HttpServlet {
 			if (variant != null && correctAns != null) {
 				if (variant.equals(correctAns)) {
 					score += multiple;
-				}
-				else {
+				} else {
 					String sql2 = "INSERT INTO `results_test`(`id`, `student_id`, `word_id`, `topic_id`, `task_type`, `test_grade`)"
 							+ " VALUES (0, '" + session.getAttribute("studentID") + "', '" + wordID + "', '" + topicID
 							+ "', '" + task_type + "', '" + test_grade + "');";
@@ -62,8 +57,16 @@ public class ProverSebyaServlet extends HttpServlet {
 				response.sendRedirect("index.jsp?navPage=prover_sebya&test_grade=" + test_grade + "&questionId=" + (++j)
 						+ "&score=" + score);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			response.sendRedirect("index.jsp");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 	}

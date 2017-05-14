@@ -214,7 +214,10 @@
     	} else {
     		JOptionPane.showMessageDialog(null, "index.jsp\n"+e.getLocalizedMessage());
     	}
-    }%>
+    }finally{
+   	 if(con != null)  con.close(); 
+    }
+    %>
     </div>
     <div class="row">
     	<div class="col-sm-6 col-sm-offset-3">

@@ -31,47 +31,44 @@ public class TrainingOneServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String page = request.getParameter("page");
-		String topicID = request.getParameter("topic_id");
-		String task_type = request.getParameter("task_type");
-		String variant = request.getParameter("variant");
-		String questionId = request.getParameter("questionId");
-		String wordID = null;
-		int j = Integer.parseInt(questionId);
-		int countOfTopic = 0;
-		String correctAns = null;
-		List<Long> wrongIds = new ArrayList<Long>();
-
-		ResultSet rs;
 		Connection con = (new DBConnection()).getConnection();
-
-		String sqlForCount = "select count(1) from topic_word where topic_id=" + topicID;
-		try (PreparedStatement ps = con.prepareStatement(sqlForCount)) {
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				countOfTopic = rs.getInt(1);
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-		if ("trainingThreeForm".equals(page)) {
-			variant = request.getParameter("demo");
-		}
-		if (!"trainingSixForm".equals(page)) {
-			wordID = request.getParameter("wordID");
-			correctAns = request.getParameter("correctAns");
-		} else {
-			StringTokenizer st = new StringTokenizer(variant, ",");
-			while (st.hasMoreElements()) {
-				String nextElement = st.nextElement().toString();
-				wrongIds.add(Long.parseLong(nextElement));
-			}
-		}
-
-		HttpSession session = request.getSession();
+		String topicID = request.getParameter("topic_id");
+		String questionId = request.getParameter("questionId");
+		int j = Integer.parseInt(questionId);
 		try {
+			request.setCharacterEncoding("UTF-8");
+			String page = request.getParameter("page");
+			String task_type = request.getParameter("task_type");
+			String variant = request.getParameter("variant");
+			String wordID = null;
+			int countOfTopic = 0;
+			String correctAns = null;
+			List<Long> wrongIds = new ArrayList<Long>();
+
+			ResultSet rs;
+
+			// String sqlForCount = "select count(1) from topic_word where
+			// topic_id=" + topicID;
+			// PreparedStatement psForCount = con.prepareStatement(sqlForCount);
+			// rs = psForCount.executeQuery();
+			// if (rs.next()) {
+			countOfTopic = 10/* rs.getInt(1) */;
+			// }
+			if ("trainingThreeForm".equals(page)) {
+				variant = request.getParameter("demo");
+			}
+			if (!"trainingSixForm".equals(page)) {
+				wordID = request.getParameter("wordID");
+				correctAns = request.getParameter("correctAns");
+			} else {
+				StringTokenizer st = new StringTokenizer(variant, ",");
+				while (st.hasMoreElements()) {
+					String nextElement = st.nextElement().toString();
+					wrongIds.add(Long.parseLong(nextElement));
+				}
+			}
+
+			HttpSession session = request.getSession();
 			if (j == 0) {
 				score = 0;
 
@@ -177,11 +174,16 @@ public class TrainingOneServlet extends HttpServlet {
 					response.sendRedirect("index.jsp?navPage=trainingOne&topic_id=" + topicID + "&questionId=" + (++j));
 				}
 			}
-		} catch (
-
-		SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			response.sendRedirect("index.jsp");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-
 	}
 }

@@ -192,7 +192,10 @@
         	} else {
         		JOptionPane.showMessageDialog(null, "profile.jsp\n"+e.getLocalizedMessage());
         	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>
 
             </div>
           </div>

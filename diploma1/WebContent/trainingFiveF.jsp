@@ -227,4 +227,7 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingFiveF.jsp\n"+e.getLocalizedMessage());
 	}
-}%>      
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>      

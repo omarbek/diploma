@@ -18,9 +18,9 @@
         </h3>
         <br>
      <% 
+       try{
  	String studentId = (String)session.getAttribute("studentID");
        	String sql1 = "select studentClass from students where student_id='"+studentId+"'";
-       try{
        	PreparedStatement prepStmt1 = con.prepareStatement(sql1);
        	ResultSet rs1 = prepStmt1.executeQuery();
        	if (rs1.next()){%>
@@ -137,6 +137,8 @@
     		} else {
     			JOptionPane.showMessageDialog(null, "tests.jsp\n"+e.getLocalizedMessage());
     		}
+}finally{
+	 if(con != null)  con.close(); 
 }
        	%>
 	</section>   

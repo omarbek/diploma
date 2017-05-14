@@ -101,5 +101,8 @@
     	} else {
     		JOptionPane.showMessageDialog(null, "add_topic.jsp\n"+e.getLocalizedMessage());
     	}
-} %>
+}finally{
+	 if(con != null)  con.close(); 
+} 
+%>
 </form>

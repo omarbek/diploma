@@ -183,5 +183,7 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingFourF.jsp\n"+e.getLocalizedMessage());
 	}
+}finally{
+	 if(con != null)  con.close(); 
 } %>
 </section>	  

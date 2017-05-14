@@ -255,4 +255,7 @@ catch(Exception e){
 	} else {
 		JOptionPane.showMessageDialog(null, "trainingThreeF.jsp\n"+e.getLocalizedMessage());
 	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>

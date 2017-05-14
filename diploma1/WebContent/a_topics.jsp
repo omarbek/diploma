@@ -125,7 +125,10 @@
         	} else {
         		JOptionPane.showMessageDialog(null, "a_topics.jsp\n"+e.getLocalizedMessage());
         	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>
       </section>
       
     </div>

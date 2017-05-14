@@ -534,6 +534,9 @@ int j = Integer.parseInt(questionId); %>
     	} else {
     		JOptionPane.showMessageDialog(null, "prover_sebyaF.jsp\n"+e.getLocalizedMessage());
     	}
-}%>
+}finally{
+	 if(con != null)  con.close(); 
+}
+%>
 	</div>
 </section>

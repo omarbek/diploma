@@ -1,3 +1,4 @@
+<%@page import="java.sql.SQLException"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -52,15 +53,17 @@ String test_grade = null;
 					randomWords.add(rs3.getInt(1));
 				}
 			}
-			randomWord = randomWords.get(myRandomizer.nextInt(randomWords.size()));
-			int positionOfWord = 0;
-			if (wordsRusKazTemp.contains(String.valueOf(randomWord))){
-				positionOfWord = wordsRusKazTemp.indexOf(String.valueOf(randomWord));
-				wordsRusKaz.add(new Word(randomWord,wordsRusKazTemp.get(positionOfWord+1),wordsRusKazTemp.get(positionOfWord+2)));
+			if(randomWords.size()>0){
+				randomWord = randomWords.get(myRandomizer.nextInt(randomWords.size()));
+				int positionOfWord = 0;
+				if (wordsRusKazTemp.contains(String.valueOf(randomWord))){
+					positionOfWord = wordsRusKazTemp.indexOf(String.valueOf(randomWord));
+					wordsRusKaz.add(new Word(randomWord,wordsRusKazTemp.get(positionOfWord+1),wordsRusKazTemp.get(positionOfWord+2)));
+				}
+				randomWords.clear();
+				wordsRusKazTemp.clear();
+				topicIds.add(rs1.getInt(1));
 			}
-			randomWords.clear();
-			wordsRusKazTemp.clear();
-			topicIds.add(rs1.getInt(1));
 		}
 		String sqlForCleanResults = "select * from results_test where test_grade='" + test_grade + "'";
 		PreparedStatement prepStmtForCleanResults = con.prepareStatement(sqlForCleanResults);
@@ -80,13 +83,15 @@ String test_grade = null;
 	request.setAttribute("test_grade", test_grade);
 	request.setAttribute("score", score);
 }
-catch(Exception e){
+catch(SQLException e){
 	session = request.getSession(false);
 	if (session == null) {
 		session.invalidate();
 	} else {
 		JOptionPane.showMessageDialog(null, "prover_sebya.jsp\n"+e.getLocalizedMessage());
 	}
+}finally{
+	 if(con != null)  con.close(); 
 }
 %>
 
