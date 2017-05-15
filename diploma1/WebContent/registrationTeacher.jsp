@@ -33,7 +33,7 @@ String message=null;
 		message="Этот электронный адрес уже зарегистрирован!";
 %>
 <div class="" >
-	<h3 class="text-center"><font color="purple"><%=message %></font></h3>
+	<h4 class="text-center" style="font-family: 'Helvetica'"><font color="black"><%=message %></font></h4>
 </div>
 <% } %>
 <br>

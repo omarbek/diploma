@@ -129,7 +129,15 @@
 				%>
 		<jsp:include page="edit_profileTeacher.jsp" />
 				<%
-			} }
+			} else if(navPage.equals("classLetters")){
+				%>
+		<jsp:include page="classLetters.jsp" />
+				<%
+			}  else if(navPage.equals("studentList")){
+				%>
+		<jsp:include page="studentList.jsp" />
+				<%
+			}}
   	} catch(Exception e){
 
     	session = request.getSession(false);

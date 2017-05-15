@@ -16,7 +16,7 @@ Long topicId=null;
 	if(request.getParameter("word_id")!=null&&request.getParameter("topic_id")!=null){
 		wordId=Long.parseLong(request.getParameter("word_id"));
 		topicId=Long.parseLong(request.getParameter("topic_id"));
-		PreparedStatement ps=con.prepareStatement("select *s from words where word_id="+wordId);
+		PreparedStatement ps=con.prepareStatement("select * from words where word_id="+wordId);
 		ResultSet rs=ps.executeQuery();
 		String grade=null;
 		if(rs.next()){

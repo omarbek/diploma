@@ -150,7 +150,7 @@
     		JOptionPane.showMessageDialog(null, "Ваша сессия истекла. \nПожалуйста, зайдите заново!");
     		response.sendRedirect("?login.jsp");
     	} else {
-    		JOptionPane.showMessageDialog(null, "admin.jsp\n"+e.getLocalizedMessage());
+    		//JOptionPane.showMessageDialog(null, "admin.jsp\n"+e.getLocalizedMessage());
     	}
     }
 	

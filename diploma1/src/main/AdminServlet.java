@@ -26,8 +26,8 @@ public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		Connection con = (new DBConnection()).getConnection();
@@ -87,7 +87,7 @@ public class AdminServlet extends HttpServlet {
 								e.printStackTrace();
 							}
 
-							String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+							String path = "C:/Users/Сымбат/git/diploma/diploma1/WebContent";
 							// String output =
 							// item.getName().substring(item.getName().indexOf('.'),
 							// item.getName().length());
@@ -97,17 +97,19 @@ public class AdminServlet extends HttpServlet {
 							}
 
 							String grade = Word.getGrade(classNumber);
-							response.sendRedirect(
-									"admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4&refresh=true");
+							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade
+									+ "&classId=4&refresh=true");
 						}
 						if (page.equals("add_word")) {
 							try {
-								PreparedStatement insertWord = con.prepareStatement(
-										"insert into words (word_rus, word_kaz) values ('" + rus + "', '" + kaz + "')");
+								PreparedStatement insertWord = con
+										.prepareStatement("insert into words (word_rus, word_kaz) values ('" + rus
+												+ "', '" + kaz + "')");
 								insertWord.executeUpdate();
 
-								PreparedStatement selectWord = con.prepareStatement(
-										"select * from words where word_rus='" + rus + "' and word_kaz='" + kaz + "'");
+								PreparedStatement selectWord = con
+										.prepareStatement("select * from words where word_rus='" + rus
+												+ "' and word_kaz='" + kaz + "'");
 								ResultSet rs = selectWord.executeQuery();
 								if (rs.next()) {
 									wordId = rs.getLong("word_id");
@@ -129,20 +131,23 @@ public class AdminServlet extends HttpServlet {
 										grade = rsGrade.getInt(1);
 									}
 
-									PreparedStatement stGrade = con.prepareStatement(
-											"select studentClass from students where user_id=" + rsUsers.getLong(1));
+									PreparedStatement stGrade = con
+											.prepareStatement("select studentClass from students where user_id="
+													+ rsUsers.getLong(1));
 									ResultSet rsStGrade = stGrade.executeQuery();
 									if (rsStGrade.next()) {
 										if (rsStGrade.getInt(1) >= grade) {
-											PreparedStatement insertPs = con.prepareStatement(
-													"insert into user_topic (user_id, topic_id) values ("
-															+ rsUsers.getLong(1) + ", " + topicId + ")");
+											PreparedStatement insertPs = con
+													.prepareStatement("insert into user_topic (user_id, topic_id)"
+															+ " values (" + rsUsers.getLong(1) + ", " + topicId
+															+ ") ON DUPLICATE KEY UPDATE user_id=" + rsUsers.getLong(1)
+															+ ", topic_id=" + topicId);
 											insertPs.executeUpdate();
 										}
 									}
 								}
 
-								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+								String path = "C:/Users/Сымбат/git/diploma/diploma1/WebContent";
 								String nameOfImage = wordId + ".jpg";
 								if (!item.getName().isEmpty()) {
 									Word.processFile(path, item, nameOfImage, "img/questions");
@@ -164,8 +169,9 @@ public class AdminServlet extends HttpServlet {
 								ResultSet rsUsers = psUsers.executeQuery();
 								while (rsUsers.next()) {
 
-									PreparedStatement stGrade = con.prepareStatement(
-											"select studentClass from students where user_id=" + rsUsers.getLong(1));
+									PreparedStatement stGrade = con
+											.prepareStatement("select studentClass from students where user_id="
+													+ rsUsers.getLong(1));
 									ResultSet rsStGrade = stGrade.executeQuery();
 									if (rsStGrade.next()) {
 										if (rsStGrade.getInt(1) < Integer.parseInt(classNumber)) {
@@ -187,12 +193,12 @@ public class AdminServlet extends HttpServlet {
 								e.printStackTrace();
 							}
 
-							String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+							String path = "C:/Users/Сымбат/git/diploma/diploma1/WebContent";
 							String nameOfImage = topicId + ".jpg";
 
 							try {
-								File file = new File(
-										"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/" + nameOfImage);
+								File file = new File("C:/Users/Сымбат/git/diploma/diploma1/WebContent/img/subjects/"
+										+ nameOfImage);
 								file.delete();
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -202,7 +208,8 @@ public class AdminServlet extends HttpServlet {
 							}
 
 							String grade = Word.getGrade(classNumber);
-							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade + "&classId=4");
+							response.sendRedirect("admin.jsp?navPage=a_topics&grade=" + grade
+									+ "&classId=4&refresh=true");
 						}
 						if ("edit_word".equals(page)) {
 							try {
@@ -210,20 +217,20 @@ public class AdminServlet extends HttpServlet {
 										+ "', word_kaz='" + kaz + "' where word_id=" + wordId);
 								updatePs.executeUpdate();
 
-								PreparedStatement topicWord = con.prepareStatement(
-										"update topic_word set topic_id=" + topicId + " where word_id=" + wordId);
+								PreparedStatement topicWord = con.prepareStatement("update topic_word set topic_id="
+										+ topicId + " where word_id=" + wordId);
 								topicWord.executeUpdate();
 							} catch (SQLException e) {
 								e.printStackTrace();
 							}
 
 							if (!item.getName().isEmpty()) {
-								String path = "C:/Users/Омарбек/git/kazakh/diploma1/WebContent";
+								String path = "C:/Users/Сымбат/git/diploma/diploma1/WebContent";
 								String nameOfImage = wordId + ".jpg";
 
 								try {
 									File file = new File(
-											"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/questions/"
+											"C:/Users/Сымбат/git/diploma/diploma1/WebContent/img/questions/"
 													+ nameOfImage);
 									file.delete();
 								} catch (Exception e) {

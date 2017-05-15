@@ -210,7 +210,7 @@
     	session = request.getSession(false);
     	if (session == null) {
     		JOptionPane.showMessageDialog(null, "Ваша сессия истекла. \nПожалуйста, зайдите заново!");
-    		response.sendRedirect("?login.jsp");
+    		response.sendRedirect("index.jsp");
     	} else {
     		JOptionPane.showMessageDialog(null, "index.jsp\n"+e.getLocalizedMessage());
     	}
@@ -222,7 +222,7 @@
     <div class="row">
     	<div class="col-sm-6 col-sm-offset-3">
 			<div class="text-center" id="copyright">
-			©IITU Динасил О., Нурбай С., Ашенова Ш., 2017 
+			© Динасил О., Нурбай С., Ашенова Ш., 2017 
 			</div>
 		</div>
 	</div>

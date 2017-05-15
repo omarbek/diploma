@@ -21,8 +21,8 @@ public class TopicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		Connection con = (new DBConnection()).getConnection();
@@ -34,8 +34,8 @@ public class TopicServlet extends HttpServlet {
 				PreparedStatement results = con.prepareStatement("delete from results where topic_id=" + topicId);
 				results.executeUpdate();
 
-				PreparedStatement resultTest = con
-						.prepareStatement("delete from results_test where topic_id=" + topicId);
+				PreparedStatement resultTest = con.prepareStatement("delete from results_test where topic_id="
+						+ topicId);
 				resultTest.executeUpdate();
 
 				PreparedStatement userTopic = con.prepareStatement("delete from user_topic where topic_id=" + topicId);
@@ -53,8 +53,8 @@ public class TopicServlet extends HttpServlet {
 				removePs.executeUpdate();
 
 				try {
-					File file = new File(
-							"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/subjects/" + topicId + ".jpg");
+					File file = new File("C:/Users/Сымбат/git/diploma/diploma1/WebContent/img/subjects/" + topicId
+							+ ".jpg");
 					file.delete();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -78,8 +78,8 @@ public class TopicServlet extends HttpServlet {
 				words.executeUpdate();
 
 				try {
-					File file = new File(
-							"C:/Users/Омарбек/git/kazakh/diploma1/WebContent/img/questions/" + wordId + ".jpg");
+					File file = new File("C:/Users/Сымбат/git/diploma/diploma1/WebContent/img/questions/" + wordId
+							+ ".jpg");
 					file.delete();
 				} catch (Exception e) {
 					e.printStackTrace();

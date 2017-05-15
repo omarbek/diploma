@@ -27,13 +27,12 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;//
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		// request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -59,8 +58,8 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("userEmail", rs.getString(2));
 					session.setAttribute("userStatus", rs.getString(4));
 					if (userState.equals("1")) {
-						PreparedStatement prepStmt2 = con
-								.prepareStatement("SELECT * FROM students WHERE user_id = " + rs.getString(1));
+						PreparedStatement prepStmt2 = con.prepareStatement("SELECT * FROM students WHERE user_id = "
+								+ rs.getString(1));
 						rs2 = prepStmt2.executeQuery();
 						if (rs2.next()) {
 							session.setAttribute("studentID", rs2.getString(1));
@@ -70,8 +69,8 @@ public class LoginServlet extends HttpServlet {
 					} else if (userState.equals("2")) {
 						response.sendRedirect("admin.jsp");
 					} else {// 3
-						PreparedStatement prepStmt2 = con
-								.prepareStatement("SELECT * FROM teachers WHERE user_id = " + rs.getString(1));
+						PreparedStatement prepStmt2 = con.prepareStatement("SELECT * FROM teachers WHERE user_id = "
+								+ rs.getString(1));
 						rs2 = prepStmt2.executeQuery();
 
 						if (rs2.next()) {
@@ -84,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 				}
 
 			} else {
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("index.jsp?message=err");
 			}
 		} catch (Exception e) {
 			response.sendRedirect("index.jsp");

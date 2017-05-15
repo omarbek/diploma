@@ -13,7 +13,12 @@
               <h1 class="modal-title text-center" id="myModalLabel">SpeakKazakh</h1>
               <% 	String message=null;
 					if(request.getParameter("message")!=null){
-						message="Вы зарегистрировались. Теперь войдите в систему."; %>
+						if(request.getParameter("message").equals("done")){
+							message="Вы зарегистрировались. Теперь войдите в систему.";
+						}
+						else if(request.getParameter("message").equals("err")){
+							message="Неправильный электронный адрес или пароль.";
+						}%>
 				<div class="" >
 					<h3 class="text-center"><font color="purple"><%=message %></font></h3>
 				</div>

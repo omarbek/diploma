@@ -25,46 +25,46 @@
           <% 
           	if("one".equals(grade)){ ////
           		%>
-		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>" class="active">1 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>&refresh=false" class="active">1 класс</a></li>
 		          <% if(classId>=2){ %>
-		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>">2 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>&refresh=false">2 класс</a></li>
 		          <% } if(classId>=3){ %>
-		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>">3 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>&refresh=false">3 класс</a></li>
 		          <% } if(classId>=4){ %>
-		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>">4 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>&refresh=false">4 класс</a></li>
           		<%
 		          }
           	}else if("two".equals(grade)){
           		%>
-		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>">1 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>&refresh=false">1 класс</a></li>
 		          <% if(classId>=2){ %>
-		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>" class="active">2 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>&refresh=false" class="active">2 класс</a></li>
 		          <% } if(classId>=3){ %>
-		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>">3 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>&refresh=false">3 класс</a></li>
 		          <% } if(classId>=4){ %>
-		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>">4 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>&refresh=false">4 класс</a></li>
           		<%
 		          }
           	}else if("three".equals(grade)){
           		%>
-		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>">1 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>&refresh=false">1 класс</a></li>
 		          <% if(classId>=2){ %>
-		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>">2 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>&refresh=false">2 класс</a></li>
 		          <% } if(classId>=3){ %>
-		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>" class="active">3 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>&refresh=false" class="active">3 класс</a></li>
 		          <% } if(classId>=4){ %>
-		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>">4 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>&refresh=false">4 класс</a></li>
           		<%
 		          }
           	}else{
           		%>
-		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>">1 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=one&classId=<%=classId %>&refresh=false">1 класс</a></li>
 		          <% if(classId>=2){ %>
-		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>">2 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=two&classId=<%=classId %>&refresh=false">2 класс</a></li>
 		          <% } if(classId>=3){ %>
-		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>">3 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=three&classId=<%=classId %>&refresh=false">3 класс</a></li>
 		          <% } if(classId>=4){ %>
-		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>" class="active">4 класс</a></li>
+		          <li><a href="?navPage=a_topics&grade=four&classId=<%=classId %>&refresh=false" class="active">4 класс</a></li>
           		<%
 		          }
           	}

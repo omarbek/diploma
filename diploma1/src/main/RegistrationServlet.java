@@ -22,8 +22,8 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -49,7 +49,7 @@ public class RegistrationServlet extends HttpServlet {
 			PreparedStatement prepStmt = con.prepareStatement(sql);
 			prepStmt.setString(1, email);
 			rs = prepStmt.executeQuery();
-			String msg2 = "already have";
+			String msg2 = "already_have";
 			if (rs.next()) {
 				if (userStatus.equals("1")) {
 					response.sendRedirect("index.jsp?navPage=registration&message=" + msg2);
@@ -66,8 +66,8 @@ public class RegistrationServlet extends HttpServlet {
 				PreparedStatement prepStmt2 = con.prepareStatement(sql2);
 				prepStmt2.executeUpdate();
 
-				PreparedStatement prepStmt4 = con
-						.prepareStatement("select user_id from users where email='" + email + "'");
+				PreparedStatement prepStmt4 = con.prepareStatement("select user_id from users where email='" + email
+						+ "'");
 				rs2 = prepStmt4.executeQuery();
 
 				if (rs2.next()) {
@@ -75,7 +75,13 @@ public class RegistrationServlet extends HttpServlet {
 				}
 				if (userStatus.equals("1")) {
 					sql3 = "INSERT INTO `students`(`student_id`, `user_id`, `studentClass`, `first_name`, `last_name`, `school_name`, `city`, `classLetter`)"
-							+ " VALUES (0, '" + userID + "', '" + studentClass + "', '" + userFirstName + "', '"
+							+ " VALUES (0, '"
+							+ userID
+							+ "', '"
+							+ studentClass
+							+ "', '"
+							+ userFirstName
+							+ "', '"
 							+ userLastName + "', '" + school + "' , '" + city + "', '" + classLetter + "');";
 					int studClass = Integer.parseInt(studentClass);
 
@@ -92,7 +98,13 @@ public class RegistrationServlet extends HttpServlet {
 					}
 				} else if (userStatus.equals("3")) {
 					sql3 = "INSERT INTO `teachers`(`teacher_id`, `user_id`, `first_name`, `last_name`, `school_name`, `city`)"
-							+ " VALUES (0, '" + userID + "', '" + userFirstName + "', '" + userLastName + "', '"
+							+ " VALUES (0, '"
+							+ userID
+							+ "', '"
+							+ userFirstName
+							+ "', '"
+							+ userLastName
+							+ "', '"
 							+ school + "' , '" + city + "');";
 				}
 
